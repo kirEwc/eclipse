@@ -29,8 +29,8 @@ export default function Navbar_Main() {
 
         {/* nombre de la empresa  */}
         <h2
-        className="text-2xl font-bold text-gray-800 dark:text-gray-200 transition duration-300">
-            Equipo Eclipse
+        className="text-2xl font-bold text-transparent dark:text-gray-200 transition duration-300">
+            <span className="bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600">Eclipse</span>
         </h2>
         </Link>
         </div>

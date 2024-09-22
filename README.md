@@ -9,6 +9,10 @@
 - **Búsqueda avanzada**: Los usuarios pueden buscar vuelos según sus preferencias, como fecha, destino y aerolínea.
 - **Plataforma amigable**: Diseño intuitivo y accesible desde cualquier dispositivo.
 
+# Contribuidores
+ Aldair Elesbán Guerra Cedeño: https://github.com/kirEwc
+ Erlan George Delfino Alba: https://github.com/erlandel
+
 ## Instalación
 
 Sigue estos pasos para configurar el proyecto en tu entorno local:
@@ -29,6 +33,4 @@ npm run dev
 # Abre tu navegador y ve a
 http://localhost:3000
 
-# Contribuidores
-# Aldair Elesbán Guerra Cedeño: https://github.com/kirEwc
-# Erlan George Delfino Alba: https://github.com/erlandel
+

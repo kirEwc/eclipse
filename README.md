@@ -10,8 +10,8 @@
 - **Plataforma amigable**: Diseño intuitivo y accesible desde cualquier dispositivo.
 
 # Contribuidores
-# Aldair Elesbán Guerra Cedeño: https://github.com/kirEwc
-# Erlan George Delfino Alba: https://github.com/erlandel
+ Aldair Elesbán Guerra Cedeño: https://github.com/kirEwc
+ Erlan George Delfino Alba: https://github.com/erlandel
 
 ## Instalación
 

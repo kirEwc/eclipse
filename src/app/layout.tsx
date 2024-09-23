@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./provider";
-import Navbar_Main from "@/components/ui/Navbar";
 import ClientOnlyLayout from "./clientLayout";
+import ToastContainerMessage from "@/messages/ToastContainerMessage";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,7 +38,7 @@ export default function RootLayout({
             {children}
           </ClientOnlyLayout>
         </Providers>
-
+        <ToastContainerMessage />
       </body>
     </html>
   );

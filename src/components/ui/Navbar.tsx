@@ -39,7 +39,7 @@ export default function Navbar_Main() {
      {/* contenido 2 */}
       <NavbarContent className="hidden md:flex gap-4" justify="center">
       <NavbarItem className="text-gray-600  hover:text-cyan-500 dark:text-gray-200 dark:hover:text-cyan-500 transition duration-300">
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/vuelos-disponibles">
           Vuelos Disponibles
           </Link>
         </NavbarItem>

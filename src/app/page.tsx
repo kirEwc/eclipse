@@ -18,9 +18,7 @@ export default function Home() {
         <Carousel images={images} />
         <PublicityRight />
       </div>
-
-        <WhyChooseUs/>
-    
+        <WhyChooseUs/>    
     </>
 
 

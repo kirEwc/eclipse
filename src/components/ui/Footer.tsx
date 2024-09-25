@@ -8,7 +8,7 @@ export const Footer = () => {
         <div>
           <div className="flex flex-col items-center sm:flex-row sm:justify-between mt-4">
             <div className="text-center sm:text-left">
-              <h2 className="text-2xl mb-5">Equipo Eclipse</h2>
+              <h2 className="text-2xl mb-5">Eclipse</h2>
               <p className="text-lg">¡Descubre el universo de posibilidades con Eclipse!</p>
             </div>
 

@@ -1,7 +1,7 @@
 "use client";
 import { Avianca, NotoV1Ticket } from "@/icons/Icons";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
-import { Calendar, Clock, Plane } from "lucide-react";
+import { Calendar,  Plane } from "lucide-react";
 import DropdownCustom from "../Dropdwon/dropdown";
 import MonedaDropdown from "../Dropdwon/monedadrop";
 // import SkeletonCard from '@/components/Skeleton/skeleton'
@@ -12,23 +12,17 @@ interface FlightData {
   from?: string;
   to?: string;
   date?: string[];
-  time?: string;
-  price: { [key: string]: number };
+  price: [string, { value: number; string: string }][]; // Objeto que contiene los precios
+  
 }
 
-export function Ticket2({
+export  const Ticket2: React.FC<FlightData> = ({
   aeroline = "No Disponible",
   from = "No Disponible",
   to = "No Disponible",
   date = ["No Disponible"],
-  time = "No Disponible",
-  price = {
-    efectivo: 0,
-    zelle: 0,
-    mlc: 0,
-    real: 0,
-  },
-}: FlightData) {
+  price = [["No Disponible", { value: 1, string: "No Disponible" }]],
+}: FlightData)=> {
   // const [selectedDate, setSelectedDate] = useState(flightData.dates[0])
 
   // await new Promise ((resolve) => setTimeout(resolve, 3000));
@@ -80,22 +74,17 @@ export function Ticket2({
             <Calendar className="w-6 h-6 " />
             <DropdownCustom dateItem={date} />
           </div>
-          <div className="flex items-center space-x-2">
-            <Clock className="w-6 h-6 " />
-            <p className=" font-semibold">{time}</p>
-          </div>
-        </div>
-        {/* Segunda fila: Precio y add */}
-        <div className="flex justify-between items-center w-full space-x-4">
-        <div className="flex items-center justify-center space-x-2">
-        <p className="text-gray-500">precio:</p>
-            <p className="text-2xl font-bold text-gray-800">
+          <div className=" items-center space-x-2">
+            <div className="text-2xl font-bold text-gray-800">
               <MonedaDropdown
               price={price}
               />
-            </p>
-            
+            </div> 
           </div>
+        </div>
+        {/* Segunda fila: Precio y add */}
+        <div className="flex justify-center items-center w-full space-x-4">
+       
 
           <button className="px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 transition-colors duration-300 ease-in-out">
             Comprar

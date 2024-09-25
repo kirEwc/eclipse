@@ -11,13 +11,12 @@ const TicketsDate = [
       '2024-09-26',
       '2024-09-27'
     ],
-    time: '10:00',
-    price: {
-      '1': 1000,
-      '2': 1200,
-      '3': 1500,
-      '4': 1800,
-    },
+    price: [
+      ["USD", { value: 1100, string: "efectivo" }],
+      ["Zelle", { value: 910, string: "zelle" }],
+      ["MLC", { value: 2100, string: "mlc" }],
+      ["R$", { value: 810, string: "real" }],
+    ],
   },
   {
     id: "2",
@@ -31,13 +30,12 @@ const TicketsDate = [
       '2024-10-04',
       '2024-10-05'
     ],
-    time: '15:30',
-    price: {
-      '1': 1000,
-      '2': 1200,
-      '3': 1500,
-      '4': 1800,
-    },
+    price: [
+      ["USD", { value: 1010, string: "efectivo" }],
+      ["Zelle", { value: 940, string: "zelle" }],
+      ["MLC", { value: 2040, string: "mlc" }],
+      ["R$", { value: 840, string: "real" }],
+    ],
   },
   {
     id: "3",
@@ -51,13 +49,12 @@ const TicketsDate = [
       '2024-11-13',
       '2024-11-14'
     ],
-    time: '08:45',
-    price: {
-      'efectivo': 1000,
-      'zelle': 1200,
-      'mlc': 1500,
-      'real': 1800,
-    },
+    price: [
+      ["USD", { value: 4100, string: "efectivo" }],
+      ["Zelle", { value: 940, string: "zelle" }],
+      ["MLC", { value: 4000, string: "mlc" }],
+      ["R$", { value: 804, string: "real" }],
+    ],
   }
 ];
 

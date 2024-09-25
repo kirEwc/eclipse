@@ -1,8 +1,16 @@
 import { Ticket2 } from '@/components/ticket/Ticket'
 import TicketsDate from '@/data/productCard'
 
+type TicketType = {
+  id: string;
+  aeroline: string;
+  from: string;
+  to: string;
+  date: string;
+  price: [string, { value: number; string: string }][]; // El tipo de price
+};
 
-const VuelosDisponibles = () => {
+const VuelosDisponibles: React.FC<TicketType> = () => {
   return (
     <div className='mb-10 px-4'>
       <h1 className='text-3xl font-bold text-center mb-8 mt-6'>Vuelos Disponibles</h1>
@@ -14,7 +22,6 @@ const VuelosDisponibles = () => {
               from={ticket.from}
               to={ticket.to}
               date={ticket.date}
-              time={ticket.time}
               price={ticket.price}
             />
           </div>

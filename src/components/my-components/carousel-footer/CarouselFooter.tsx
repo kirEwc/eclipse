@@ -23,10 +23,10 @@ const CarouselFooter: React.FC<CarouselProps> = ({ images, textImage }) => {
         delay: 5000,
         disableOnInteraction: false,
       }}
-      breakpoints={{
-        640: { slidesPerView: 1 },
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
+      breakpoints={{       
+        450: { slidesPerView: 2 },
+        768: { slidesPerView: 3 },
+        1024: { slidesPerView: 4 },
         1280: { slidesPerView: 5 },
       }}
     >

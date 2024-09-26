@@ -7,6 +7,7 @@ import { PublicityLeft } from "@/components/my-components/publicity/PublicityLef
 import { PublicityRight } from "@/components/my-components/publicity/PublicityRight";
 import WhyChooseUs from "@/components/my-components/whyChooseUs/WhyChooseUs";
 import TextImagen from "@/components/my-components/carousel-footer/TextImage";
+import PublicityServices from "@/components/my-components/publicityServices/PublicityServices";
 
 
 export default function Home() {
@@ -22,9 +23,11 @@ export default function Home() {
         <PublicityRight />
       </div>
       <WhyChooseUs />   
+      <PublicityServices/>
       <div className="mx-4">
       <CarouselFooter images={ImagenCarouselFooter} textImage={TextImagen} />
       </div>
+
     </>
 
 

@@ -1,3 +1,4 @@
+import { Divider } from "@nextui-org/react";
 import CarouselFooter from "@/components/my-components/carousel-footer/CarouselFooter";
 import ImagenCarouselFooter from "@/components/my-components/carousel-footer/ImagenCarouselFooter";
 import Carousel from "@/components/my-components/carousel/Carousel";
@@ -5,7 +6,7 @@ import { images } from "@/components/my-components/carousel/ImagePath";
 import { PublicityLeft } from "@/components/my-components/publicity/PublicityLeft";
 import { PublicityRight } from "@/components/my-components/publicity/PublicityRight";
 import WhyChooseUs from "@/components/my-components/whyChooseUs/WhyChooseUs";
-import { Divider } from "@nextui-org/react";
+import TextImagen from "@/components/my-components/carousel-footer/TextImage";
 
 
 export default function Home() {
@@ -22,7 +23,7 @@ export default function Home() {
       </div>
       <WhyChooseUs />   
       <div className="mx-4">
-      <CarouselFooter images={ImagenCarouselFooter} />
+      <CarouselFooter images={ImagenCarouselFooter} textImage={TextImagen} />
       </div>
     </>
 

@@ -7,13 +7,14 @@ type TicketType = {
   from: string;
   to: string;
   date: string;
-  price: [string, { value: number; string: string }][]; // El tipo de price
+  price: [string, { value: number; string: string }]; // El tipo de price
 };
 
 const VuelosDisponibles: React.FC<TicketType> = () => {
   return (
     <div className='mb-10 px-4'>
-      <h1 className='text-3xl font-bold text-center mb-8 mt-6'>Vuelos Disponibles</h1>
+      <h1 className='text-3xl font-bold text-center bg-transparent mb-8 mt-6'>
+        <span className='bg-gradient-to-t from-blue-400 to-blue-600 bg-clip-text text-transparent'>Vuelos Disponibles</span></h1>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto'>
         {TicketsDate.map((ticket) => (
           <div key={ticket.id} className=" rounded-lg p-6 h-full">

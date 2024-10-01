@@ -1,19 +1,54 @@
 "use client"
+
+import { validationVerifyCode } from '@/app/lib/validation/validationVerifyCode';
 import ButtonNext from '@/components/Next_ui_elements/button/ButtonNext';
-import InputCode from '@/components/my-components/inputCode/inputCode';
+import InputNumber from '@/components/Next_ui_elements/inputNumber/inputNumber';
 import CustomLink from '@/components/my-components/link/Link';
 import { User } from '@/icons/Icons';
+import ErrorMessage from '@/messages/ErrorMessage';
+import ApiRequest from '@/services/ApiRequest';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 const VerifyCode = () => {
+  const router = useRouter();
 
-  const [code, setCode] = useState<number>(0);
 
-  const handleCode = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleCode = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); 
+     const formData = new FormData(event.currentTarget);
+    const { code } = Object.fromEntries(formData);
+    console.log(code);
+    const validatedFields = validationVerifyCode.safeParse({
+      code: code,
+    })
+
+    if (!validatedFields.success) {
+      const firstError = validatedFields.error.errors[0];
+      const messageError = String(firstError.message);
+      ErrorMessage(messageError);
+    } else {
+      try {
+        const response = await ApiRequest({
+          method: 'POST',
+          url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
+          body: {
+            code: code,
+          },
+        });
+
+        if (response.status === 200) {
+          router.push('/Login');
+        } else {
+          ErrorMessage('Error al registrarce');
+        }
+
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
   }
-
-
 
   return (
     <>
@@ -26,17 +61,14 @@ const VerifyCode = () => {
 
             <form onSubmit={handleCode}>
               <div className="flex items-center justify-center flex-grow flex-col">
-                <div className="mb-4">
-                  <InputCode
-                    value={code}
-                    onChange={setCode}
-                    className="text-black"
-                    placeholder="Ingresa un número"
+                <div className="mb-4 w-48">
+                  <InputNumber
+                    name="code"                    
                   />
                   
                 </div>
 
-                <div className="mt-3">
+                <div className="mt-3 w-48">
                   <ButtonNext
                     text="Confirmar"
                     type="submit"

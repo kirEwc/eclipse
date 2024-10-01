@@ -53,7 +53,7 @@ const WhyChooseUs = () => {
       </div>
 
 
-      <div className="relative  w-3/4 lg:w-6/12 h-80  mb-4">
+      <div className="relative  w-3/4 h-64  lg:w-6/12 sm:h-80  mb-4">
         <Image
           src="/images/imagen-center/imagen-center.webp"
           alt="NextUI hero Image with delay"

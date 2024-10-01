@@ -5,6 +5,8 @@ import 'animate.css';
 import 'swiper/css';
 import 'react-toastify/dist/ReactToastify.css';
 import { Providers } from "./provider";
+
+
 import ClientOnlyLayout from "./clientLayout";
 import ToastContainerMessage from "@/messages/ToastContainerMessage";
 
@@ -50,6 +52,7 @@ export default function RootLayout({
           </ClientOnlyLayout>
         </Providers>
         <ToastContainerMessage />
+
       </body>
     </html>
   );

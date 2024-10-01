@@ -1,16 +1,18 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
+import { Google, User } from "@/icons/Icons";
+import { validationLogin } from "@/app/lib/validation/validationLogin";
 
 import InputPassword from "@/components/Next_ui_elements/inputPassword/InputPassword";
 import InputEmail from "@/components/Next_ui_elements/inputEmail/InputEmail";
 import ButtonNext from "@/components/Next_ui_elements/button/ButtonNext";
 import CustomLink from "@/components/my-components/link/Link";
-import { Google, User } from "@/icons/Icons";
-import { useRouter } from "next/navigation";
 import ErrorMessage from "@/messages/ErrorMessage";
-import { validationLogin } from "@/app/lib/validation/validationLogin";
 import ApiRequest from "@/services/ApiRequest";
+import { useEffect, useRef } from "react";
 
 
 
@@ -19,8 +21,9 @@ import ApiRequest from "@/services/ApiRequest";
 
 const Login: React.FC = () => {
   const router = useRouter();
-
-
+  const { data: session,status} = useSession();
+  const hasAuthenticated = useRef(false); 
+  
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -56,20 +59,49 @@ const Login: React.FC = () => {
         }
 
       } catch (error) {
-        console.log(error)
+        // console.log(error)
       }
 
     }
 
 
-  };
+  }
 
 
-  const handleGoogleLogin = async () => {
-    await signIn('google');
-  };
 
 
+
+  useEffect(() => {
+    if (status === 'authenticated' && !hasAuthenticated.current) {
+      console.log('Usuario autenticado, ejecutando useEffect');
+      hasAuthenticated.current = true;
+
+      const authenticateUser = async () => {
+        const email = session?.user?.email;
+        console.log('Email de usuario autenticado:', email);
+
+        try {
+          const response = await ApiRequest({
+            method: 'POST',
+            url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
+            body: {
+              email: email,
+            },
+          });
+
+          if (response?.status === 200) {
+            router.push('/');
+          } else {
+            ErrorMessage('Error al autenticar con Google');
+          }
+        } catch (error) {
+          // console.error('Error en la petición:', error);
+        }
+      };
+
+      authenticateUser();
+    }
+  }, [status, session, router]);
 
 
   return (
@@ -107,7 +139,8 @@ const Login: React.FC = () => {
                 <ButtonNext
                   icon={<Google className="h-6 w-6" />}
                   text="Iniciar con Google"
-                  onClick={handleGoogleLogin}
+                  onClick={() => signIn("google")}
+
 
                 >
                 </ButtonNext>

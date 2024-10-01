@@ -10,12 +10,13 @@ import TextImagen from "@/components/my-components/carousel-footer/TextImage";
 import PublicityServices from "@/components/my-components/publicityServices/PublicityServices";
 
 
+
 export default function Home() {
 
 
   return (
 
-    <>
+    <div>
       <Divider />
       <div className="flex justify-between items-center gap-4 p-4">
         <PublicityLeft />
@@ -26,9 +27,9 @@ export default function Home() {
       <PublicityServices/>
       <div className="mx-4">
       <CarouselFooter images={ImagenCarouselFooter} textImage={TextImagen} />
-      </div>
+      </div>    
 
-    </>
+    </div>
 
 
   )

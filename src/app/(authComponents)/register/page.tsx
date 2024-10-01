@@ -1,15 +1,15 @@
 "use client";
 
-import InputEmail from '@/components/Next_ui_elements/inputEmail/InputEmail';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 import { User } from '@/icons/Icons';
+import { validationRegister } from '@/app/lib/validation/validationRegister';
+import InputEmail from '@/components/Next_ui_elements/inputEmail/InputEmail';
 import InputPassword from '@/components/Next_ui_elements/inputPassword/InputPassword';
 import ButtonNext from '@/components/Next_ui_elements/button/ButtonNext';
 import CustomLink from '@/components/my-components/link/Link';
-import { useRouter } from 'next/navigation';
 import ErrorMessage from '@/messages/ErrorMessage';
-import { validationRegister } from '@/app/lib/validation/validationRegister';
 import ApiRequest from '@/services/ApiRequest';
 
 

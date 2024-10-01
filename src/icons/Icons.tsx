@@ -113,3 +113,13 @@ export function IcBaselineWhatsapp(props: SVGProps<SVGSVGElement>) {
 export function Fa6SolidGreaterThan(props: SVGProps<SVGSVGElement>) {
 	return (<svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="1em" viewBox="0 0 384 512" {...props}><path fill="black" d="M3.4 81.7c-7.9 15.8-1.5 35 14.3 42.9L280.5 256L17.7 387.4c-15.8 7.9-22.2 27.1-14.3 42.9s27.1 22.2 42.9 14.3l320-160c10.8-5.4 17.7-16.5 17.7-28.6s-6.8-23.2-17.7-28.6l-320-160c-15.8-7.9-35-1.5-42.9 14.3"></path></svg>);
 }
+
+//number
+export function Number(props: SVGProps<SVGSVGElement>) {
+	return (
+	  <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16" {...props}>
+		<path fill="#818c98" fillRule="evenodd" d="M7.808 10.197H6.796L5.859 13H4.485l.937-2.803H3.966l.219-1.25h1.647l.608-1.805H4.991l.226-1.251h1.64l.95-2.844h1.368l-.95 2.844h1.018l.95-2.844h1.374l-.95 2.844h1.51l-.218 1.25h-1.702l-.608 1.805h1.497l-.219 1.251H9.182L8.252 13H6.878zm-.602-1.25h1.012l.615-1.805H7.814z"></path>
+	  </svg>
+	);
+  }
+  

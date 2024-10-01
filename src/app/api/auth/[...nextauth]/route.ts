@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+/* import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 const handle = NextAuth({
@@ -10,4 +10,42 @@ const handle = NextAuth({
       ]
 })
 
-export { handle as GET, handle as POST }
+export { handle as GET, handle as POST } */
+
+
+
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+
+const handler = NextAuth({
+  providers: [
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" }
+      },
+        async authorize(credentials) {
+            console.log("credentials", credentials);
+            
+
+        const user = { id: "1", name: "Admin", email: "admin@example.com" };
+
+        if (credentials?.email === "admin@example.com" && credentials.password === "admin") {
+          return user;
+        } else {
+          return null;
+        }
+      }
+    })
+  ],
+  pages: {
+    signIn: "/login"
+  },
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+});
+
+export { handler as GET, handler as POST };

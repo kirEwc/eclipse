@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import 'animate.css'; 
 import 'swiper/css';
+import 'react-toastify/dist/ReactToastify.css';
 import { Providers } from "./provider";
 import ClientOnlyLayout from "./clientLayout";
 import ToastContainerMessage from "@/messages/ToastContainerMessage";

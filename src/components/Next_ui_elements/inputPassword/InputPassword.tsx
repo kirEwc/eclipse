@@ -20,7 +20,7 @@ const InputPassword: React.FC<PasswordInputProps> = ({
       placeholder="contrseña"
       name={name}
       type={isVisible ? 'text' : 'password'}
-      className={`max-w-xs ${className}`}     
+      className={`max-w-xs ${className}`}         
       startContent={
       <Password className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
       }

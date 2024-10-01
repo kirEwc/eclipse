@@ -20,7 +20,7 @@ const TicketsDate = [
   },
   {
     id: "2",
-    aeroline: 'American Airlines',
+    aeroline: 'Caribbean Airlines',
     from: 'New York',
     to: 'Los Angeles',
     date: [

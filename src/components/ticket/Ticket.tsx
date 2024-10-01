@@ -1,11 +1,11 @@
 "use client";
-import { Avianca, NotoV1Ticket } from "@/icons/Icons";
+import {  IcBaselineWhatsapp, NotoV1Ticket } from "@/icons/Icons";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import { Calendar,  Plane } from "lucide-react";
 import DropdownCustom from "../Dropdwon/dropdown";
 import MonedaDropdown from "../Dropdwon/monedadrop";
-// import SkeletonCard from '@/components/Skeleton/skeleton'
-// import React, { Suspense } from 'react'
+import Image from "next/image";
+import Link from "next/link";
 
 interface FlightData {
   aeroline?: string;
@@ -23,21 +23,29 @@ export  const Ticket2: React.FC<FlightData> = ({
   date = ["No Disponible"],
   price = [["No Disponible", { value: 1, string: "No Disponible" }]],
 }: FlightData)=> {
-  // const [selectedDate, setSelectedDate] = useState(flightData.dates[0])
 
   // await new Promise ((resolve) => setTimeout(resolve, 3000));
 
+  
+  
   return (
-    // <Suspense fallback={<SkeletonCard/>}>
 
     <Card className="relative  max-w-md w-full bg-gradient-to-t from-white to-gray-300 rounded-lg overflow-hidden transition-transform duration-500 ease-in-out transform shadow-2xl">
       <div className="h-3 w-full bg-blue-500"></div>
       {/* Header */}
       <CardHeader className="flex justify-between items-center p-4">
-        <div className="flex justify-center items-center ">
+
+          <div className="flex justify-center items-center ">
           <h1 className="text-2xl font-serif font-bold  mr-2">{aeroline}</h1>
-          <Avianca className="w-8 h-8 " />
-        </div>
+          <Image
+            src="/icons8-avión-80.png"
+            alt="Airplane"
+            width={50}
+            height={50}
+            className="w-8 h-8"
+          />
+          </div>
+
         <NotoV1Ticket className="w-10 h-10 " />
       </CardHeader>
 
@@ -69,8 +77,8 @@ export  const Ticket2: React.FC<FlightData> = ({
       {/* Footer */}
       <CardFooter className="p-4 flex flex-col space-y-3 ">
         {/* Primera fila: Fecha y Hora */}
-        <div className="flex justify-between w-full items-center">
-          <div className="flex items-center space-x-2">
+        <div className="flex flex-col lg:flex-row lg:justify-between w-full items-center">
+          <div className="flex items-center space-x-2 mb-4 lg:mb-0">
             <Calendar className="w-6 h-6 " />
             <DropdownCustom dateItem={date} />
           </div>
@@ -86,12 +94,19 @@ export  const Ticket2: React.FC<FlightData> = ({
         <div className="flex justify-center items-center w-full space-x-4">
        
 
-          <button className="px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 transition-colors duration-300 ease-in-out">
-            Comprar
+          <Link 
+          href={`https://wa.me/+5359562875?text=Hola,%20estoy%20interesado%20en%20el%20viaje%20de%20${from}%20a%20${to}%20el%20${date}%20a%20través%20de%20${aeroline}`} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          >
+          <button 
+          className="flex px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 transition-colors duration-300 ease-in-out justify-center items-center"
+          >
+           <span className="mr-1"> Comprar en</span> <IcBaselineWhatsapp className="w-6 h-6" />
           </button>
+          </Link>
         </div>
       </CardFooter>
     </Card>
-    // </Suspense>
   );
 }

@@ -27,7 +27,7 @@ export default function MonedaDropdown({ price }: DropdownCustomProps) {
   // Obtener el precio y el string correspondiente al valor seleccionado
   const selectedPriceItem = price.find(([currency]) => currency === selectedValue);
   const selectedPrice = selectedPriceItem ? selectedPriceItem[1].value : null; // Obtener el valor o null si no se encuentra
-  const selectedString = selectedPriceItem ? selectedPriceItem[1].string as PriceIconKey : "efectivo"; // Asegurarte de que sea un PriceIconKey
+   const selectedString = selectedPriceItem ? selectedPriceItem[1].string as PriceIconKey : "efectivo"; // Asegurarte de que sea un PriceIconKey
 
   return (
     <div className="flex items-center justify-center space-x-2">

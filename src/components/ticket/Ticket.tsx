@@ -2,8 +2,8 @@
 import {  IcBaselineWhatsapp, NotoV1Ticket } from "@/icons/Icons";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import { Calendar,  Plane } from "lucide-react";
-import DropdownCustom from "../Dropdwon/dropdown";
-import MonedaDropdown from "../Dropdwon/monedadrop";
+import DropdownCustom from "../Next_ui_elements/Dropdwon/dropdown";
+import MonedaDropdown from "../Next_ui_elements/Dropdwon/monedadrop";
 import Image from "next/image";
 import Link from "next/link";
 

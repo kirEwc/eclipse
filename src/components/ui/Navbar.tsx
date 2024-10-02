@@ -18,6 +18,8 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import LoginDrop from "../Next_ui_elements/Dropdwon/LoginDrop";
+import { DropNLogin } from "../Next_ui_elements/Dropdwon/DropNLogin";
 
 
 export default function Navbar_Main() {
@@ -84,6 +86,15 @@ export default function Navbar_Main() {
 
       {/* contenido 3 */}
       <NavbarContent className="hidden md:flex" justify="end">
+
+        
+      {!session ? (
+        //si no estas autenticado, muestra el dropdown de login
+        <DropNLogin  />
+      ) : (
+        // Si está autenticado, muestra el dropdown de login
+        <LoginDrop />
+      )}
 
       </NavbarContent>
 

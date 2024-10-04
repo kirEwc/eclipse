@@ -16,32 +16,21 @@ import Image from "next/image";
 import Link from "next/link";
 import LoginDrop from "../Next_ui_elements/Dropdwon/LoginDrop";
 import { DropNLogin } from "../Next_ui_elements/Dropdwon/DropNLogin";
-<<<<<<< HEAD
+
 import Sidebar from "./Sidebar";
-
-
-export default function Navbar_Main() {
-  const { data: session} = useSession();
-=======
 import { useAuthStore } from "@/stores/authStore.store";
 
 
 
-export default function Navbar_Main() {
+  
+  
+  
+  export default function Navbar_Main() {
   const { data: session } = useSession();
   const { user } = useAuthStore();
   console.log(user);
  
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = [
-    { label: "Vuelos Disponibles", href: "/vuelos-disponibles" },
-    { label: "Requisitos", href: "/requisitos" },
-    { label: "Comentarios", href: "/comentarios" },
-  ];
-
-
->>>>>>> 90296a77275d76b6042ebc7cd19e0350a7b9906d
 
   return (
     <Navbar shouldHideOnScroll  className="bg-white dark:bg-gray-800 shadow-md sticky">

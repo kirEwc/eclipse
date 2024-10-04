@@ -20,11 +20,14 @@ import Link from "next/link";
 import { useState } from "react";
 import LoginDrop from "../Next_ui_elements/Dropdwon/LoginDrop";
 import { DropNLogin } from "../Next_ui_elements/Dropdwon/DropNLogin";
+import { useAuthStore } from "@/stores/authStore.store";
+
 
 
 export default function Navbar_Main() {
-  const { data: session} = useSession();
-
+  const { data: session } = useSession();
+  const { user } = useAuthStore();
+  console.log(user);
  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

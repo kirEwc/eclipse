@@ -1,18 +1,18 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn,useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 import { Google, User } from "@/icons/Icons";
 import { validationLogin } from "@/app/lib/validation/validationLogin";
-
 import InputPassword from "@/components/Next_ui_elements/inputPassword/InputPassword";
 import InputEmail from "@/components/Next_ui_elements/inputEmail/InputEmail";
 import ButtonNext from "@/components/Next_ui_elements/button/ButtonNext";
 import CustomLink from "@/components/my-components/link/Link";
 import ErrorMessage from "@/messages/ErrorMessage";
 import ApiRequest from "@/services/ApiRequest";
-import { useEffect, useRef } from "react";
+import { useAuthStore } from "@/stores/authStore.store";
 
 
 
@@ -23,6 +23,7 @@ const Login: React.FC = () => {
   const router = useRouter();
   const { data: session,status} = useSession();
   const hasAuthenticated = useRef(false); 
+  const { login } = useAuthStore();
   
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,6 +54,8 @@ const Login: React.FC = () => {
         });
 
         if (response?.status === 200) {
+          login({ email: 'tu@gmail.com', role: 'admin'});
+
           router.push('/');
         } else {
           ErrorMessage('Credenciales incorrectas');
@@ -63,8 +66,8 @@ const Login: React.FC = () => {
       }
 
     }
-
-
+    login({ email: 'tu@gmail.com', role: 'admin' });
+    router.push('/');
   }
 
 

@@ -1,135 +1,118 @@
 'use client';
-import Image from 'next/image';
-import React, { useState } from 'react';
+import StarComponent from "@/components/my-components/Star/StarComponent";
+import ModalCustom from "@/components/Next_ui_elements/Modal/Modal";
+import { ProiconsNoteAdd, Star } from "@/icons/Icons";
+import { Avatar, Button, Card, CardBody, CardFooter, Progress, useDisclosure } from "@nextui-org/react";
+import React, { useState } from "react";
 
-const Comentarios = () => {
-  const [comments, setComments] = useState([
+export const Comentarios = () => {
+  const [averageRating, setAverageRating] = useState(4.2);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const reviews = [
     {
-      id: 1,
-      name: 'Juan Pérez',
-      avatar: '/icons8-avión-80.png',
-      date: '27 de Septiembre, 2024',
-      comment: 'Excelente servicio, los vuelos siempre a tiempo y muy cómodos.',
+      id: "1",
+      user: { name: "Alice", avatar: "/images/fondo/1.webp" },
+      rating: 5,
+      comment: "Excellent product, very satisfied with the purchase.",
+      date: "2024-06-01",
     },
     {
-      id: 2,
-      name: 'María López',
-      avatar: '/icons8-avión-80.png',
-      date: '25 de Septiembre, 2024',
-      comment: 'El proceso de reserva fue muy sencillo y el personal fue muy amable.',
+      id: "2",
+      user: { name: "Bob", avatar: "/images/fondo/1.webp" },
+      rating: 4,
+      comment: "Good product, but shipping took longer than expected.",
+      date: "2024-05-28",
     },
     {
-      id: 3,
-      name: 'Carlos Díaz',
-      avatar: '/icons8-avión-80.png',
-      date: '22 de Septiembre, 2024',
-      comment: 'Una experiencia maravillosa. Sin duda, volveré a utilizar sus servicios.',
+      id: "3",
+      user: { name: "Charlie", avatar: "/images/fondo/1.webp" },
+      rating: 5,
+      comment: "Incredible quality, I definitely recommend it.",
+      date: "2024-05-25",
     },
-    {
-      id: 4,
-      name: 'Ana Torres',
-      avatar: '/icons8-avión-80.png',
-      date: '20 de Septiembre, 2024',
-      comment: 'Todo fue perfecto. La atención al cliente fue excelente.',
-    },
-    {
-      id: 5,
-      name: 'Luis Gómez',
-      avatar: '/icons8-avión-80.png',
-      date: '18 de Septiembre, 2024',
-      comment: 'Me encantó la facilidad para hacer las reservas. Recomendado.',
-    },
-  ]);
-
-  const [newComment, setNewComment] = useState('');
-
-  const handleCommentSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newComment.trim()) {
-      const currentDate = new Date().toLocaleDateString('es-ES', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      });
-
-      const newCommentObj = {
-        id: comments.length + 1,
-        name: 'Anónimo', // Aquí podrías agregar lógica para capturar el nombre del usuario real
-        avatar: '/icons8-avión-80.png',
-        date: currentDate, // Obtiene la fecha actual
-        comment: newComment,
-      };
-
-      setComments([newCommentObj, ...comments]);
-      setNewComment('');
-    }
-  };
+    
+  ];
 
   return (
     <>
-    <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 m-4 text-center">
-      Comentarios de nuestros clientes
-    </h2>
-    <div className="max-w-6xl mx-auto p-6 bg-white dark:bg-gray-900 shadow-lg rounded-lg transition-all duration-300 flex flex-col md:flex-row gap-8">
-  
-  {/* Contenedor de comentarios con scroll */}
-  <div className="w-full md:w-2/3 max-h-96 overflow-y-auto p-4 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-inner">
-
-    <div className="space-y-6">
-      {comments.map(({ id, name, avatar, date, comment }) => (
-          <div
-          key={id}
-          className="flex flex-col md:flex-row items-start space-y-2 md:space-y-0 md:space-x-4 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-md"
-          >
-          <Image
-            src={avatar}
-            alt={`Avatar de ${name}`}
-            className="w-12 h-12 rounded-full object-cover border-2 border-cyan-600"
-            width={48}
-            height={48}
-            />
-          <div className="flex-1">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-                {name}
-              </h3>
-              <span className="text-sm text-gray-500 dark:text-gray-400">
-                {date}
-              </span>
+      <h2 className="flex text-2xl justify-center items-center mt-4 mb-3 font-bold">Comentarios de nuestros clientes</h2>
+      <div className="flex flex-col md:flex-row justify-between items-center mx-36">
+        {/* componente de rating general */}
+        <div className="flex items-center mb-6">
+          <div className="text-4xl font-bold mr-4">
+            {averageRating.toFixed(1)}
+          </div>
+          <div>
+            <div className="flex mb-2">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star
+                  key={star}
+                  className={`w-6 h-6 ${
+                    star <= Math.round(averageRating)
+                      ? "text-yellow-400 fill-yellow-400"
+                      : "text-gray-300"
+                  }`}
+                />
+              ))}
             </div>
-            <p className="text-gray-700 dark:text-gray-300 mt-1 text-base leading-relaxed">
-              {comment}
-            </p>
+            <Progress
+              size="sm"
+              aria-label="Progreso de carga"
+              value={averageRating * 20}
+              className="max-w-md"
+              color="warning"
+            />
           </div>
         </div>
-      ))}
-    </div>
-  </div>
 
-  {/* Formulario para agregar nuevo comentario */}
-  <div className="w-full md:w-1/3">
-    <form onSubmit={handleCommentSubmit} className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md">
-      <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
-        Deja tu comentario
-      </h3>
-      <textarea
-        value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
-        rows={6}
-        placeholder="Escribe tu comentario aquí..."
-        className="w-full p-4 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-4 focus:ring-cyan-500 dark:bg-gray-700 dark:text-gray-200 transition-all duration-300"
-        ></textarea>
-      <button
-        type="submit"
-        className="mt-4 w-full bg-cyan-600 text-white py-2 px-6 rounded-lg text-lg font-medium hover:bg-cyan-700 transition-colors duration-300"
-        >
-        Enviar
-      </button>
-    </form>
+        <div className="flex items-center mb-6">
+          <Button
+            variant="shadow"
+            className="bg-gradient-to-tr from-blue-100 via-slate-300 to-purple-100 justify-center items-center"
+            onClick={() => (onOpen())}
+          >
+            <ProiconsNoteAdd 
+            className="w-6 h-6" 
+            aria-labelledby="icono de agregar comentario"
+            />
+            Agregar Comentario
+          </Button>
+          <ModalCustom isOpen={isOpen} onClose={onClose} />
+        </div>
+      </div>
+
+      {/* Recuro de comentarios con scroll */}
+      <div
+  className="flex flex-col justify-start h-96 items-center w-9/12 mx-auto mb-8 bg-gray-200 rounded-lg overflow-y-scroll"
+  aria-labelledby="Lista de comentarios de clientes"
+>
+  {/* Caja de comentarios */}
+  <div className="flex flex-col md:w-2/3">
+    {reviews.map((review, index) => (
+      <Card key={review.id} className={`mb-4 ${index === 0 ? 'mt-4' : ''}`}>
+        <CardBody>
+          <div className="flex items-center mb-2">
+            <Avatar
+              src={review.user.avatar}
+              size="sm"
+              className="mr-2"
+            />
+            <span className="font-semibold">{review.user.name}</span>
+            <StarComponent Nstar={review.rating} />
+          </div>
+          <p>{review.comment}</p>
+        </CardBody>
+        <CardFooter>
+          <small className="text-gray-500">{review.date}</small>
+        </CardFooter>
+      </Card>
+    ))}
   </div>
 </div>
-          </>
 
+    </>
   );
 };
 

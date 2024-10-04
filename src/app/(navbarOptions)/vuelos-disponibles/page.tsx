@@ -12,9 +12,9 @@ type TicketType = {
 
 const VuelosDisponibles: React.FC<TicketType> = () => {
   return (
-    <div className='mb-10 px-4'>
-      <h1 className='text-3xl font-bold text-center bg-transparent mb-8 mt-6'>
-        <span className='bg-gradient-to-t from-blue-400 to-blue-600 bg-clip-text text-transparent'>Vuelos Disponibles</span></h1>
+    <div className='bg-[url("/images/fondo/fondo_boletos.webp")] bg-cover bg-center bg-no-repeat'>
+      <h1 className='text-3xl font-bold text-center bg-transparent mb-8 pt-6'>
+        <span className='bg-gradient-to-t from-black via-blue-600 to-blue-800 bg-clip-text text-transparent'>Vuelos Disponibles</span></h1>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto'>
         {TicketsDate.map((ticket) => (
           <div key={ticket.id} className=" rounded-lg p-6 h-full">

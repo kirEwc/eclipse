@@ -8,14 +8,17 @@ import {
     Avatar,
   } from "@nextui-org/react";
 import { RegisterIcon, SolarLoginBroken } from "@/icons/Icons";
-import { useAuthStore } from "@/stores/authStore.store";
+
 
 
 
 //este es el dropdown de login cuando no esta logueado
 export const DropNLogin = () => {
-  const { user } = useAuthStore();
-  console.log(user);
+
+
+
+
+
 
   return (
     <div className="flex items-center gap-4">

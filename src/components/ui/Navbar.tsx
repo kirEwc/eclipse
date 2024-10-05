@@ -25,7 +25,7 @@ import { useAuthStore } from "@/stores/authStore.store";
   
   
   export default function Navbar_Main() {
-  const { data: session } = useSession();
+  const { data: session,status} = useSession();
   const { isAuthenticated } = useAuthStore();
 
  
@@ -81,13 +81,13 @@ import { useAuthStore } from "@/stores/authStore.store";
       {/* contenido 3 */}
       <NavbarContent className="hidden md:flex" justify="end">
 
-        
-      {session !==null || !isAuthenticated ? (
+       
+      {status ==='authenticated' || isAuthenticated ? (
         //si no estas autenticado, muestra el dropdown de login
-        <DropNLogin  />
+        <LoginDrop />
       ) : (
         // Si está autenticado, muestra el dropdown de login
-        <LoginDrop />
+        <DropNLogin  />
       )}
 
       </NavbarContent>

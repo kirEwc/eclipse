@@ -12,9 +12,16 @@ import { signOut, useSession } from "next-auth/react";
 // este es el dropdown de login cuando esta logueado, mas abajo esta el dropdown de login cuando no esta logueado
 const LoginDrop = () => {
 
+  const { data: session, status } = useSession();
+  console.log('status  ' + status);
+  console.log('session  ' + session?.user?.email);
+  const { user,isAuthenticated,logout } = useAuthStore();
+  console.log('DropNLogin  '+user);
+
+/* 
   const { user,isAuthenticated,logout } = useAuthStore();
   // console.log(user);
-  const { data: session } = useSession();
+  const { data: session } = useSession(); */
 
   const email = session?.user?.email || user?.email
 

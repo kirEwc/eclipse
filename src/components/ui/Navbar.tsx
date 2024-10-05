@@ -21,14 +21,13 @@ import Sidebar from "./Sidebar";
 import { useAuthStore } from "@/stores/authStore.store";
 
 
-
   
   
   
   export default function Navbar_Main() {
   const { data: session } = useSession();
-  const { user } = useAuthStore();
-  console.log(user);
+  const { isAuthenticated } = useAuthStore();
+
  
 
 
@@ -83,7 +82,7 @@ import { useAuthStore } from "@/stores/authStore.store";
       <NavbarContent className="hidden md:flex" justify="end">
 
         
-      {!session ? (
+      {session !==null || !isAuthenticated ? (
         //si no estas autenticado, muestra el dropdown de login
         <DropNLogin  />
       ) : (

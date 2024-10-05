@@ -1,4 +1,5 @@
 import { SolarLogoutBroken } from "@/icons/Icons";
+import { useAuthStore } from "@/stores/authStore.store";
 import {
   Dropdown,
   DropdownTrigger,
@@ -11,10 +12,21 @@ import { signOut, useSession } from "next-auth/react";
 // este es el dropdown de login cuando esta logueado, mas abajo esta el dropdown de login cuando no esta logueado
 const LoginDrop = () => {
 
-  
+  const { user,isAuthenticated,logout } = useAuthStore();
+  // console.log(user);
   const { data: session } = useSession();
 
+  const email = session?.user?.email || user?.email
 
+      const handlelogout = async () => {
+
+        if (session!==null) {
+         signOut();
+        }
+        if(isAuthenticated){
+          logout();
+        }
+      };
   return (
     <div className="flex items-center gap-4">
       <Dropdown placement="bottom-end">
@@ -23,12 +35,12 @@ const LoginDrop = () => {
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
           <DropdownItem key="profile" textValue="Perfil" className="h-14 gap-2">
-            <p className="font-semibold">Signed in as</p>
-            <p className="font-semibold">{session?.user?.email}</p>
+            <p className="font-semibold">correo</p>
+            <p className="font-semibold">{ email }</p>
           </DropdownItem>
 
           <DropdownItem key="logout" textValue="Cerrar Seccion" color="danger">
-              <button onClick={() => signOut()} className=" w-full flex justify-between">
+              <button onClick={handlelogout} className=" w-full flex justify-between">
                 Cerrar sesión 
                 <SolarLogoutBroken className="w-6 h-6" />
                 </button>

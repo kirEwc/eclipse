@@ -12,6 +12,8 @@ const ModalCustom: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 
     const [newComment, setNewComment] = useState("");
     const [newRating, setNewRating] = useState(0);
+
+    
     
   return (
     <>
@@ -34,10 +36,10 @@ const ModalCustom: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
-                  Close
+                  Cerrar
                 </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
+                <Button color="primary"  onPress={onClose}>
+                  Enviar
                 </Button>
               </ModalFooter>
             </>

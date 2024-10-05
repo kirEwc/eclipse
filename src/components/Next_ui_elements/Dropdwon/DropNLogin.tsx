@@ -7,11 +7,15 @@ import {
     DropdownItem,
     Avatar,
   } from "@nextui-org/react";
-import { SolarLoginBroken } from "@/icons/Icons";
+import { RegisterIcon, SolarLoginBroken } from "@/icons/Icons";
+import { useAuthStore } from "@/stores/authStore.store";
+
+
 
 //este es el dropdown de login cuando no esta logueado
 export const DropNLogin = () => {
-    
+  const { user } = useAuthStore();
+  console.log(user);
 
   return (
     <div className="flex items-center gap-4">
@@ -34,10 +38,11 @@ export const DropNLogin = () => {
           </DropdownItem>
           
           <DropdownItem key="register" textValue="Registrarse" color="default">
-          <Link href='/register'>
+          <Link href='/register' className="flex justify-around">
               <button className="w-full h-full flex items-start">
-              Registrarse                
+              Registrarse
             </button>            
+              <RegisterIcon className="w-6 h-6"/>               
           </Link>
           </DropdownItem>
         </DropdownMenu>

@@ -36,16 +36,18 @@ export const Comentarios = () => {
   ];
 
   return (
-    <>
-      <h2 className="flex text-2xl justify-center items-center mt-4 mb-3 font-bold">Comentarios de nuestros clientes</h2>
-      <div className="flex flex-col md:flex-row justify-between items-center mx-36">
-        {/* componente de rating general */}
-        <div className="flex items-center mb-6">
+    <div className="bg-[url('/images/fondo/comentarios.webp')] bg-cover bg-center bg-no-repeat">
+      <h2 className="flex text-3xl justify-center items-center pt-4 pb-3 font-bold text-center bg-transparent">
+        <span className="bg-gradient-to-t from-gray-500 via-slate-800 to-cyan-800 bg-clip-text text-transparent">Comentarios de nuestros clientes</span>
+      </h2>
+      <div className="flex flex-col md:flex-row justify-between items-center mx-4 md:mx-20 lg:mx-36">
+        {/* Componente de rating general */}
+        <div className="flex flex-col md:flex-row items-center mb-6">
           <div className="text-4xl font-bold mr-4">
             {averageRating.toFixed(1)}
           </div>
           <div>
-            <div className="flex mb-2">
+            <div className="flex mb-2 justify-center">
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star
                   key={star}
@@ -61,7 +63,7 @@ export const Comentarios = () => {
               size="sm"
               aria-label="Progreso de carga"
               value={averageRating * 20}
-              className="max-w-md"
+              className="max-w-full"
               color="warning"
             />
           </div>
@@ -70,8 +72,8 @@ export const Comentarios = () => {
         <div className="flex items-center mb-6">
           <Button
             variant="shadow"
-            className="bg-gradient-to-tr from-blue-100 via-slate-300 to-purple-100 justify-center items-center"
-            onClick={() => (onOpen())}
+            className="bg-gradient-to-tr from-blue-300 via-slate-300 to-purple-300 justify-center items-center"
+            onClick={() => onOpen()}
           >
             <ProiconsNoteAdd 
             className="w-6 h-6" 
@@ -85,34 +87,37 @@ export const Comentarios = () => {
 
       {/* Recuro de comentarios con scroll */}
       <div
-  className="flex flex-col justify-start h-96 items-center w-9/12 mx-auto mb-8 bg-gray-200 rounded-lg overflow-y-scroll"
-  aria-labelledby="Lista de comentarios de clientes"
->
-  {/* Caja de comentarios */}
-  <div className="flex flex-col md:w-2/3">
-    {reviews.map((review, index) => (
-      <Card key={review.id} className={`mb-4 ${index === 0 ? 'mt-4' : ''}`}>
-        <CardBody>
-          <div className="flex items-center mb-2">
-            <Avatar
-              src={review.user.avatar}
-              size="sm"
-              className="mr-2"
-            />
-            <span className="font-semibold">{review.user.name}</span>
-            <StarComponent Nstar={review.rating} />
-          </div>
-          <p>{review.comment}</p>
-        </CardBody>
-        <CardFooter>
-          <small className="text-gray-500">{review.date}</small>
-        </CardFooter>
-      </Card>
-    ))}
-  </div>
-</div>
+        className="flex flex-col justify-start h-80 md:h-96 items-center w-full md:w-11/12 lg:w-9/12 mx-auto bg-blue-200 rounded-lg overflow-y-scroll p-4"
+        aria-labelledby="Lista de comentarios de clientes"
+      >
+        {/* Caja de comentarios */}
+        <div className="flex flex-col w-full md:w-2/3">
+          {reviews.map((review, index) => (
+            <Card key={review.id} className={`mb-4 ${index === 0 ? 'mt-4' : ''}`}>
+              <CardBody>
+                <div className="flex items-center mb-2">
+                  <Avatar
+                    src={review.user.avatar}
+                    size="sm"
+                    className="mr-2"
+                  />
+                  <span className="font-semibold">{review.user.name}</span>
+                  <StarComponent Nstar={review.rating} />
+                </div>
+                <p>{review.comment}</p>
+              </CardBody>
+              <CardFooter>
+                <small className="text-gray-500">{review.date}</small>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </div>
 
-    </>
+      <div className="w-full h-8">
+
+      </div>
+    </div>
   );
 };
 

@@ -1,5 +1,8 @@
+import { deleteAuthCookies } from "@/app/actions/deleteAuthCookies";
 import { SolarLogoutBroken } from "@/icons/Icons";
 import { useAuthStore } from "@/stores/authStore.store";
+import { signOut, useSession } from "next-auth/react";
+
 import {
   Dropdown,
   DropdownTrigger,
@@ -7,21 +10,13 @@ import {
   DropdownItem,
   Avatar,
 } from "@nextui-org/react";
-import { signOut, useSession } from "next-auth/react";
 
 // este es el dropdown de login cuando esta logueado, mas abajo esta el dropdown de login cuando no esta logueado
 const LoginDrop = () => {
 
-  const { data: session, status } = useSession();
-  console.log('status  ' + status);
-  console.log('session  ' + session?.user?.email);
+  const { data: session } = useSession();
   const { user,isAuthenticated,logout } = useAuthStore();
-  console.log('DropNLogin  '+user);
 
-/* 
-  const { user,isAuthenticated,logout } = useAuthStore();
-  // console.log(user);
-  const { data: session } = useSession(); */
 
   const email = session?.user?.email || user?.email
 
@@ -30,8 +25,11 @@ const LoginDrop = () => {
         if (session!==null) {
          signOut();
         }
+
+        console.log('isAuthenticated',isAuthenticated)
         if(isAuthenticated){
-          logout();
+          logout();    
+          await deleteAuthCookies();
         }
       };
   return (

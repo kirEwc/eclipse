@@ -13,6 +13,7 @@ import CustomLink from "@/components/my-components/link/Link";
 import ErrorMessage from "@/messages/ErrorMessage";
 import ApiRequest from "@/services/ApiRequest";
 import { useAuthStore } from "@/stores/authStore.store";
+import { setAuthCookie } from "@/app/actions/setAuthCookie";
 
 
 
@@ -29,7 +30,7 @@ const Login: React.FC = () => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
-    const { email, password } = Object.fromEntries(formData);
+    const { email, password } = Object.fromEntries(formData) as { email: string, password: string };
 
     const validatedFields = validationLogin.safeParse({
       email: email,
@@ -52,10 +53,14 @@ const Login: React.FC = () => {
             password: password,
           },
         });
+        const data = await response.json();    
+        
 
         if (response?.status === 200) {
-          login({ email: 'tu@gmail.com', role: 'admin'});
-
+          login({ email});
+          const token = data.token;  
+          const role = data.role ;  
+          await setAuthCookie(token, role);
           router.push('/');
         } else {
           ErrorMessage('Credenciales incorrectas');
@@ -66,7 +71,11 @@ const Login: React.FC = () => {
       }
 
     }
-    login({ email: 'tu@gmail.com', role: 'admin' });
+    login({ email });
+
+    const token = 'gwygr92r5723gr9h42dfby2evfb2iu'
+    const role ='admin'
+    await setAuthCookie(token, role);
     router.push('/');
   }
 

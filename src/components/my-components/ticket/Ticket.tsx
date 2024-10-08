@@ -88,7 +88,7 @@ export  const Ticket2: React.FC<FlightData> = ({
   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between sm:justify-around w-full space-y-4 sm:space-y-0 sm:space-x-1">
     
     {/* Primer dropdown: alineado en pantalla pequeña y grande */}
-    <div className="flex w-full sm:w-auto justify-center sm:justify-start items-center sm:-ml-1 md:-ml-0">
+    <div className="flex w-full sm:w-auto justify-center sm:justify-start items-center sm:-ml-2 md:-ml-0">
       <FechasDrop 
         dateItem={date} 
         setFechaValue={setFechaValue}

@@ -22,7 +22,7 @@ export default function FechasDrop({ dateItem,setFechaValue }: DropdownCustomPro
     <Dropdown className="w-full sm:w-auto">
       <DropdownTrigger>
         <Button variant="bordered" className="capitalize">
-          <span className="flex flex-row items-center gap-1">
+          <span className="flex flex-row items-center gap-2">
           { <Calendar /> }
           { selectedValue }
           </span>

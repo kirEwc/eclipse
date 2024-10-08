@@ -20,14 +20,14 @@ export const useAuthStore = create<AuthState>()(
       },
       logout: () => {
         set({ user: null, isAuthenticated: false });
-        sessionStorage.clear();      
+        localStorage.clear();      
       },
     }),
     {
       name: 'auth-storage',
       storage: createJSONStorage(() => ({
         getItem: (name) => {
-          const storedValue = sessionStorage.getItem(name);
+          const storedValue = localStorage.getItem(name);
           if (storedValue) {
             try {
               return decryptData(storedValue);
@@ -40,9 +40,9 @@ export const useAuthStore = create<AuthState>()(
         },
         setItem: (name, value) => {
           const encryptedValue = encryptData(value);
-          sessionStorage.setItem(name, encryptedValue);
+          localStorage.setItem(name, encryptedValue);
         },
-        removeItem: (name) => sessionStorage.removeItem(name),
+        removeItem: (name) => localStorage.removeItem(name),
       })),
     }
   )

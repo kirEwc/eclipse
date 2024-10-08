@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Textarea,} from "@nextui-org/react";
 import StarComponent from "@/components/my-components/Star/StarComponent";
+import { AkarIconsCommentAdd, HugeiconsCommentRemove01 } from "@/icons/Icons";
 
 
 interface ModalProps {
@@ -17,7 +18,7 @@ const ModalCustom: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     
   return (
     <>
-      <Modal backdrop={'blur'} isOpen={isOpen} onClose={onClose}>
+      <Modal backdrop={'blur'} isOpen={isOpen} onClose={onClose} placement={'center'}>
         <ModalContent>
           {(onClose) => (
             <>
@@ -35,11 +36,13 @@ const ModalCustom: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                 />
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Cerrar
+                <Button color="danger" variant="light" onPress={onClose} className="flex flex-row items-center gap-1">
+                  Cancelar
+                  <HugeiconsCommentRemove01 className="w-6 h-6" />
                 </Button>
-                <Button color="primary"  onPress={onClose}>
+                <Button color="primary"  onPress={onClose} className="flex flex-row items-center gap-1">
                   Enviar
+                  <AkarIconsCommentAdd className="w-6 h-6 " />
                 </Button>
               </ModalFooter>
             </>

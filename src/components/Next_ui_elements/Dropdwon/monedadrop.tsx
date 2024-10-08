@@ -43,9 +43,12 @@ export default function MonedaDropdown({ price, setMonedaValue, setMonedaString 
     <div className="flex items-center justify-center space-x-2">
       <Dropdown>
         <DropdownTrigger>
-          <Button variant="bordered" className="capitalize">
+          <Button variant="bordered" className="capitalize  min-w-[140px] max-w-[200px] truncate">
+            <span className="flex w-full justify-between items-center ml-2 mr-1">
             {priceIcons[iconKey]} {/* Muestra el ícono basado en el string */}
             <span className="ml-2">{selectedPrice !== null ? selectedPrice : "Seleccionar método"}</span>
+            </span>
+
           </Button>
         </DropdownTrigger>
 

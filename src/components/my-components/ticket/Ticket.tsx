@@ -34,11 +34,11 @@ export  const Ticket2: React.FC<FlightData> = ({
   const [FechaValue, setFechaValue] = useState('');
 
   
-  const isEnabled = MonedaValue !== 0 && FechaValue !== "Fechas Disponibles"; // Habilitar solo si MonedaValue no es 0 y FechaValue no es vacío
+  const isEnabled = MonedaValue !== 0 && FechaValue !== "Fechas Disponibles"; // Habilitar solo si MonedaValue no es 0 y FechaValue no es vacío(vacio es "Fechas Disponibles")
 
   return (
 
-    <Card className="relative  max-w-md w-full bg-gradient-to-t from-white to-gray-300 rounded-lg overflow-hidden transition-transform duration-500 ease-in-out transform shadow-2xl">
+    <Card className="relative sm:max-w-lg md:max-w-md w-full bg-gradient-to-t from-white to-gray-300 rounded-lg shadow-2xl">
       <div className="h-3 w-full bg-blue-500"></div>
       {/* Header */}
       <CardHeader className="flex justify-between items-center p-4">
@@ -84,32 +84,30 @@ export  const Ticket2: React.FC<FlightData> = ({
 
       {/* Footer */}
       <CardFooter className="p-4 flex flex-col space-y-3">
-
   {/* Primera fila: Fecha y precio */}
-  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full space-y-4 sm:space-y-0">
-  
-  {/* Primer dropdown: alineado al inicio en pantallas pequeñas */}
-  <div className="flex w-full sm:w-auto justify-center sm:justify-start items-center space-x-2">
-    <FechasDrop 
-      dateItem={date} 
-      setFechaValue = {setFechaValue}
-    />
-  </div>
-  
-  {/* Segundo dropdown: alineado al final en pantallas pequeñas */}
-  <div className="flex w-full sm:w-auto justify-center items-center space-x-2 sm:ml-4 text-2xl font-bold text-gray-800">
+  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between sm:justify-around w-full space-y-4 sm:space-y-0 sm:space-x-1">
+    
+    {/* Primer dropdown: alineado en pantalla pequeña y grande */}
+    <div className="flex w-full sm:w-auto justify-center sm:justify-start items-center sm:-ml-1 md:-ml-0">
+      <FechasDrop 
+        dateItem={date} 
+        setFechaValue={setFechaValue}
+      />
+    </div>
+    
+    {/* Segundo dropdown: alineado en pantalla pequeña y grande */}
+    <div className="flex w-full sm:w-auto justify-center sm:justify-start items-center text-2xl mr-2 font-bold text-gray-800">
       <MonedaDropdown 
         price={price}
-        setMonedaValue = {setMonedaValue}
-        setMonedaString = {setMonedaString}
+        setMonedaValue={setMonedaValue}
+        setMonedaString={setMonedaString}
       />
+    </div>
   </div>
-</div>
 
   {/* Segunda fila: botón */}
   <div className="flex justify-center items-center w-full space-x-4">
-
-  {isEnabled ? ( // Mostrar el enlace si isEnabled es verdadero
+    {isEnabled ? (
       <Link 
         href={`https://wa.me/+5359562875?text=Hola,%20estoy%20interesado%20en%20el%20viaje%20de%20${from}%20a%20${to}%20el%20${FechaValue}%20a%20través%20de%20${aeroline}%20.Y%20pienso%20pagar%20${MonedaValue}%20en%20${MonedaString}`} 
         target="_blank" 
@@ -125,7 +123,7 @@ export  const Ticket2: React.FC<FlightData> = ({
     ) : (
       <button 
         className="flex px-6 py-2 bg-gray-400 cursor-not-allowed text-white text-sm font-medium rounded-lg shadow transition-colors duration-300 ease-in-out justify-center items-center"
-        disabled // Establecer la propiedad disabled
+        disabled
       >
         <span className="mr-1">Comprar en</span> 
         <IcBaselineWhatsapp className="w-6 h-6" />
@@ -133,6 +131,8 @@ export  const Ticket2: React.FC<FlightData> = ({
     )}
   </div>
 </CardFooter>
+
+
 
 
     </Card>

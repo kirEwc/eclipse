@@ -6,14 +6,17 @@ import MonedaDropdown from "../../Next_ui_elements/Dropdwon/monedadrop";
 import Image from "next/image";
 import Link from "next/link";
 import FechasDrop from "../../Next_ui_elements/Dropdwon/FechasDrop";
+import { useState } from "react";
+
+
 
 interface FlightData {
-  aeroline?: string;
-  from?: string;
-  to?: string;
-  date?: string[];
-  price: [string, { value: number; string: string }][]; // Objeto que contiene los precios
-  
+  id: string;
+  aeroline: string;
+  from: string;
+  to: string;
+  date: string[];
+  price: { value: number,string: string }[];
 }
 
 export  const Ticket2: React.FC<FlightData> = ({
@@ -21,10 +24,14 @@ export  const Ticket2: React.FC<FlightData> = ({
   from = "No Disponible",
   to = "No Disponible",
   date = ["No Disponible"],
-  price = [["No Disponible", { value: 1, string: "No Disponible" }]],
+  price = [{ value: 1, string: "No Disponible" }],
 }: FlightData)=> {
 
   // await new Promise ((resolve) => setTimeout(resolve, 3000));
+
+  const [MonedaValue, setMonedaValue] = useState(0);
+  const [MonedaString, setMonedaString] = useState('');
+  const [FechaValue, setFechaValue] = useState('');
 
   
   
@@ -76,25 +83,32 @@ export  const Ticket2: React.FC<FlightData> = ({
 
       {/* Footer */}
       <CardFooter className="p-4 flex flex-col space-y-3">
+
   {/* Primera fila: Fecha y precio */}
   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full space-y-4 sm:space-y-0">
+  
   {/* Primer dropdown: alineado al inicio en pantallas pequeñas */}
   <div className="flex w-full sm:w-auto justify-center sm:justify-start items-center space-x-2">
-    <FechasDrop dateItem={date} />
+    <FechasDrop 
+      dateItem={date} 
+      setFechaValue = {setFechaValue}
+    />
   </div>
   
   {/* Segundo dropdown: alineado al final en pantallas pequeñas */}
-  <div className="flex w-full sm:w-auto justify-center items-center space-x-2 sm:ml-4">
-    <div className="text-2xl font-bold text-gray-800">
-      <MonedaDropdown price={price} />
-    </div>
+  <div className="flex w-full sm:w-auto justify-center items-center space-x-2 sm:ml-4 text-2xl font-bold text-gray-800">
+      <MonedaDropdown 
+        price={price}
+        setMonedaValue = {setMonedaValue}
+        setMonedaString = {setMonedaString}
+      />
   </div>
 </div>
 
   {/* Segunda fila: botón */}
   <div className="flex justify-center items-center w-full space-x-4">
     <Link 
-      href={`https://wa.me/+5359562875?text=Hola,%20estoy%20interesado%20en%20el%20viaje%20de%20${from}%20a%20${to}%20el%20${date}%20a%20través%20de%20${aeroline}%20.Y%20pienso%20pagar%20${price}`} 
+      href={`https://wa.me/+5359562875?text=Hola,%20estoy%20interesado%20en%20el%20viaje%20de%20${from}%20a%20${to}%20el%20${FechaValue}%20a%20través%20de%20${aeroline}%20.Y%20pienso%20pagar%20${MonedaValue}%20en%20${MonedaString}`} 
       target="_blank" 
       rel="noopener noreferrer"
     >

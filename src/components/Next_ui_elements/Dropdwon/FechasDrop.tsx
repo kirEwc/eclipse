@@ -6,25 +6,25 @@ import { Calendar } from "lucide-react";
 // Definir las props que acepta el componente
 interface DropdownCustomProps {
   dateItem: string[]; // Un array de strings para las fechas
+  setFechaValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function FechasDrop({ dateItem }: DropdownCustomProps) {
+export default function FechasDrop({ dateItem,setFechaValue }: DropdownCustomProps) {
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set(["Fechas Disponibles"]));
 
   const selectedValue = React.useMemo(
     () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
     [selectedKeys]
   );
-
-
+  setFechaValue(selectedValue);
 
   return (
     <Dropdown className="w-full sm:w-auto">
       <DropdownTrigger>
         <Button variant="bordered" className="capitalize">
           <span className="flex flex-row items-center gap-1">
-          {<Calendar />}
-          {selectedValue}
+          { <Calendar /> }
+          { selectedValue }
           </span>
         </Button>
       </DropdownTrigger>
@@ -49,3 +49,4 @@ export default function FechasDrop({ dateItem }: DropdownCustomProps) {
     </Dropdown>
   );
 }
+

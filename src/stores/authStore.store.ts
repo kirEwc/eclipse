@@ -1,14 +1,11 @@
-// src/store/authStore.ts
-
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { decryptData, encryptData } from '@/security/encryptData';
 
-
 interface AuthState {
-  user: { email: string; role: string } | null; 
+  user: { email: string} | null; 
   isAuthenticated: boolean;
-  login: (user: { email: string; role: string }) => void;
+  login: (user: { email: string; }) => void;  
   logout: () => void;
 }
 
@@ -17,10 +14,13 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       user: null,
       isAuthenticated: false,
-      login: (user) => set({ user, isAuthenticated: true }),
+      login: ({ email}) => {
+        set({ user: { email }, isAuthenticated: true });
+
+      },
       logout: () => {
         set({ user: null, isAuthenticated: false });
-        sessionStorage.clear(); 
+        sessionStorage.clear();      
       },
     }),
     {

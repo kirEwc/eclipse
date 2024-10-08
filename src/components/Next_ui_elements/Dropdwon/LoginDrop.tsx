@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 import { IcOutlineAdminPanelSettings, SolarLogoutBroken } from "@/icons/Icons";
+=======
+import { deleteAuthCookies } from "@/app/actions/deleteAuthCookies";
+import { SolarLogoutBroken } from "@/icons/Icons";
+>>>>>>> c7bf5369b16c5ac15a7ee131879608cc4fa7f2a6
 import { useAuthStore } from "@/stores/authStore.store";
+import { signOut, useSession } from "next-auth/react";
+
 import {
   Dropdown,
   DropdownTrigger,
@@ -7,18 +14,27 @@ import {
   DropdownItem,
   Avatar,
 } from "@nextui-org/react";
+<<<<<<< HEAD
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+=======
+>>>>>>> c7bf5369b16c5ac15a7ee131879608cc4fa7f2a6
 
 // este es el dropdown de login cuando esta logueado, mas abajo esta el dropdown de login cuando no esta logueado
 const LoginDrop = () => {
   const { data: session } = useSession();
   const { user, isAuthenticated, logout } = useAuthStore();
 
+<<<<<<< HEAD
   /* 
   const { user,isAuthenticated,logout } = useAuthStore();
   // console.log(user);
   const { data: session } = useSession(); */
+=======
+  const { data: session } = useSession();
+  const { user,isAuthenticated,logout } = useAuthStore();
+
+>>>>>>> c7bf5369b16c5ac15a7ee131879608cc4fa7f2a6
 
   const email = session?.user?.email || user?.email;
 
@@ -51,6 +67,19 @@ const LoginDrop = () => {
   // crear la url de la imagen de avatar
   const avatarSrc = generateAvatarImage(email || "avatar");
 
+<<<<<<< HEAD
+=======
+        if (session!==null) {
+         signOut();
+        }
+
+        console.log('isAuthenticated',isAuthenticated)
+        if(isAuthenticated){
+          logout();    
+          await deleteAuthCookies();
+        }
+      };
+>>>>>>> c7bf5369b16c5ac15a7ee131879608cc4fa7f2a6
   return (
     <div className="flex items-center gap-4">
       <Dropdown placement="bottom-end">

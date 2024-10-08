@@ -14,12 +14,6 @@ import { RegisterIcon, SolarLoginBroken } from "@/icons/Icons";
 
 //este es el dropdown de login cuando no esta logueado
 export const DropNLogin = () => {
-
-
-
-
-
-
   return (
     <div className="flex items-center gap-4">
       <Dropdown placement="bottom-end">

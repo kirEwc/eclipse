@@ -34,7 +34,8 @@ export  const Ticket2: React.FC<FlightData> = ({
   const [FechaValue, setFechaValue] = useState('');
 
   
-  
+  const isEnabled = MonedaValue !== 0 && FechaValue !== "Fechas Disponibles"; // Habilitar solo si MonedaValue no es 0 y FechaValue no es vacío
+
   return (
 
     <Card className="relative  max-w-md w-full bg-gradient-to-t from-white to-gray-300 rounded-lg overflow-hidden transition-transform duration-500 ease-in-out transform shadow-2xl">
@@ -107,18 +108,29 @@ export  const Ticket2: React.FC<FlightData> = ({
 
   {/* Segunda fila: botón */}
   <div className="flex justify-center items-center w-full space-x-4">
-    <Link 
-      href={`https://wa.me/+5359562875?text=Hola,%20estoy%20interesado%20en%20el%20viaje%20de%20${from}%20a%20${to}%20el%20${FechaValue}%20a%20través%20de%20${aeroline}%20.Y%20pienso%20pagar%20${MonedaValue}%20en%20${MonedaString}`} 
-      target="_blank" 
-      rel="noopener noreferrer"
-    >
+
+  {isEnabled ? ( // Mostrar el enlace si isEnabled es verdadero
+      <Link 
+        href={`https://wa.me/+5359562875?text=Hola,%20estoy%20interesado%20en%20el%20viaje%20de%20${from}%20a%20${to}%20el%20${FechaValue}%20a%20través%20de%20${aeroline}%20.Y%20pienso%20pagar%20${MonedaValue}%20en%20${MonedaString}`} 
+        target="_blank" 
+        rel="noopener noreferrer"
+      >
+        <button 
+          className="flex px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 transition-colors duration-300 ease-in-out justify-center items-center"
+        >
+          <span className="mr-1">Comprar en</span> 
+          <IcBaselineWhatsapp className="w-6 h-6" />
+        </button>
+      </Link>
+    ) : (
       <button 
-        className="flex px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 transition-colors duration-300 ease-in-out justify-center items-center"
+        className="flex px-6 py-2 bg-gray-400 cursor-not-allowed text-white text-sm font-medium rounded-lg shadow transition-colors duration-300 ease-in-out justify-center items-center"
+        disabled // Establecer la propiedad disabled
       >
         <span className="mr-1">Comprar en</span> 
         <IcBaselineWhatsapp className="w-6 h-6" />
       </button>
-    </Link>
+    )}
   </div>
 </CardFooter>
 

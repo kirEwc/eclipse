@@ -25,3 +25,9 @@ body {
     text-wrap: balance;
   }
 }
+
+html, body {
+  overflow-x: hidden; /* Elimina el desplazamiento horizontal */
+}
+
+

@@ -3,9 +3,9 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { decryptData, encryptData } from '@/security/encryptData';
 
 interface AuthState {
-  user: { email: string} | null; 
+  user: { email: string,role:string} | null; 
   isAuthenticated: boolean;
-  login: (user: { email: string; }) => void;  
+  login: (user: { email: string,role:string}) => void;
   logout: () => void;
 }
 
@@ -14,8 +14,8 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       user: null,
       isAuthenticated: false,
-      login: ({ email}) => {
-        set({ user: { email }, isAuthenticated: true });
+      login: ({ email,role}) => {
+        set({ user: { email,role }, isAuthenticated: true });
 
       },
       logout: () => {

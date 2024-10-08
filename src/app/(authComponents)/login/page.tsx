@@ -57,9 +57,10 @@ const Login: React.FC = () => {
         
 
         if (response?.status === 200) {
-          login({ email});
           const token = data.token;  
-          const role = data.role ;  
+          const role = data.role;  
+          
+          login({ email,role});
           await setAuthCookie(token, role);
           router.push('/');
         } else {
@@ -71,10 +72,10 @@ const Login: React.FC = () => {
       }
 
     }
-    login({ email });
-
+    
     const token = 'gwygr92r5723gr9h42dfby2evfb2iu'
     const role ='admin'
+    login({ email,role}); 
     await setAuthCookie(token, role);
     router.push('/');
   }

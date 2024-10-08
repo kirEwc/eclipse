@@ -1,5 +1,4 @@
 import { Bars3Icon, XMarkIcon } from "@/icons/Icons";
-
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -33,8 +32,13 @@ export default function Sidebar() {
     };
   }, [isOpen]);
 
+  // Función para cerrar el sidebar al hacer clic en un link
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <div className="sm:hidden relative">
+    <div className="relative">
       {/* Botón de menú móvil */}
       <button
         className="lg:hidden fixed top-4 right-4 z-20 p-2 rounded-md text-black focus:outline-none"
@@ -61,7 +65,8 @@ export default function Sidebar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="group flex items-center px-2 py-2 text-base text-black font-medium rounded-md "
+                className="group flex items-center px-2 py-2 text-base text-black font-medium rounded-md"
+                onClick={handleLinkClick} // Cierra el sidebar al hacer clic
               >
                 {item.name}
               </Link>

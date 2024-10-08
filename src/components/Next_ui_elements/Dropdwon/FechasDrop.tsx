@@ -1,13 +1,14 @@
 import React from "react";
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 import type { Selection } from "@nextui-org/react";
+import { Calendar } from "lucide-react";
 
 // Definir las props que acepta el componente
 interface DropdownCustomProps {
   dateItem: string[]; // Un array de strings para las fechas
 }
 
-export default function DropdownCustom({ dateItem }: DropdownCustomProps) {
+export default function FechasDrop({ dateItem }: DropdownCustomProps) {
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set(["Fechas Disponibles"]));
 
   const selectedValue = React.useMemo(
@@ -15,11 +16,16 @@ export default function DropdownCustom({ dateItem }: DropdownCustomProps) {
     [selectedKeys]
   );
 
+
+
   return (
-    <Dropdown>
+    <Dropdown className="w-full sm:w-auto">
       <DropdownTrigger>
         <Button variant="bordered" className="capitalize">
+          <span className="flex flex-row items-center gap-1">
+          {<Calendar />}
           {selectedValue}
+          </span>
         </Button>
       </DropdownTrigger>
       <DropdownMenu
@@ -32,9 +38,12 @@ export default function DropdownCustom({ dateItem }: DropdownCustomProps) {
       >
         {/* Mapear el array dateItem para generar las opciones del Dropdown */}
         {dateItem.map((date) => (
-          <DropdownItem key={date}>
-            {date}
-          </DropdownItem>
+          <DropdownItem key={date} className="flex items-center justify-between w-full" value={date}>
+          <div className="flex items-center space-x-2">
+            {<Calendar />}
+            <span>{date}</span>
+          </div>
+        </DropdownItem>
         ))}
       </DropdownMenu>
     </Dropdown>

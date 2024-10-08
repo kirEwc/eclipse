@@ -3,10 +3,11 @@ import StarComponent from "@/components/my-components/Star/StarComponent";
 import ModalCustom from "@/components/Next_ui_elements/Modal/Modal";
 import { ProiconsNoteAdd, Star } from "@/icons/Icons";
 import { Avatar, Button, Card, CardBody, CardFooter, Progress, useDisclosure } from "@nextui-org/react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export const Comentarios = () => {
   const [averageRating, setAverageRating] = useState(4.2);
+  console.log(setAverageRating);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 

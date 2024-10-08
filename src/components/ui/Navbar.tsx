@@ -19,13 +19,14 @@ import { DropNLogin } from "../Next_ui_elements/Dropdwon/DropNLogin";
 
 import Sidebar from "./Sidebar";
 import { useAuthStore } from "@/stores/authStore.store";
+import { HugeiconsComment01, IcTwotoneAirplaneTicket, Requirements } from "@/icons/Icons";
 
 
   
   
   
   export default function Navbar_Main() {
-  const { data: session,status} = useSession();
+  const { status} = useSession();
   const { isAuthenticated } = useAuthStore();
 
  
@@ -55,42 +56,46 @@ import { useAuthStore } from "@/stores/authStore.store";
         </div>
       </NavbarBrand>
 
-      {/* contenido del sidebar */}
-      <div className="sm:hidden flex items-end" >
-        <Sidebar/>
-      </div>
+      
 
       {/* contenido 2 */}
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem className="text-gray-600  hover:text-cyan-500 dark:text-gray-200 dark:hover:text-cyan-500 transition duration-300">
-          <Link color="foreground" href="/vuelos-disponibles">
+      <NavbarContent className="hidden md:flex gap-4" justify="center">
+        <NavbarItem className="text-gray-600  hover:text-cyan-500 dark:text-gray-200  transition duration-300">
+          <Link color="foreground" href="/vuelos-disponibles" className="flex flex-row items-center gap-1">
             Vuelos Disponibles
+            <IcTwotoneAirplaneTicket className="w-5 h-5" />
           </Link>
         </NavbarItem>
-        <NavbarItem className="text-gray-600 hover:text-cyan-500 dark:text-gray-200 dark:hover:text-cyan-500 transition duration-300">
-          <Link color="foreground" href="/requisitos">
+        <NavbarItem className="text-gray-600 hover:text-cyan-500 dark:text-gray-200  transition duration-300">
+          <Link color="foreground" href="/requisitos" className="flex flex-row items-center gap-1">
             Requisitos
+            <Requirements className="w-4 h-4" />
           </Link>
         </NavbarItem>
-        <NavbarItem className="text-gray-600 hover:text-cyan-500 dark:text-gray-200 dark:hover:text-cyan-500 transition duration-300">
-          <Link color="foreground" href="/comentarios">
+        <NavbarItem className="text-gray-600 hover:text-cyan-500 dark:text-gray-200  transition duration-300">
+          <Link color="foreground" href="/comentarios" className="flex flex-row items-center gap-1">
             Comentarios
+            <HugeiconsComment01 className="w-4 h-4" />
           </Link>
         </NavbarItem>
       </NavbarContent>
 
       {/* contenido 3 */}
-      <NavbarContent className="hidden md:flex" justify="end">
+      <NavbarContent className="  " justify="end">
 
        
       {status ==='authenticated' || isAuthenticated ? (
-        //si no estas autenticado, muestra el dropdown de login
+        // Si está autenticado, muestra el dropdown de login
         <LoginDrop />
       ) : (
-        // Si está autenticado, muestra el dropdown de login
+        //si no estas autenticado, muestra el dropdown de login
         <DropNLogin  />
       )}
 
+      {/* contenido del sidebar */}
+      <div className="md:hidden flex items-end ml-8 " >
+        <Sidebar/>
+      </div>
       </NavbarContent>
 
       

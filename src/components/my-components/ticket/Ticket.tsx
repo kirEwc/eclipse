@@ -1,11 +1,11 @@
 "use client";
 import {  IcBaselineWhatsapp, NotoV1Ticket } from "@/icons/Icons";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
-import { Calendar,  Plane } from "lucide-react";
-import DropdownCustom from "../Next_ui_elements/Dropdwon/dropdown";
-import MonedaDropdown from "../Next_ui_elements/Dropdwon/monedadrop";
+import { Plane } from "lucide-react";
+import MonedaDropdown from "../../Next_ui_elements/Dropdwon/monedadrop";
 import Image from "next/image";
 import Link from "next/link";
+import FechasDrop from "../../Next_ui_elements/Dropdwon/FechasDrop";
 
 interface FlightData {
   aeroline?: string;
@@ -75,38 +75,40 @@ export  const Ticket2: React.FC<FlightData> = ({
       </CardBody>
 
       {/* Footer */}
-      <CardFooter className="p-4 flex flex-col space-y-3 ">
-        {/* Primera fila: Fecha y Hora */}
-        <div className="flex flex-col lg:flex-row lg:justify-between w-full items-center">
-          <div className="flex items-center space-x-2 mb-4 lg:mb-0">
-            <Calendar className="w-6 h-6 " />
-            <DropdownCustom dateItem={date} />
-          </div>
-          <div className=" items-center space-x-2">
-            <div className="text-2xl font-bold text-gray-800">
-              <MonedaDropdown
-              price={price}
-              />
-            </div> 
-          </div>
-        </div>
-        {/* Segunda fila: Precio y add */}
-        <div className="flex justify-center items-center w-full space-x-4">
-       
+      <CardFooter className="p-4 flex flex-col space-y-3">
+  {/* Primera fila: Fecha y precio */}
+  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full space-y-4 sm:space-y-0">
+  {/* Primer dropdown: alineado al inicio en pantallas pequeñas */}
+  <div className="flex w-full sm:w-auto justify-center sm:justify-start items-center space-x-2">
+    <FechasDrop dateItem={date} />
+  </div>
+  
+  {/* Segundo dropdown: alineado al final en pantallas pequeñas */}
+  <div className="flex w-full sm:w-auto justify-center items-center space-x-2 sm:ml-4">
+    <div className="text-2xl font-bold text-gray-800">
+      <MonedaDropdown price={price} />
+    </div>
+  </div>
+</div>
 
-          <Link 
-          href={`https://wa.me/+5359562875?text=Hola,%20estoy%20interesado%20en%20el%20viaje%20de%20${from}%20a%20${to}%20el%20${date}%20a%20través%20de%20${aeroline}`} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          >
-          <button 
-          className="flex px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 transition-colors duration-300 ease-in-out justify-center items-center"
-          >
-           <span className="mr-1"> Comprar en</span> <IcBaselineWhatsapp className="w-6 h-6" />
-          </button>
-          </Link>
-        </div>
-      </CardFooter>
+  {/* Segunda fila: botón */}
+  <div className="flex justify-center items-center w-full space-x-4">
+    <Link 
+      href={`https://wa.me/+5359562875?text=Hola,%20estoy%20interesado%20en%20el%20viaje%20de%20${from}%20a%20${to}%20el%20${date}%20a%20través%20de%20${aeroline}%20.Y%20pienso%20pagar%20${price}`} 
+      target="_blank" 
+      rel="noopener noreferrer"
+    >
+      <button 
+        className="flex px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 transition-colors duration-300 ease-in-out justify-center items-center"
+      >
+        <span className="mr-1">Comprar en</span> 
+        <IcBaselineWhatsapp className="w-6 h-6" />
+      </button>
+    </Link>
+  </div>
+</CardFooter>
+
+
     </Card>
   );
 }

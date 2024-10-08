@@ -32,10 +32,10 @@ export default function MonedaDropdown({ price }: DropdownCustomProps) {
   return (
     <div className="flex items-center justify-center space-x-2">
       <span className="text-xl font-bold text-gray-800">
-        {selectedPrice !== null ? selectedPrice : ""} {/* Mostrar el precio seleccionado o un "-" si no hay selección */}
+        {selectedPrice !== null ? selectedPrice : ""} {/* Mostrar el precio seleccionado o un " " si no hay selección */}
       </span>
 
-      <Dropdown>
+      <Dropdown >
         <DropdownTrigger>
           <Button variant="bordered" className="capitalize flex items-center">
             {priceIcons[selectedString]} {/* Muestra el ícono basado en el string */}

@@ -1,6 +1,6 @@
 'use client';
 import StarComponent from "@/components/my-components/Star/StarComponent";
-import ModalCustom from "@/components/Next_ui_elements/Modal/Modal";
+import ModalCustom from "@/components/Next_ui_elements/Modal/ModalComentarios";
 import { ProiconsNoteAdd, Star } from "@/icons/Icons";
 import { Avatar, Button, Card, CardBody, CardFooter, Progress, useDisclosure } from "@nextui-org/react";
 import { useState } from "react";

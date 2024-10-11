@@ -9,13 +9,13 @@ import CustomSelect from "@/components/Next_ui_elements/select/Select";
 import { dataNameAirline } from "@/data/dataNameAirline";
 import { Destination, F7MoneyDollarCircleFill, Fa6SolidPlaneCircleCheck, Fa6SolidPlaneCircleXmark,NotoV1Ticket, Origin, Plane } from "@/icons/Icons";
 import CorrectMessage from "@/messages/CorrectMessage";
-import ErrorMessage from "@/messages/ErrorMessage";
 import ApiRequest from "@/services/ApiRequest";
 import { useDisclosure } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { DateObject } from "react-multi-date-picker";
 import { ModalAddPrice } from "@/components/Next_ui_elements/Modal/ModalAddPrice";
+import ErrorMessage from "@/messages/errorMessage";
 
 interface FormData {
     selectedAirline: string;

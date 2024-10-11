@@ -1,5 +1,6 @@
 "use client";
 
+import { validationAddTicket } from "@/app/lib/validation/validationAddTicket";
 import ButtonMoney from "@/components/my-components/button/ButtonMoney";
 import ButtonNext from "@/components/Next_ui_elements/button/ButtonNext";
 import Calendar from "@/components/Next_ui_elements/calender/Calender";
@@ -7,35 +8,113 @@ import InputText from "@/components/Next_ui_elements/inputText/InputText";
 import CustomSelect from "@/components/Next_ui_elements/select/Select";
 import { dataNameAirline } from "@/data/dataNameAirline";
 import { Destination, F7MoneyDollarCircleFill, Fa6SolidPlaneCircleCheck, Fa6SolidPlaneCircleXmark,NotoV1Ticket, Origin, Plane } from "@/icons/Icons";
+import CorrectMessage from "@/messages/CorrectMessage";
+import ErrorMessage from "@/messages/ErrorMessage";
+import ApiRequest from "@/services/ApiRequest";
+import { useDisclosure } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { DateObject } from "react-multi-date-picker";
+import { ModalAddPrice } from "@/components/Next_ui_elements/Modal/ModalAddPrice";
 
+interface FormData {
+    selectedAirline: string;
+    origin: string;
+    destination: string;
+    selectedDates: DateObject[]// O cualquier tipo que uses para las fechas
+}
 
 
 
 const AddTicket: React.FC = () => {
     const router = useRouter();
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const handleSelectChange = (value: string) => {
-        const selectedAirline = dataNameAirline.find(airline => airline.key === value);
-        console.log('selectedAirline: ', selectedAirline?.label);
+    const [formData, setFormData] = useState<FormData>({
+        selectedAirline: '',
+        origin: '',
+        destination: '',
+        selectedDates: [],
+    });
 
+    // Manejador para actualizar los valores del formulario
+    const handleInputChange = (name: keyof FormData, value: any) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+            
+        }));     
     };
 
-    const [selectedDates, setSelectedDates] = useState<DateObject[]>([]);
+
+    const handleSubmit = async ()  => {       
+       const { selectedAirline, origin, destination, selectedDates } = formData;
+        const dates = selectedDates.map(date => date.format("DD/MM/YYYY"));
+        const selectedAirlineData = dataNameAirline.find(airline => airline.key === selectedAirline);   
+        const nameAirline = selectedAirlineData ? selectedAirlineData.label : "";
+
+
+        const dataToValidate = {
+            nameAirline: nameAirline, 
+            origin: origin,
+            destination: destination,
+            selectedDates:dates , 
+        };
+
+        console.log(dataToValidate);
+
+        const validatedFields = validationAddTicket.safeParse(dataToValidate);
+
+
+        if (!validatedFields.success) {         
+            const firstError = validatedFields.error.errors[0];
+            if (firstError) {
+                const message = firstError.message; // Obtén el mensaje del primer error
+               console.log(message);
+                ErrorMessage(message); // Muestra el mensaje de error
+            }
+        }if (validatedFields.success) {
+      
+            try {
+              const response = await ApiRequest({
+                method: 'POST',
+                url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
+                body: {
+                    nameAirline: nameAirline,
+                    origin: origin,
+                    destination: destination,
+                    selectedDates: dates,
+                },
+              });
+           
+              
+              if (response?.status === 200) {
+                  CorrectMessage('Boleto agregado correctamente');
+                
+              } else {
+                ErrorMessage('Error al agregar el boleto');
+              }
+      
+            } catch (error) {
+              // console.log(error)
+            }
+      
+          }
+          
+   
+    };
+
+
+
 
     const handleCancelTicket = () => {
         router.push('/adminPanel');
     }
-    const handleAddTicket = () => {
-        const cadena = selectedDates.map(date => date.format("DD/MM/YYYY"));
-        console.log(cadena)
-    }
 
-    const handleMoney = () => {
-        console.log('Precio');
-    }
+  
+
+
+
 
 
     return (
@@ -45,6 +124,8 @@ const AddTicket: React.FC = () => {
                     <div className="h-3 w-full bg-black"></div>
                     <div className="w-full h-5/12 ">
 
+                       
+                                             
                         <div className="flex  items-center justify-between py-3 mx-2">
                             <div>
                                 <Plane className="w-10 h-10 my-1 ml-4" />
@@ -53,8 +134,8 @@ const AddTicket: React.FC = () => {
                             <div >
                                 <CustomSelect
                                     options={dataNameAirline}
-                                    onChange={handleSelectChange}
-                                    label="Select an airline"
+                                    onChange={(value) => handleInputChange('selectedAirline', value)}
+                                        label="Select an airline"                                        
                                 />                               
                             </div>
 
@@ -67,11 +148,21 @@ const AddTicket: React.FC = () => {
                         <div className="py-3 mx-4 ">
                             <div className="flex justify-between space-x-2">
                                 <div className="w-48">
-                                    <InputText name="origin" placeholder="Origen" icon={<Origin />} />
+                                    <InputText
+                                        name="origin"
+                                        placeholder="Origen"
+                                        icon={<Origin />}
+                                        onChange={(e) => handleInputChange('origin', e.target.value)}
+                                         />
                                 </div>
 
                                 <div className="w-48">
-                                    <InputText name="destination" placeholder="Destino" icon={<Destination />} />
+                                    <InputText
+                                        name="destination"
+                                        placeholder="Destino"
+                                        icon={<Destination />}
+                                        onChange={(e) => handleInputChange('destination',  e.target.value)}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -81,8 +172,8 @@ const AddTicket: React.FC = () => {
 
                                 <div className="w-48">
                                     <Calendar
-                                        selectedDates={selectedDates}
-                                        onChange={setSelectedDates}
+                                        selectedDates={formData.selectedDates}
+                                        onChange={(dates) => handleInputChange('selectedDates', dates)}
                                         placeholder="Fecha(s)"
 
                                     />
@@ -92,11 +183,13 @@ const AddTicket: React.FC = () => {
                                       <ButtonMoney
                                         icon={<F7MoneyDollarCircleFill className="h-7 w-7 ml-2" />}
                                         text="Precios"
-                                        onClick={handleMoney}                                        
+                                        onClick={()=>{onOpen()}}                                        
                                         className="bg-white w-full h-10"
-                                    />                     
+                                       />   
+                                      <ModalAddPrice isOpen={isOpen} onClose={onClose} />
 
-                                </div>
+
+                                </div>
                             </div>                          
                         </div>
 
@@ -117,12 +210,11 @@ const AddTicket: React.FC = () => {
                                 </div>
 
                                 <div>
-                                    <ButtonNext
+                                        <ButtonNext
+                                       onClick={handleSubmit}
                                         icon={<Fa6SolidPlaneCircleCheck className="h-7 w-7" />}
-                                        text="Agregar"
-                                        onClick={handleAddTicket}
+                                        text="Agregar"                                       
                                         className="bg-green-500 text-white"
-
                                     >
                                     </ButtonNext>
                                 </div>
@@ -130,8 +222,7 @@ const AddTicket: React.FC = () => {
 
                         </div>
 
-
-
+                       
                     </div>
                 </div>
 

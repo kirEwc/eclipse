@@ -1,13 +1,14 @@
 import React from 'react';
 import { Input, InputProps } from '@nextui-org/react';
 
-interface EmailInputProps extends Omit<InputProps, 'type'> {
+interface TextInputProps extends Omit<InputProps, 'type'> {
   name?: string;
   icon?: React.ReactNode; // Nueva prop para el icono
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  
 }
 
-const InputText: React.FC<EmailInputProps> = ({ name = 'email', onChange, className = '', icon, ...props }) => {
+const InputText: React.FC<TextInputProps> = ({ name = 'email', onChange, className = '', icon, ...props }) => {
   return (
     <Input
       name={name}
@@ -16,7 +17,7 @@ const InputText: React.FC<EmailInputProps> = ({ name = 'email', onChange, classN
       labelPlacement="outside"
       startContent={
         icon ? (
-          <div className="text-2xl text-default-400 pointer-events-none flex-shrink-0">
+          <div className="text-2xl text-default-400 pointer-events-none flex-shrink-0 ">
             {icon}
           </div>
         ) : null

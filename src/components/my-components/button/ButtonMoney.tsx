@@ -11,7 +11,7 @@ const ButtonMoney: React.FC<ButtonMoneyProps> = ({ icon, text, onClick, classNam
     return (
         <button
             onClick={onClick}
-            className={`flex items-center justify-start ${className} rounded-xl transition-all duration-300 `}    
+            className={`flex items-center justify-start ${className} rounded-xl `}    
         >
             {icon}
             <span className="ml-2">{text}</span>

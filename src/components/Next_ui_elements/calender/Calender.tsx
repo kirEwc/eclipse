@@ -16,7 +16,7 @@ const Calendar: React.FC<CalendarProps> = ({
   onChange,
   placeholder = "Fecha(s)", 
   iconClassName = "absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400",
-  inputClassName = "w-full border rounded-xl p-2 pl-10 focus:outline-none"
+  inputClassName = "w-full border rounded-xl p-2 pl-10 focus:outline-none hover:bg-gray-50 hover:cursor-pointer"
 }) => {
   return (    
       <div className="relative flex items-center">

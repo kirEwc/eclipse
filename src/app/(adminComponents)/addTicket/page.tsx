@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { DateObject } from "react-multi-date-picker";
 import { ModalAddPrice } from "@/components/Next_ui_elements/Modal/ModalAddPrice";
-import ErrorMessage from "@/messages/errorMessage";
+import ErrorMessage from "@/messages/ErrorMessage";
 
 interface FormData {
     selectedAirline: string;
@@ -29,6 +29,8 @@ interface FormData {
 const AddTicket: React.FC = () => {
     const router = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [addPrice, setaddPrice] = useState();
+
 
     const [formData, setFormData] = useState<FormData>({
         selectedAirline: '',

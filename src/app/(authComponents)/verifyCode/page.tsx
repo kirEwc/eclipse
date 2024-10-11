@@ -4,7 +4,7 @@ import { validationVerifyCode } from '@/app/lib/validation/validationVerifyCode'
 import ButtonNext from '@/components/Next_ui_elements/button/ButtonNext';
 import InputNumber from '@/components/Next_ui_elements/inputNumber/InputNumber';
 import CustomLink from '@/components/my-components/link/Link';
-import { User } from '@/icons/Icons';
+import { Number, User } from '@/icons/Icons';
 import ErrorMessage from '@/messages/ErrorMessage';
 import ApiRequest from '@/services/ApiRequest';
 import { useRouter } from 'next/navigation';
@@ -63,7 +63,8 @@ const VerifyCode = () => {
               <div className="flex items-center justify-center flex-grow flex-col">
                 <div className="mb-4 w-48">
                   <InputNumber
-                    name="code"                    
+                    name="code"  
+                    icon={<Number className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />} 
                   />
                   
                 </div>

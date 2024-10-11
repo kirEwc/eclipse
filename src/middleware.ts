@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
 console.log('authToken'+authToken)
 
   const restrictedRoutes = ['/login', '/register', '/recoveryPassword', '/verifyCode', '/confirmPassword'];
-  const adminRoutes = ['/adminPanel'];
+  const adminRoutes = ['/adminPanel','/addTicket'];
 
   if (authToken || authTokenGoogle) {
     if (restrictedRoutes.some((route) => request.nextUrl.pathname.startsWith(route))) {
@@ -41,5 +41,6 @@ export const config = {
     '/confirmPassword', 
     '/admin/dashboard', 
     '/adminPanel',
+    '/addTicket'
   ],
 };

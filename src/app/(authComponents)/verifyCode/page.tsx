@@ -2,7 +2,7 @@
 
 import { validationVerifyCode } from '@/app/lib/validation/validationVerifyCode';
 import ButtonNext from '@/components/Next_ui_elements/button/ButtonNext';
-import InputNumber from '@/components/Next_ui_elements/inputNumber/inputNumber';
+import InputNumber from '@/components/Next_ui_elements/inputNumber/InputNumber';
 import CustomLink from '@/components/my-components/link/Link';
 import { User } from '@/icons/Icons';
 import ErrorMessage from '@/messages/ErrorMessage';

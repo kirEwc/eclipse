@@ -98,17 +98,17 @@ export function Fa6SolidGreaterThan(props: SVGProps<SVGSVGElement>) {
 //number
 export function Number(props: SVGProps<SVGSVGElement>) {
 	return (
-	  <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16" {...props}>
-		<path fill="#818c98" fillRule="evenodd" d="M7.808 10.197H6.796L5.859 13H4.485l.937-2.803H3.966l.219-1.25h1.647l.608-1.805H4.991l.226-1.251h1.64l.95-2.844h1.368l-.95 2.844h1.018l.95-2.844h1.374l-.95 2.844h1.51l-.218 1.25h-1.702l-.608 1.805h1.497l-.219 1.251H9.182L8.252 13H6.878zm-.602-1.25h1.012l.615-1.805H7.814z"></path>
-	  </svg>
+		<svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 16 16" {...props}>
+			<path fill="#818c98" fillRule="evenodd" d="M7.808 10.197H6.796L5.859 13H4.485l.937-2.803H3.966l.219-1.25h1.647l.608-1.805H4.991l.226-1.251h1.64l.95-2.844h1.368l-.95 2.844h1.018l.95-2.844h1.374l-.95 2.844h1.51l-.218 1.25h-1.702l-.608 1.805h1.497l-.219 1.251H9.182L8.252 13H6.878zm-.602-1.25h1.012l.615-1.805H7.814z"></path>
+		</svg>
 	);
-  }
-  
-  //icono de 3 barras del sidebar
-  export function Bars3Icon(props: SVGProps<SVGSVGElement>) {
+}
+
+//icono de 3 barras del sidebar
+export function Bars3Icon(props: SVGProps<SVGSVGElement>) {
 	return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="currentColor" fillRule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75M3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12m8.25 5.25a.75.75 0 0 1 .75-.75h8.25a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75" clipRule="evenodd"></path></svg>);
 }
- //X del sidebar
+//X del sidebar
 export function XMarkIcon(props: SVGProps<SVGSVGElement>) {
 	return (<svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="1em" viewBox="0 0 384 512" {...props}><path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7L86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256L41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3l105.4 105.3c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256z"></path></svg>);
 }
@@ -166,4 +166,82 @@ export function HugeiconsCommentRemove01(props: SVGProps<SVGSVGElement>) {
 //enviar comentario
 export function AkarIconsCommentAdd(props: SVGProps<SVGSVGElement>) {
 	return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><g fill="none" stroke="white" strokeLinecap="round" strokeWidth={2}><path d="M12 8v3m0 0v3m0-3h3m-3 0H9"></path><path strokeLinejoin="round" d="M14 19c3.771 0 5.657 0 6.828-1.172S22 14.771 22 11s0-5.657-1.172-6.828S17.771 3 14 3h-4C6.229 3 4.343 3 3.172 4.172S2 7.229 2 11s0 5.657 1.172 6.828c.653.654 1.528.943 2.828 1.07"></path><path d="M14 19c-1.236 0-2.598.5-3.841 1.145c-1.998 1.037-2.997 1.556-3.489 1.225s-.399-1.355-.212-3.404L6.5 17.5"></path></g></svg>);
+}
+
+//plane
+
+
+export function Plane(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 64 64" {...props}><path fill="#677780" d="M26.967 10.907c-1.86 1.739-4.871 1.584-6.733-.34c-1.859-1.928-1.861-4.895-.004-6.634l2.915-2.725c1.858-1.735 4.873-1.583 6.731.342c1.861 1.93 1.863 4.897.002 6.636z"></path><path fill="#96bfc9" d="M39.53 23.987L8.601 9.747S.048-2.759 42.791 9.81l-3.263 14.177"></path><path fill="#6c8e99" d="m8.812 8.111l.403.143c8.966-1.888 25.785 2.383 34.727 5l1.188-4.055C-.65-1.385 8.81 8.111 8.81 8.111"></path><path fill="#677780" d="M51.27 35.957c-1.856 1.741-1.902 4.756-.104 6.741c1.803 1.981 4.764 2.181 6.62.438l2.909-2.727c1.857-1.741 1.9-4.762.102-6.743c-1.803-1.982-4.764-2.176-6.622-.437z"></path><path fill="#96bfc9" d="m39.05 22.559l12.175 31.803s11.916 9.353 2.183-34.12L39.05 22.564"></path><path fill="#6c8e99" d="m52.867 54.26l-.117-.411c2.474-8.822-.684-25.886-2.703-34.982l4.123-.917c7.554 46.38-1.303 36.31-1.303 36.31"></path><path fill="#96bfc9" d="m19.09 45.659l1.928 16.15s5.517 3.36 6.988-19.877l-8.916 3.724"></path><path fill="#6c8e99" d="M22.02 61.48v-.219c2.941-5.457 3.914-14.687 4.229-19.552l2.599-1.211C25.6 65.758 22.02 61.48 22.02 61.48"></path><path fill="#96bfc9" d="M16.373 42.854L.382 39.87s-2.992-5.723 20.294-5.667z"></path><path fill="#6c8e99" d="m.781 38.901l.214.012c5.64-2.573 14.911-2.937 19.79-2.935l1.378-2.514C-3.254 35.047.781 38.901.781 38.901"></path><path fill="#e8ebec" d="M59.41 15.275c2.502-2.345 6.338-10.345 3.628-13.241c-2.713-2.897-10.947.405-13.451 2.752l-2.818 2.637c-.02.02-.033.046-.056.068c-.014.012-.039.028-.052.04l-31.06 31.33c-1.45 1.358-5 7.776-3.064 9.786l.584.605c1.938 2.01 8.636-1.155 10.09-2.516l33.13-28.589c.036-.034.088-.097.127-.143c.04-.036.088-.058.125-.093l2.818-2.636"></path><path fill="#c0c5c8" d="M62.37 1.431C59.144-.404 51.957 2.566 49.646 4.733l-2.817 2.635c-.021.021-.035.047-.058.069c-.014.012-.04.03-.054.04l-31.05 31.33c-1.452 1.357-5.01 7.775-3.068 9.785l.584.604c.353.365.866.557 1.473.622c9.115-11.895 32.999-41.775 47.717-48.39"></path><path fill="#6c8e99" d="M9.344 53.3c-.449.419-2.254 1.656-2.538 1.366l-.086-.091c-.278-.292 1.068-2 1.515-2.419l8.96-11.497c.447-.417 4.084-.247 4.367.045l.083.088c.284.292.225 3.916-.22 4.335L9.345 53.3M52.718 4.848s8.166-.872 6.964 7.21c0 0-1.134-5.635-6.964-7.21"></path></svg>);
+}
+
+
+
+//option
+export function Option(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="black" d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0m0-6a2 2 0 1 0 4 0a2 2 0 0 0-4 0m0 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0"></path></svg>);
+}
+
+//Selector
+export function Selector(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m8 9l4-4l4 4m0 6l-4 4l-4-4"></path></svg>);
+}
+
+//update
+
+export function Update(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="1.5em" viewBox="0 0 48 48" {...props}><g fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth={4}><path fill="#2f88ff" stroke="#000" d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z"></path><path stroke="#fff" d="M33.5424 27C32.2681 31.0571 28.4778 34 24.0002 34C19.5226 34 15.7323 31.0571 14.458 27V33"></path><path stroke="#fff" d="M33.5424 15V21C32.2681 16.9429 28.4778 14 24.0002 14C19.5226 14 15.7323 16.9429 14.458 21"></path></g></svg>);
+}
+
+
+//origin
+export function Origin(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="1em" viewBox="0 0 256 344" {...props}><defs><linearGradient id="logosOrigin0" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stopColor="#000"></stop><stop offset="100%" stopColor="#000"></stop></linearGradient></defs><path fill="url(#logosOrigin0)" d="M127.616 2.374c.7 1.802-.51 3.45-1.503 4.844c-7.025 9.957-12.548 21.092-14.75 33.063c-.862 2.457-.672 4.288 0 4.492c13.633-1.197 29.012-1.059 42.434 1.808c24.423 4.917 47.25 17.274 64.793 34.942c17.493 17.486 29.77 40.144 34.738 64.385c5.508 26.247 2.43 54.186-8.586 78.632c-23.358 49.918-62.736 92.141-110.918 118.906c-1.554.722-3.794.751-4.859-.795c-1.254-1.62-.736-3.925.504-5.398c6.5-9.068 11.037-19.492 13.503-30.362c.474-2.254 1.123-4.537.926-6.857c-.795-1.036-2.108-.722-3.224-.685c-23.388 2.341-47.454-1.839-68.587-12.168c-22.636-10.906-41.843-28.735-54.544-50.408C5.777 216.836-.409 193.617.021 170.455c.08-21.257 5.88-42.34 16.093-60.948C39.888 63.863 77.215 25.346 122.284.463c1.889-1.05 4.683-.27 5.332 1.911M120.97 122.44c-13.911 1.868-26.743 10.038-34.534 21.68c-5.274 7.996-8.47 17.494-8.404 27.109c-.393 12.882 4.742 25.787 13.642 35.066c7.776 8.375 18.58 13.831 29.909 15.29c11.533 1.525 23.577-1.174 33.345-7.514c9.928-6.302 17.493-16.253 20.878-27.523c6.354-19.565-1.262-42.486-17.836-54.573c-10.41-7.922-24.059-11.439-37-9.535"></path></svg>);
+}
+
+export function Destination(props: SVGProps<SVGSVGElement>) {
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="1em"
+			height="1em"
+			viewBox="0 0 24 24"
+			{...props}
+		>
+			<defs>
+				<linearGradient id="logosDestination0" x1="50%" x2="50%" y1="0%" y2="100%">
+					<stop offset="0%" stopColor="#000"></stop> 
+					
+				</linearGradient>
+			</defs>
+			<path
+				fill="url(#logosDestination0)" // Aplicamos el mismo gradiente
+				fillRule="evenodd"
+				d="M8.445 3.168a1 1 0 0 1 1.002-.062L15 5.882l5.553-2.776A1 1 0 0 1 22 4v12a1 1 0 0 1-.445.832l-6 4a1 1 0 0 1-1.002.062L9 18.118l-5.553 2.776A1 1 0 0 1 2 20V8a1 1 0 0 1 .445-.832zM5 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0m5 1a1 1 0 0 1-1-1a1 1 0 1 1 2 0v.001a1 1 0 0 1-1 1zm4.707-3.708a1 1 0 1 0-1.414 1.414L14.586 12l-1.293 1.293a1 1 0 0 0 1.414 1.414L16 13.414l1.293 1.293a1 1 0 0 0 1.414-1.414L17.414 12l1.293-1.293a1 1 0 0 0-1.414-1.414L16 10.586l-1.293-1.293z"
+				clipRule="evenodd"
+			/>
+		</svg>
+	);
+}
+
+
+//EosIconsModifiedDate
+export function EosIconsModifiedDate(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24" {...props}><path fill="#000000" d="M20 3h-1V1h-2v2H7V1H5v2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2M7.53 21H4v-3.53l9.41-9.41l3.53 3.53ZM19.72 8.81l-1.84 1.84l-3.53-3.53l1.85-1.84a.92.92 0 0 1 1.32 0l2.2 2.2a.94.94 0 0 1 0 1.33"></path></svg>);
+}
+
+//cancel ticket
+export function Fa6SolidPlaneCircleXmark(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1em" viewBox="0 0 640 512" {...props}><path fill="black" d="M256 0c-35 0-64 59.5-64 93.7v84.6L8.1 283.4c-5 2.8-8.1 8.2-8.1 13.9v65.5c0 10.6 10.2 18.3 20.4 15.4l171.6-49v70.9l-57.6 43.2c-4 3-6.4 7.8-6.4 12.8v42c0 7.8 6.3 14 14 14c1.3 0 2.6-.2 3.9-.5L256 480l110.1 31.5c1.3.4 2.6.5 3.9.5c6 0 11.1-3.7 13.1-9c-38.6-32.3-63.1-80.8-63.1-135c0-60.6 30.6-114 77.1-145.6L320 178.3V93.7C320 59.5 292 0 256 0m240 512a144 144 0 1 0 0-288a144 144 0 1 0 0 288m59.3-180.7L518.6 368l36.7 36.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L496 390.6l-36.7 36.7c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l36.7-36.7l-36.7-36.7c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l36.7 36.7l36.7-36.7c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6"></path></svg>);
+}
+
+//add ticket
+export function Fa6SolidPlaneCircleCheck(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1em" viewBox="0 0 640 512" {...props}><path fill="black" d="M256 0c-35 0-64 59.5-64 93.7v84.6L8.1 283.4c-5 2.8-8.1 8.2-8.1 13.9v65.5c0 10.6 10.2 18.3 20.4 15.4l171.6-49v70.9l-57.6 43.2c-4 3-6.4 7.8-6.4 12.8v42c0 7.8 6.3 14 14 14c1.3 0 2.6-.2 3.9-.5L256 480l110.1 31.5c1.3.4 2.6.5 3.9.5c6 0 11.1-3.7 13.1-9c-38.6-32.3-63.1-80.8-63.1-135c0-60.6 30.6-114 77.1-145.6L320 178.3V93.7C320 59.5 292 0 256 0m384 368a144 144 0 1 0-288 0a144 144 0 1 0 288 0m-76.7-43.3c6.2 6.2 6.2 16.4 0 22.6l-72 72c-6.2 6.2-16.4 6.2-22.6 0l-40-40c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l28.7 28.7l60.7-60.7c6.2-6.2 16.4-6.2 22.6 0"></path></svg>);
+}
+
+//Money
+
+export function F7MoneyDollarCircleFill(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 56 56" {...props}><path fill="black" d="M4 28C4 14.745 14.745 4 28 4s24 10.745 24 24s-10.745 24-24 24S4 41.255 4 28m24.573 1.744c2.974.732 3.865 1.702 3.865 3.34c0 1.702-1.145 2.99-3.865 3.197zm-1.797-3.673c-2.544-.637-3.499-1.702-3.499-3.15s1.209-2.767 3.5-3.053zm1.797.429v-6.632c2.036.254 3.467 1.415 3.674 3.42h3.308c-.127-3.61-3.006-5.996-6.982-6.315v-2.687h-1.797v2.687c-4.008.303-6.87 2.656-6.87 6.219c0 3.228 2.179 5.042 6.218 5.98l.652.159v6.934c-2.56-.27-3.769-1.638-4.055-3.499h-3.292c.11 3.817 3.308 6.091 7.347 6.394v2.671h1.797V39.16c4.056-.287 7.237-2.497 7.237-6.394c0-3.387-2.29-5.105-6.473-6.075z"></path></svg>);
 }

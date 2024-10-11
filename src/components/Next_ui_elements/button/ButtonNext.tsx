@@ -16,12 +16,13 @@ const ButtonNext: React.FC<ButtonProps> = ({
   onClick, 
   type = 'button', 
   disabled = false, 
-  className = 'bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg w-full',
+  className = 'bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg ',
   icon,
   radius = 'full'
 }) => {
   return (
-    <Button
+    
+        <Button
       type={type}
       onClick={onClick}
       disabled={disabled}
@@ -31,6 +32,8 @@ const ButtonNext: React.FC<ButtonProps> = ({
       {icon && <span className="ml-2">{icon}</span>}
       {text}
     </Button>
+   
+    
   );
 };
 

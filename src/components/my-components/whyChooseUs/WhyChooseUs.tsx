@@ -21,7 +21,7 @@ const WhyChooseUs = () => {
             <p className="text-sm">Nuestro equipo experto en viajes ofrece las mejores rutas y tarifas personalizadas para ti.</p>
           </div>
           <div className="flex items-center bg-blue-500 rounded-full p-3 hover:animate-rotate-y">
-            <FluentHatGraduationSparkle16Filled className="text-4xl " />
+            <FluentHatGraduationSparkle16Filled className="text-4xl" />
           </div>
 
         </div>

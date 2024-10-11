@@ -14,10 +14,10 @@ interface DropdownCustomProps {
 type PriceIconKey = "USD" | "Zelle" | "MLC" | "R$";
 
 const priceIcons: Record<PriceIconKey, JSX.Element> = {
-  USD: <Efectivo />,
-  Zelle: <Zelle />,
-  MLC: <MLC />,
-  R$: <Real />,
+  USD: <Efectivo className="w-5 h-5"/>,
+  Zelle: <Zelle className="w-5 h-5"/>,
+  MLC: <MLC className="w-5 h-5"/>,
+  R$: <Real className="w-5 h-5"/>,
 };
 
 export default function MonedaDropdown({ price, setMonedaValue, setMonedaString }: DropdownCustomProps) {
@@ -43,9 +43,12 @@ export default function MonedaDropdown({ price, setMonedaValue, setMonedaString 
     <div className="flex items-center justify-center space-x-2">
       <Dropdown>
         <DropdownTrigger>
-          <Button variant="bordered" className="capitalize">
+          <Button variant="bordered" className="capitalize  min-w-[140px] max-w-[200px] truncate">
+            <span className="flex w-full justify-between items-center ml-1 mr-1">
             {priceIcons[iconKey]} {/* Muestra el ícono basado en el string */}
             <span className="ml-2">{selectedPrice !== null ? selectedPrice : "Seleccionar método"}</span>
+            </span>
+
           </Button>
         </DropdownTrigger>
 

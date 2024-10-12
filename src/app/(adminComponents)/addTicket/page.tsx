@@ -1,5 +1,10 @@
 "use client";
 
+import { useDisclosure } from "@nextui-org/react";
+import { DateObject } from "react-multi-date-picker";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+
 import { validationAddTicket } from "@/app/lib/validation/validationAddTicket";
 import ButtonMoney from "@/components/my-components/button/ButtonMoney";
 import ButtonNext from "@/components/Next_ui_elements/button/ButtonNext";
@@ -7,13 +12,9 @@ import Calendar from "@/components/Next_ui_elements/calender/Calender";
 import InputText from "@/components/Next_ui_elements/inputText/InputText";
 import CustomSelect from "@/components/Next_ui_elements/select/Select";
 import { dataNameAirline } from "@/data/dataNameAirline";
-import { Destination, F7MoneyDollarCircleFill, Fa6SolidPlaneCircleCheck, Fa6SolidPlaneCircleXmark,NotoV1Ticket, Origin, Plane } from "@/icons/Icons";
+import { Destination, F7MoneyDollarCircleFill, Fa6SolidPlaneCircleCheck, Fa6SolidPlaneCircleXmark, NotoV1Ticket, Origin, Plane } from "@/icons/Icons";
 import CorrectMessage from "@/messages/CorrectMessage";
 import ApiRequest from "@/services/ApiRequest";
-import { useDisclosure } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { DateObject } from "react-multi-date-picker";
 import { ModalAddPrice } from "@/components/Next_ui_elements/Modal/ModalAddPrice";
 import ErrorMessage from "@/messages/ErrorMessage";
 
@@ -44,23 +45,23 @@ const AddTicket: React.FC = () => {
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
-            
-        }));     
+
+        }));
     };
 
 
-    const handleSubmit = async ()  => {       
-       const { selectedAirline, origin, destination, selectedDates } = formData;
+    const handleSubmit = async () => {
+        const { selectedAirline, origin, destination, selectedDates } = formData;
         const dates = selectedDates.map(date => date.format("DD/MM/YYYY"));
-        const selectedAirlineData = dataNameAirline.find(airline => airline.key === selectedAirline);   
+        const selectedAirlineData = dataNameAirline.find(airline => airline.key === selectedAirline);
         const nameAirline = selectedAirlineData ? selectedAirlineData.label : "";
 
 
         const dataToValidate = {
-            nameAirline: nameAirline, 
+            nameAirline: nameAirline,
             origin: origin,
             destination: destination,
-            selectedDates:dates , 
+            selectedDates: dates,
         };
 
         console.log(dataToValidate);
@@ -68,42 +69,42 @@ const AddTicket: React.FC = () => {
         const validatedFields = validationAddTicket.safeParse(dataToValidate);
 
 
-        if (!validatedFields.success) {         
+        if (!validatedFields.success) {
             const firstError = validatedFields.error.errors[0];
             if (firstError) {
                 const message = firstError.message; // Obtén el mensaje del primer error
-               console.log(message);
+                console.log(message);
                 ErrorMessage(message); // Muestra el mensaje de error
             }
-        }if (validatedFields.success) {
-      
+        } if (validatedFields.success) {
+
             try {
-              const response = await ApiRequest({
-                method: 'POST',
-                url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
-                body: {
-                    nameAirline: nameAirline,
-                    origin: origin,
-                    destination: destination,
-                    selectedDates: dates,
-                },
-              });
-           
-              
-              if (response?.status === 200) {
-                  CorrectMessage('Boleto agregado correctamente');
-                
-              } else {
-                ErrorMessage('Error al agregar el boleto');
-              }
-      
+                const response = await ApiRequest({
+                    method: 'POST',
+                    url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
+                    body: {
+                        nameAirline: nameAirline,
+                        origin: origin,
+                        destination: destination,
+                        selectedDates: dates,
+                    },
+                });
+
+
+                if (response?.status === 200) {
+                    CorrectMessage('Boleto agregado correctamente');
+
+                } else {
+                    ErrorMessage('Error al agregar el boleto');
+                }
+
             } catch (error) {
-              // console.log(error)
+                // console.log(error)
             }
-      
-          }
-          
-   
+
+        }
+
+
     };
 
 
@@ -113,7 +114,7 @@ const AddTicket: React.FC = () => {
         router.push('/adminPanel');
     }
 
-  
+
 
 
 
@@ -126,8 +127,8 @@ const AddTicket: React.FC = () => {
                     <div className="h-3 w-full bg-black"></div>
                     <div className="w-full h-5/12 ">
 
-                       
-                                             
+
+
                         <div className="flex  items-center justify-between py-3 mx-2">
                             <div>
                                 <Plane className="w-10 h-10 my-1 ml-4" />
@@ -137,8 +138,8 @@ const AddTicket: React.FC = () => {
                                 <CustomSelect
                                     options={dataNameAirline}
                                     onChange={(value) => handleInputChange('selectedAirline', value)}
-                                        label="Select an airline"                                        
-                                />                               
+                                    label="Select an airline"
+                                />
                             </div>
 
                             <div >
@@ -155,7 +156,7 @@ const AddTicket: React.FC = () => {
                                         placeholder="Origen"
                                         icon={<Origin />}
                                         onChange={(e) => handleInputChange('origin', e.target.value)}
-                                         />
+                                    />
                                 </div>
 
                                 <div className="w-48">
@@ -163,7 +164,7 @@ const AddTicket: React.FC = () => {
                                         name="destination"
                                         placeholder="Destino"
                                         icon={<Destination />}
-                                        onChange={(e) => handleInputChange('destination',  e.target.value)}
+                                        onChange={(e) => handleInputChange('destination', e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -182,20 +183,17 @@ const AddTicket: React.FC = () => {
                                 </div>
 
                                 <div className=" w-48">
-                                      <ButtonMoney
+                                    <ButtonMoney
                                         icon={<F7MoneyDollarCircleFill className="h-7 w-7 ml-2" />}
                                         text="Precios"
-                                        onClick={()=>{onOpen()}}                                        
+                                        onClick={() => { onOpen() }}
                                         className="bg-white w-full h-10"
-                                       />   
-                                      <ModalAddPrice isOpen={isOpen} onClose={onClose} />
-
-
-                                </div>
-                            </div>                          
+                                    />
+                                    <ModalAddPrice isOpen={isOpen} onClose={onClose} />
+                                </div>
+                            </div>
                         </div>
 
-                        
 
 
                         <div className="py-3 mx-4 flex flex-col space-y-3 ">
@@ -212,19 +210,18 @@ const AddTicket: React.FC = () => {
                                 </div>
 
                                 <div>
-                                        <ButtonNext
-                                       onClick={handleSubmit}
+                                    <ButtonNext
+                                        onClick={handleSubmit}
                                         icon={<Fa6SolidPlaneCircleCheck className="h-7 w-7" />}
-                                        text="Agregar"                                       
+                                        text="Agregar"
                                         className="bg-green-500 text-white"
                                     >
                                     </ButtonNext>
                                 </div>
                             </div>
-
                         </div>
 
-                       
+
                     </div>
                 </div>
 
@@ -232,9 +229,7 @@ const AddTicket: React.FC = () => {
             </div>
 
         </div>
-
     );
-
 }
 
 export default AddTicket;

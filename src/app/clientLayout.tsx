@@ -5,7 +5,7 @@ import { Banner } from "@/components/my-components/publicity/Banner";
 
 import { Footer } from "@/components/ui/Footer";
 import Navbar_Main from '@/components/ui/Navbar';
-import { div } from 'framer-motion/client';
+
 
 export default function ClientOnlyLayout({
   children,

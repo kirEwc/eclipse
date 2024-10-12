@@ -8,6 +8,7 @@ interface DropdownItemProps {
   shortcut?: string;
   startContent?: ReactNode;
   isDanger?: boolean;
+  onClick?: () => void;
 }
 
 interface CustomDropdownProps {
@@ -19,45 +20,25 @@ export default function CustomDropdown({ buttonContent, items }: CustomDropdownP
   return (
     <Dropdown className="min-w-40">
       <DropdownTrigger>
-        <div className="flex items-center cursor-pointer"> {/* Usando un div con flex y cursor */}
+        <div className="flex items-center cursor-pointer">
           {buttonContent}
         </div>
       </DropdownTrigger>
-      <DropdownMenu variant="faded" aria-label="Dropdown menu" >
+      <DropdownMenu variant="faded" aria-label="Dropdown menu">
         {items.map((item) => (
           <DropdownItem
             key={item.key}
             shortcut={item.shortcut}
             description={item.description}
             startContent={item.startContent}
-            className={item.isDanger ? "text-danger" : ""} 
-            color={item.isDanger ? "danger" : undefined}
+            className={item.isDanger ? "text-danger" : ""} // Usando className para el color del texto
+            color={item.isDanger ? "danger" : undefined} // Asignando el color de NextUI si es peligroso
+            onClick={item.onClick}
           >
             {item.label}
-          </DropdownItem >
+          </DropdownItem>
         ))}
       </DropdownMenu>
     </Dropdown>
   );
 }
-
-
-/* 
-
-  <div className="ml-auto ">
-                            <CustomDropdown buttonContent={ <Option className="w-10 h-10 " />} items={items} />                             
-                            </div>
-
-
-
-
-const items = [
-    {
-      key: "Update",
-      label: "Modificar",  
-      startContent: <Update  />,
-    },
-]
-
-
-*/

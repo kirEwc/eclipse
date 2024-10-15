@@ -15,8 +15,8 @@ const AdminPanel: React.FC = () => {
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-md md:max-w-lg lg:max-w-6xl mx-auto'>
         {TicketsDate.map((ticket) => (
           <div key={ticket.id} className="rounded-lg p-6 h-full flex justify-center">
-            <TicketAdmin 
-              id={ticket.id} 
+            <TicketAdmin
+              id={ticket.id}
               aeroline={ticket.aeroline}
               from={ticket.from}
               to={ticket.to}

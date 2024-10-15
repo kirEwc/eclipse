@@ -10,13 +10,13 @@ import ButtonMoney from "@/components/my-components/button/ButtonMoney";
 import ButtonNext from "@/components/Next_ui_elements/button/ButtonNext";
 import Calendar from "@/components/Next_ui_elements/calender/Calender";
 import InputText from "@/components/Next_ui_elements/inputText/InputText";
-import CustomSelect from "@/components/Next_ui_elements/select/Select";
 import { dataNameAirline } from "@/data/dataNameAirline";
 import { Destination, F7MoneyDollarCircleFill, Fa6SolidPlaneCircleCheck, Fa6SolidPlaneCircleXmark, NotoV1Ticket, Origin, Plane } from "@/icons/Icons";
 import CorrectMessage from "@/messages/CorrectMessage";
 import ApiRequest from "@/services/ApiRequest";
 import { ModalAddPrice } from "@/components/Next_ui_elements/Modal/ModalAddPrice";
 import ErrorMessage from "@/messages/ErrorMessage";
+import CustomSelectAirline from "@/components/Next_ui_elements/selectAirline/CustomSelectAirline";
 
 interface FormData {
     selectedAirline: string;
@@ -53,12 +53,10 @@ const AddTicket: React.FC = () => {
     const handleSubmit = async () => {
         const { selectedAirline, origin, destination, selectedDates } = formData;
         const dates = selectedDates.map(date => date.format("DD/MM/YYYY"));
-        const selectedAirlineData = dataNameAirline.find(airline => airline.key === selectedAirline);
-        const nameAirline = selectedAirlineData ? selectedAirlineData.label : "";
-
-
+       
+   
         const dataToValidate = {
-            nameAirline: nameAirline,
+            nameAirline: selectedAirline,
             origin: origin,
             destination: destination,
             selectedDates: dates,
@@ -83,7 +81,7 @@ const AddTicket: React.FC = () => {
                     method: 'POST',
                     url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
                     body: {
-                        nameAirline: nameAirline,
+                        nameAirline: selectedAirline,
                         origin: origin,
                         destination: destination,
                         selectedDates: dates,
@@ -135,11 +133,12 @@ const AddTicket: React.FC = () => {
                             </div>
 
                             <div >
-                                <CustomSelect
-                                    options={dataNameAirline}
-                                    onChange={(value) => handleInputChange('selectedAirline', value)}
-                                    label="Select an airline"
+                            <CustomSelectAirline
+                                    airlines={dataNameAirline}
+                                    selectedLabel={formData.selectedAirline}
+                                    onSelect={(airline) => handleInputChange('selectedAirline', airline.label)}
                                 />
+
                             </div>
 
                             <div >

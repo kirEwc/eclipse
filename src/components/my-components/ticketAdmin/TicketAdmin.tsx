@@ -1,18 +1,18 @@
 "use client";
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
-import { Plane } from "lucide-react";
-import { useState } from "react";
+import {  Button, Card, CardBody,  CardFooter,  CardHeader, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, } from "@nextui-org/react";
+import { Calendar, Plane } from "lucide-react";
 import Image from "next/image";
 
 import CustomDropdown from "@/components/Next_ui_elements/Dropdwon/DropAddTicket";
-import MonedaDropdown from "../../Next_ui_elements/Dropdwon/monedadrop";
-import FechasDrop from "../../Next_ui_elements/Dropdwon/FechasDrop";
+
 import { Delete, Option, Update } from "@/icons/Icons";
 import ErrorMessage from "@/messages/ErrorMessage";
 import CorrectMessage from "@/messages/CorrectMessage";
 import ApiRequest from "@/services/ApiRequest";
-import { on } from "events";
+
 import { useRouter } from "next/navigation";
+import { Efectivo, MLC, Real, Zelle } from "@/icons/monedaicons";
+import { ticketStore } from "@/stores/ticketStore.store";
 
 
 
@@ -37,22 +37,18 @@ export const TicketAdmin: React.FC<FlightData> = ({
     date = ["No Disponible"],
     price = [{ value: 1, string: "No Disponible" }],
 }: FlightData) => {
-const router = useRouter();
+    const router = useRouter();
+    const  setFlightData = ticketStore((state) => state.setTicketData);
 
-    
 
-    // await new Promise ((resolve) => setTimeout(resolve, 3000));
-
-    const [MonedaValue, setMonedaValue] = useState(0);
-    const [MonedaString, setMonedaString] = useState('');
-    const [FechaValue, setFechaValue] = useState('');
+    const ticket = { id, aeroline, from, to, date, price };
 
     const items = [
         {
             key: "Update",
             label: "Modificar",
             startContent: <Update />,
-            onClick: () => handleUpdate(id)
+            onClick: () => handleUpdate(ticket)
         },
         {
             key: "delete",
@@ -63,37 +59,45 @@ const router = useRouter();
         },
     ];
 
-   
 
-    const handleDelete = async (ticketId: string) => {        
+    const handleUpdate = async (ticket: FlightData) => {
+        setFlightData(ticket);
+        router.push(`/updateTicket`);
+    };
+
+
+
+    const handleDelete = async (ticketId: string) => {
         try {
             const response = await ApiRequest({
-              method: 'POST',
-              url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
-              body: {
-              id: ticketId,
-              },
+                method: 'POST',
+                url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
+                body: {
+                    id: ticketId,
+                },
             });
-          
-    
+
+
             if (response?.status === 200) {
-              CorrectMessage('Boleto eliminado');
+                CorrectMessage('Boleto eliminado');
             } else {
-              ErrorMessage('Error al eliminar el boleto');
+                ErrorMessage('Error al eliminar el boleto');
             }
-    
-          } catch (error) {
+
+        } catch (error) {
             // console.log(error)
-          }   
-    
+        }
+
     };
-    
-    const handleUpdate = async (ticketId: string) => { 
-       
-        router.push(`/updateTicket?ticketId=${ticketId}`);
+  
+    type PriceIconKey = "USD" | "Zelle" | "MLC" | "R$";
 
-    }
-
+    const priceIcons: Record<PriceIconKey, JSX.Element> = {
+        USD: <Efectivo className="w-5 h-5" />,
+        Zelle: <Zelle className="w-5 h-5" />,
+        MLC: <MLC className="w-5 h-5" />,
+        R$: <Real className="w-5 h-5" />,
+    };
 
 
     return (
@@ -142,33 +146,78 @@ const router = useRouter();
                 </div>
             </CardBody>
 
-         
-          {/*   <CardFooter className="p-4 flex flex-col space-y-3">
+
+            <CardFooter className="p-4 flex flex-col space-y-3">
           
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between sm:justify-around w-full space-y-4 sm:space-y-0 sm:space-x-1">
 
                   
                     <div className="flex w-full sm:w-auto justify-center sm:justify-start items-center sm:-ml-2 md:-ml-0">
-                        <FechasDrop
-                            dateItem={date}
-                            setFechaValue={setFechaValue}
-                        />
+                    {/* dropdown Fechas actualizado para solo ver datos y no poder utilizarlos */} 
+                    <Dropdown className="w-full sm:w-auto">
+                        <DropdownTrigger>
+                            <Button variant="bordered" className="capitalize">
+                            <span className="flex flex-row items-center gap-5">
+                            { <Calendar /> }
+                            { 'Seleccionar Fecha' }
+                            </span>
+                            </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu
+                            aria-label="Select a date"
+                            variant="flat"
+                            disallowEmptySelection
+                            selectionMode="single"
+                        >
+                            {/* Mapear el array dateItem para generar las opciones del Dropdown */}
+                            {date.map((date) => (
+                            <DropdownItem key={date} className="flex items-center justify-between w-full" value={date}>
+                            <div className="flex items-center space-x-2">
+                                {<Calendar />}
+                                <span>{date}</span>
+                            </div>
+                            </DropdownItem>
+                            ))}
+                        </DropdownMenu>
+                    </Dropdown>
+                        
                     </div>
 
                    
                     <div className="flex w-full sm:w-auto justify-center sm:justify-start items-center text-2xl mr-2 font-bold text-gray-800">
-                        <MonedaDropdown
-                            price={price}
-                            setMonedaValue={setMonedaValue}
-                            setMonedaString={setMonedaString}
-                        />
+                    {/* dropdown money actualizado para solo ver datos y no poder utilizarlos */} 
+                    <div className="flex items-center justify-center space-x-2">
+                            <Dropdown>
+                                <DropdownTrigger>
+                                <Button variant="bordered" className="capitalize  min-w-[140px] max-w-[200px] truncate">
+                                    <span className="flex w-full justify-between items-center ml-1 mr-1">
+                                        {<Efectivo className="w-5 h-5"/>}
+                                    <span className="ml-2">{"Seleccionar método"}</span>
+                                    </span>
+
+                                </Button>
+                                </DropdownTrigger>
+
+                                <DropdownMenu
+                                aria-label="Select a currency"
+                                variant="flat"
+                                disallowEmptySelection
+                                selectionMode="single"
+                                >
+                                {price.map(({ value, string }) => (
+                                    <DropdownItem key={string} textValue="item" value={string}> {/* Usa el string como key y value */}
+                                    {priceIcons[string as PriceIconKey]} {/* Muestra el ícono basado en el string */}
+                                    {string} - {value}  {/* Muestra el valor en palabras y el precio */}
+                                    </DropdownItem>
+                                ))}
+                                </DropdownMenu>
+                            </Dropdown>
+                        </div>
                     </div>
                 </div>
 
 
-            </CardFooter> */}
-
-
+            </CardFooter>
 
 
         </Card>

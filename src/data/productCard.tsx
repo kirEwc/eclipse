@@ -13,8 +13,8 @@ const TicketsDate = [
     ],
   },
   {
-    id: "2",
-    aeroline: 'Avianca',
+    id: "4",
+    aeroline: 'Latam',
     from: 'Habana',
     to: 'Miami',
     date: ['2024-09-23', '2024-09-24', '2024-09-25', '2024-09-26', '2024-09-27'],
@@ -27,7 +27,7 @@ const TicketsDate = [
   },
   {
     id: "3",
-    aeroline: 'Avianca',
+    aeroline: 'Sky Airline',
     from: 'Habana',
     to: 'Miami',
     date: ['2024-09-23', '2024-09-24', '2024-09-25', '2024-09-26', '2024-09-27'],
@@ -39,7 +39,7 @@ const TicketsDate = [
     ],
   },
   {
-    id: "4",
+    id: "5",
     aeroline: 'Avianca',
     from: 'Habana',
     to: 'Miami',

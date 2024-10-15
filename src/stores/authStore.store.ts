@@ -3,24 +3,37 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { decryptData, encryptData } from '@/security/encryptData';
 
 interface AuthState {
-  user: { email: string,role:string} | null; 
+  user: { email: string, role: string } | null;
   isAuthenticated: boolean;
-  login: (user: { email: string,role:string}) => void;
+  login: (user: { email: string, role: string }) => void;
   logout: () => void;
 }
+
+const SESSION_TIMEOUT = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       user: null,
       isAuthenticated: false,
-      login: ({ email,role}) => {
-        set({ user: { email,role }, isAuthenticated: true });
 
+      login: ({ email, role }) => {
+        set({
+          user: { email, role },
+          isAuthenticated: true,
+        });
+
+        // Iniciar temporizador de 1 minuto para cerrar sesión automáticamente
+        setTimeout(() => {
+          set({ user: null, isAuthenticated: false });
+          localStorage.clear(); // Limpiar el almacenamiento local
+        }, SESSION_TIMEOUT); // Ejecutar logout después de 1 minuto
       },
+
       logout: () => {
         set({ user: null, isAuthenticated: false });
-        localStorage.clear();      
+        localStorage.clear(); // Limpiar todo el almacenamiento local
       },
     }),
     {

@@ -16,7 +16,7 @@ import CorrectMessage from "@/messages/CorrectMessage";
 import ApiRequest from "@/services/ApiRequest";
 import { ModalAddPrice } from "@/components/Next_ui_elements/Modal/ModalAddPrice";
 import ErrorMessage from "@/messages/ErrorMessage";
-import CustomSelectAirline from "@/components/Next_ui_elements/selectAirline/CustomSelectAirline";
+import CustomSelectAirline from "@/components/my-components/selectAirline/CustomSelectAirline";
 
 interface FormData {
     selectedAirline: string;
@@ -29,7 +29,7 @@ interface FormData {
 interface Price {
     value: number;
     string: string;
-  }
+}
 
 
 
@@ -61,14 +61,14 @@ const AddTicket: React.FC = () => {
     const handleSubmit = async () => {
         const { selectedAirline, origin, destination, selectedDates } = formData;
         const dates = selectedDates.map(date => date.format("DD/MM/YYYY"));
-      
-   
+
+
         const dataToValidate = {
             nameAirline: selectedAirline,
             origin: origin,
             destination: destination,
             selectedDates: dates,
-            price: addPrice,            
+            price: addPrice,
         };
 
         console.log(dataToValidate);
@@ -80,7 +80,7 @@ const AddTicket: React.FC = () => {
             const firstError = validatedFields.error.errors[0];
             if (firstError) {
                 const message = firstError.message; // Obtén el mensaje del primer error
-              
+
                 ErrorMessage(message); // Muestra el mensaje de error
             }
         } if (validatedFields.success) {
@@ -142,7 +142,7 @@ const AddTicket: React.FC = () => {
                             </div>
 
                             <div >
-                            <CustomSelectAirline
+                                <CustomSelectAirline
                                     airlines={dataNameAirline}
                                     selectedLabel={formData.selectedAirline}
                                     onSelect={(airline) => handleInputChange('selectedAirline', airline.label)}

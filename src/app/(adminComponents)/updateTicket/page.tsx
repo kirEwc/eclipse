@@ -17,7 +17,7 @@ import ApiRequest from "@/services/ApiRequest";
 import { ModalAddPrice } from "@/components/Next_ui_elements/Modal/ModalAddPrice";
 import ErrorMessage from "@/messages/ErrorMessage";
 import { ticketStore } from "@/stores/ticketStore.store";
-import CustomSelectAirline from "@/components/Next_ui_elements/selectAirline/CustomSelectAirline";
+import CustomSelectAirline from "@/components/my-components/selectAirline/CustomSelectAirline";
 
 
 
@@ -59,7 +59,7 @@ const UpdateTicket: React.FC = () => {
     });
 
 
-   
+
 
 
     const handleInputChange = (name: keyof FormData, value: any) => {
@@ -71,7 +71,7 @@ const UpdateTicket: React.FC = () => {
 
     const handleSubmit = async () => {
         const { selectedAirline, origin, destination, selectedDates } = formData;
-    
+
         const dates = selectedDates.map(date => date.format("DD/MM/YYYY"));
 
 
@@ -90,7 +90,7 @@ const UpdateTicket: React.FC = () => {
             const firstError = validatedFields.error.errors[0];
             if (firstError) {
                 const message = firstError.message; // Obtén el mensaje del primer error
-               
+
                 ErrorMessage(message); // Muestra el mensaje de error
             }
         }
@@ -114,7 +114,7 @@ const UpdateTicket: React.FC = () => {
                     ErrorMessage('Error al agregar el boleto');
                 }
 
-            } catch (error) {              
+            } catch (error) {
                 // console.error(error);
             }
         }
@@ -136,7 +136,7 @@ const UpdateTicket: React.FC = () => {
                                 <Plane className="w-10 h-10 my-1 ml-4" />
                             </div>
                             <div>
-                      
+
                                 <CustomSelectAirline
                                     airlines={dataNameAirline}
                                     selectedLabel={formData.selectedAirline}
@@ -192,7 +192,7 @@ const UpdateTicket: React.FC = () => {
                                         onClick={onOpen}
                                         className="bg-white w-full h-10"
                                     />
-                                    <ModalAddPrice isOpen={isOpen} onClose={onClose} setaddPrice={setaddPrice} addPrice={addPrice}/>
+                                    <ModalAddPrice isOpen={isOpen} onClose={onClose} setaddPrice={setaddPrice} addPrice={addPrice} />
                                 </div>
                             </div>
                         </div>

@@ -17,9 +17,10 @@ type CustomListboxProps = {
 };
 
 export default function CustomSelectAirline({ airlines, selectedLabel, onSelect }: CustomListboxProps) {
-  // Inicializa el estado con la aerolínea que coincida con el selectedLabel o con la primera aerolínea
-  const initialSelected = airlines.find(airline => airline.label === selectedLabel) || airlines[0];
-  const [selected, setSelected] = useState<Airline>(initialSelected); 
+
+const initialSelected = airlines.find(airline => airline.label === selectedLabel) || null;
+const [selected, setSelected] = useState<Airline | null>(initialSelected);
+
 
   const handleSelect = (airline: Airline) => {
     setSelected(airline);
@@ -32,7 +33,7 @@ export default function CustomSelectAirline({ airlines, selectedLabel, onSelect 
     <Listbox value={selected} onChange={handleSelect}>
       <div className="relative mt-2">
         <ListboxButton className="relative w-52 rounded-xl bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
-          <span>{selected.label}</span>
+        <span>{selected?.label ? selected.label : "Selecionar aerolinea"}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
             <MiSelect /> {/* Ícono que se muestra en el botón */}
           </span>
@@ -50,7 +51,7 @@ export default function CustomSelectAirline({ airlines, selectedLabel, onSelect 
               <span className="block font-normal group-data-[selected]:font-semibold">
                 {airline.label}
               </span>
-              {selected.key === airline.key && ( // Muestra el ícono si esta opción está seleccionada
+              {selected?.key === airline.key && ( // Muestra el ícono si esta opción está seleccionada
                 <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
                   <EpSelect aria-hidden="true" />
                 </span>

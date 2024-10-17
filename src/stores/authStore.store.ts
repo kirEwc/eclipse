@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { decryptData, encryptData } from '@/security/encryptData';
+import { deleteAuthCookies } from '@/app/actions/deleteAuthCookies';
 
 interface AuthState {
   user: { email: string, role: string } | null;
@@ -26,6 +27,7 @@ export const useAuthStore = create<AuthState>()(
 
         // Iniciar temporizador de 1 minuto para cerrar sesión automáticamente
         setTimeout(() => {
+          deleteAuthCookies();
           set({ user: null, isAuthenticated: false });
           localStorage.clear(); // Limpiar el almacenamiento local
         }, SESSION_TIMEOUT); // Ejecutar logout después de 1 minuto

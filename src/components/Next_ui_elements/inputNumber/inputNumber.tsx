@@ -3,46 +3,46 @@ import { Input, InputProps } from '@nextui-org/react';
 
 interface NumberInputProps extends Omit<InputProps, 'type'> {
   name?: string;
+  icon?: React.ReactNode; 
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  icon?: React.ReactNode; // Permitir pasar un ícono personalizado como prop
 }
 
 const InputNumber: React.FC<NumberInputProps> = ({ 
   name = 'number', 
   onChange, 
-  onKeyDown, 
-  className = '', 
-  icon, // Icono dinámico pasado como prop
+  icon, 
   ...props 
 }) => {
   
-  // Función para manejar la entrada de teclas
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement;
-    const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Enter'];
-
-    // Permitir solo números y las teclas de control
-    if (!/[0-9]/.test(e.key) && !allowedKeys.includes(e.key)) {
-      e.preventDefault(); // Evitar caracteres no numéricos
-    }
-
-    // Si se pasa una función onKeyDown adicional, llamarla también
-    if (onKeyDown) {
-      onKeyDown(e);
+    // Permitir solo números, Backspace, Delete, Tab, y las teclas de flecha
+    const validKeys = [
+      'Backspace',
+      'Delete',
+      'Tab',
+      'ArrowLeft',
+      'ArrowRight',
+      'Enter',  // Puedes permitir Enter si quieres
+    ];
+    
+    if (
+      !validKeys.includes(e.key) && 
+      (e.key < '0' || e.key > '9') // Solo permitir números
+    ) {
+      e.preventDefault(); // Evitar que se ingrese el carácter no válido
     }
   };
 
   return (
     <Input      
-      name={name}    
+      name={name}          
       onChange={onChange}  
-      onKeyDown={handleKeyDown} 
+      onKeyDown={handleKeyDown} // Añadir el manejador de evento
       placeholder=" X   X   X   X   X" 
       labelPlacement="outside"     
       type="text" 
-      startContent={icon} // Usar el icono pasado como prop
-      className={`max-w-xs ${className}`}
+      startContent={icon} 
+      className={`max-w-xs`} 
       {...props}
     />
   );

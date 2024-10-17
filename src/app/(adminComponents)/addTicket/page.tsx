@@ -23,14 +23,21 @@ interface FormData {
     origin: string;
     destination: string;
     selectedDates: DateObject[]// O cualquier tipo que uses para las fechas
+    price: { value: number, string: string }[];
 }
+
+interface Price {
+    value: number;
+    string: string;
+  }
 
 
 
 const AddTicket: React.FC = () => {
     const router = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [addPrice, setaddPrice] = useState();
+    const [addPrice, setaddPrice] = useState<Price[]>([]);
+
 
 
     const [formData, setFormData] = useState<FormData>({
@@ -38,6 +45,7 @@ const AddTicket: React.FC = () => {
         origin: '',
         destination: '',
         selectedDates: [],
+        price: [],
     });
 
     // Manejador para actualizar los valores del formulario
@@ -53,13 +61,14 @@ const AddTicket: React.FC = () => {
     const handleSubmit = async () => {
         const { selectedAirline, origin, destination, selectedDates } = formData;
         const dates = selectedDates.map(date => date.format("DD/MM/YYYY"));
-       
+      
    
         const dataToValidate = {
             nameAirline: selectedAirline,
             origin: origin,
             destination: destination,
             selectedDates: dates,
+            price: addPrice,            
         };
 
         console.log(dataToValidate);
@@ -71,7 +80,7 @@ const AddTicket: React.FC = () => {
             const firstError = validatedFields.error.errors[0];
             if (firstError) {
                 const message = firstError.message; // Obtén el mensaje del primer error
-                console.log(message);
+              
                 ErrorMessage(message); // Muestra el mensaje de error
             }
         } if (validatedFields.success) {
@@ -188,7 +197,11 @@ const AddTicket: React.FC = () => {
                                         onClick={() => { onOpen() }}
                                         className="bg-white w-full h-10"
                                     />
-                                    <ModalAddPrice isOpen={isOpen} onClose={onClose} />
+                                    <ModalAddPrice
+                                        isOpen={isOpen}
+                                        onClose={onClose}
+                                        setaddPrice={setaddPrice}
+                                    />
                                 </div>
                             </div>
                         </div>

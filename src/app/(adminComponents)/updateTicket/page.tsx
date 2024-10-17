@@ -36,12 +36,17 @@ const UpdateTicket: React.FC = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const router = useRouter();
     const ticketData = ticketStore((state) => state.ticketData);
-
     const { id, aeroline, from, to, date, price } = ticketData;
+
+    const [addPrice, setaddPrice] = useState(price);
+
+
+
 
     const selectedAirlineData = dataNameAirline.find(airline => airline.label === aeroline);
 
     const selectedAirlineLabel = selectedAirlineData ? selectedAirlineData.label : null;
+
 
 
     const [formData, setFormData] = useState<FormData>({
@@ -66,17 +71,18 @@ const UpdateTicket: React.FC = () => {
 
     const handleSubmit = async () => {
         const { selectedAirline, origin, destination, selectedDates } = formData;
-        console.log('selectedAirline'+selectedAirline);
+    
         const dates = selectedDates.map(date => date.format("DD/MM/YYYY"));
-       
+
+
         const dataToValidate = {
             nameAirline: selectedAirline,
             origin: origin,
             destination: destination,
             selectedDates: dates,
+            price: addPrice,
         };
 
-        console.log('dataToValidate: ',dataToValidate);
 
         const validatedFields = validationAddTicket.safeParse(dataToValidate);
 
@@ -84,7 +90,7 @@ const UpdateTicket: React.FC = () => {
             const firstError = validatedFields.error.errors[0];
             if (firstError) {
                 const message = firstError.message; // Obtén el mensaje del primer error
-                console.log(message);
+               
                 ErrorMessage(message); // Muestra el mensaje de error
             }
         }
@@ -186,7 +192,7 @@ const UpdateTicket: React.FC = () => {
                                         onClick={onOpen}
                                         className="bg-white w-full h-10"
                                     />
-                                    <ModalAddPrice isOpen={isOpen} onClose={onClose} />
+                                    <ModalAddPrice isOpen={isOpen} onClose={onClose} setaddPrice={setaddPrice} addPrice={addPrice}/>
                                 </div>
                             </div>
                         </div>

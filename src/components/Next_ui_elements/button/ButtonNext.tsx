@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@nextui-org/react';
 
 type ButtonProps = {
-  text: string;
+  text?: string;
   onClick?: () => void;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;

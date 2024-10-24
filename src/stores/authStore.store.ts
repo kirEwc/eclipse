@@ -27,8 +27,8 @@ export const useAuthStore = create<AuthState>()(
 
         // Iniciar temporizador de 1 minuto para cerrar sesión automáticamente
         setTimeout(() => {
-          deleteAuthCookies();
           set({ user: null, isAuthenticated: false });
+          deleteAuthCookies();
           localStorage.clear(); // Limpiar el almacenamiento local
         }, SESSION_TIMEOUT); // Ejecutar logout después de 1 minuto
       },

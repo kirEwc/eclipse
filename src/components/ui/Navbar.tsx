@@ -24,14 +24,11 @@ import { HugeiconsComment01, IcTwotoneAirplaneTicket, Requirements } from "@/ico
 
   
   
-  
   export default function Navbar_Main() {
   const { status} = useSession();
-  const { isAuthenticated } = useAuthStore();
+    const { isAuthenticated } = useAuthStore();
 
- 
- 
-
+    
 
   return (
     <Navbar shouldHideOnScroll  className="bg-white dark:bg-gray-800 shadow-md sticky">
@@ -81,7 +78,7 @@ import { HugeiconsComment01, IcTwotoneAirplaneTicket, Requirements } from "@/ico
       </NavbarContent>
 
       {/* contenido 3 */}
-      <NavbarContent className="  " justify="end">
+      <NavbarContent className=" " justify="end">
 
        
       {status ==='authenticated' || isAuthenticated ? (

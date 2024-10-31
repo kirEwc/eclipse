@@ -10,7 +10,7 @@ import InputPassword from '@/components/Next_ui_elements/inputPassword/InputPass
 import ButtonNext from '@/components/Next_ui_elements/button/ButtonNext';
 import CustomLink from '@/components/my-components/link/Link';
 import ApiRequest from '@/services/ApiRequest';
-import ErrorMessage from '@/messages/ErrorMessage';
+import ErrorMessage from '../../../messages/ErrorMessage';
 
 
 const Register: React.FC = () => {

@@ -13,7 +13,7 @@ import CustomLink from "@/components/my-components/link/Link";
 import ApiRequest from "@/services/ApiRequest";
 import { useAuthStore } from "@/stores/authStore.store";
 import { setAuthCookie } from "@/app/actions/setAuthCookie";
-import ErrorMessage from "@/messages/ErrorMessage";
+import ErrorMessage from "../../../messages/ErrorMessage";
 
 
 

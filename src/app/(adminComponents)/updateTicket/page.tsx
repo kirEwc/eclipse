@@ -18,7 +18,7 @@ import { ModalAddPrice } from "@/components/Next_ui_elements/Modal/ModalAddPrice
 
 import { ticketStore } from "@/stores/ticketStore.store";
 import CustomSelectAirline from "@/components/my-components/selectAirline/CustomSelectAirline";
-import ErrorMessage from "@/messages/ErrorMessage";
+import ErrorMessage from "../../../messages/ErrorMessage";
 
 
 

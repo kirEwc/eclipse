@@ -16,7 +16,7 @@ import CorrectMessage from "@/messages/CorrectMessage";
 import ApiRequest from "@/services/ApiRequest";
 import { ModalAddPrice } from "@/components/Next_ui_elements/Modal/ModalAddPrice";
 import CustomSelectAirline from "@/components/my-components/selectAirline/CustomSelectAirline";
-import ErrorMessage from "@/messages/ErrorMessage";
+import ErrorMessage from "../../../messages/ErrorMessage";
 
 interface FormData {
     selectedAirline: string;

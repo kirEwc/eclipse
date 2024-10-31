@@ -10,7 +10,7 @@ import ButtonNext from '@/components/Next_ui_elements/button/ButtonNext';
 import InputEmail from '@/components/Next_ui_elements/inputEmail/InputEmail'
 import CustomLink from '@/components/my-components/link/Link';
 import ApiRequest from '@/services/ApiRequest';
-import ErrorMessage from '@/messages/ErrorMessage';
+import ErrorMessage from '../../../messages/ErrorMessage';
 
 const RecoveryPassword = () => {
   const router = useRouter();

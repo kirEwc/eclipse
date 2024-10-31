@@ -1,8 +1,9 @@
 import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/react";
-import InputNumber from "../inputNumber/InputNumber";
+
 import ButtonNext from "../button/ButtonNext";
 import { Efectivo, MLC, Real, Zelle } from "@/icons/monedaicons";
 import { useState } from "react";
+import InputNumber from "@/components/Next_ui_elements/inputNumber/InputNumber";
 
 interface Price {
   value: number;

@@ -2,8 +2,10 @@
 
 import { TicketAdmin } from "@/components/my-components/ticketAdmin/TicketAdmin";
 import InputText from "@/components/Next_ui_elements/inputText/InputText";
+import ModalBaner from "@/components/Next_ui_elements/Modal/ModalBaner";
 import TicketsDate from "@/data/productCard";
-import { Fa6SolidMagnifyingGlass, MaterialSymbolsLightAddNotes } from "@/icons/Icons";
+import { Fa6SolidMagnifyingGlass, MaterialSymbolsLightAddNotes, MdiEditBox } from "@/icons/Icons";
+import { useDisclosure } from "@nextui-org/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -11,6 +13,8 @@ import { useState } from "react";
 const AdminPanel: React.FC = () => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  
 
   const handleClick = () => {
     router.push("/addTicket");
@@ -40,35 +44,40 @@ const AdminPanel: React.FC = () => {
             height={80}
             className="rounded-full w-20 h-20"
           />
-          <p className="hidden md:block text-white text-3xl font-bold ml-2">Eclipse</p>
+          <p className="hidden lg:block text-white text-3xl font-bold ml-2">Eclipse</p>
         </div>
 
-        <div className="mr-4">
-          <h1 className="text-white text-3xl font-bold">Administrar <span className="hidden sm:inline-block">Boletos</span></h1>
+        <div className="ml-3 md:ml-4 lg:ml-12" >
+          <h1 className="text-white text-4xl font-bold">Panel <span className="hidden sm:inline-block">de Control</span></h1>
         </div>
+
 
         <div className="flex items-center space-x-1 md:space-x-4">
           <button
-            className="flex items-center space-x-2 w-10 lg:w-40 h-10 rounded-lg bg-gradient-to-tr from-blue-300 via-slate-300 to-purple-300 justify-center"
+            className="flex items-center space-x-2 w-10 lg:w-28 h-10 rounded-lg bg-gradient-to-tr from-blue-300 via-slate-300 to-purple-300 justify-center"
             onClick={handleClick}
           >
             <MaterialSymbolsLightAddNotes />
-            <span className="hidden lg:block font-bold">Agregar Boleto</span>
+            <span className="hidden lg:block font-bold">Agregar</span>
           </button>
 
-          <InputText
-            className="hidden md:block sm:w-36"
-            placeholder="Buscar..."
-            icon={<Fa6SolidMagnifyingGlass />}
-            onChange={handleSearchChange}
-          />
+          <button
+            className="flex items-center space-x-2 w-10 lg:w-28 h-10 rounded-lg bg-gradient-to-tr from-blue-300 via-slate-300 to-purple-300 justify-center"
+            onClick={() => onOpen()}
+          >
+            <MdiEditBox />
+            <span className="hidden lg:block font-bold">Editar</span>
+          </button>
+          <ModalBaner isOpen={isOpen} onClose={onClose} />
+
+        
         </div>
       </header>
 
       <div className="flex items-center justify-center m-2 mx-5">
         <div className="w-96">
           <InputText
-            className="w-full max-w-full sm:hidden"
+            className="w-full max-w-full"
             placeholder="Buscar..."
             icon={<Fa6SolidMagnifyingGlass />}
             onChange={handleSearchChange}

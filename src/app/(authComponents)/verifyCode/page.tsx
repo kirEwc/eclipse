@@ -8,7 +8,7 @@ import { Number, User } from '@/icons/Icons';
 import ErrorMessage from '@/messages/ErrorMessage';
 import ApiRequest from '@/services/ApiRequest';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import React from 'react'
 
 const VerifyCode = () => {
   const router = useRouter();

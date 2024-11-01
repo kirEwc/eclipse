@@ -2,13 +2,13 @@
 
 import { validationVerifyCode } from '@/app/lib/validation/validationVerifyCode';
 import ButtonNext from '@/components/Next_ui_elements/button/ButtonNext';
-import InputNumber from '@/components/Next_ui_elements/inputNumber/InputNumber';
 import CustomLink from '@/components/my-components/link/Link';
 import { Number, User } from '@/icons/Icons';
 import ErrorMessage from '../../../messages/ErrorMessage';
 import ApiRequest from '@/services/ApiRequest';
 import { useRouter } from 'next/navigation';
 import React from 'react'
+import InputNumber from '@/components/Next_ui_elements/inputNumber/inputNumber';
 
 const VerifyCode = () => {
   const router = useRouter();

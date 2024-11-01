@@ -4,7 +4,7 @@ import { validationConfirmPassword } from '@/app/lib/validation/validationConfir
 import ButtonNext from '@/components/Next_ui_elements/button/ButtonNext';
 import InputPassword from '@/components/Next_ui_elements/inputPassword/InputPassword';
 import { User } from '@/icons/Icons';
-import ErrorMessage from '@/messages/ErrorMessage';
+import ErrorMessage from '../../../messages/ErrorMessage';
 import ApiRequest from '@/services/ApiRequest';
 import { useRouter } from 'next/navigation';
 import React from 'react'

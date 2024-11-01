@@ -23,6 +23,7 @@ const VuelosDisponibles: React.FC<TicketType> = () => {
         {TicketsDate.map((ticket) => (
           <div key={ticket.id} className="rounded-lg p-6 h-full flex justify-center">
             <Ticket2 
+              id={ticket.id}
               aeroline={ticket.aeroline}
               from={ticket.from}
               to={ticket.to}

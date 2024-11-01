@@ -5,7 +5,7 @@ import { ProiconsNoteAdd, Star } from "@/icons/Icons";
 import { Avatar, Button, Card, CardBody, CardFooter, Progress, useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
 
-export const Comentarios = () => {
+const Comentarios = () => {
   const [averageRating, setAverageRating] = useState(4.2);
   console.log(setAverageRating);
 

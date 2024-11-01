@@ -1,4 +1,4 @@
-import Messenger, { Facebook, Github, Instagram, Twitter, WhatsApp } from "@/icons/Icons";
+import Messenger, { Facebook,WhatsApp } from "@/icons/Icons";
 import React from "react";
 
 export const Footer = () => {

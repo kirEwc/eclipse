@@ -1,17 +1,16 @@
-interface HttpRequest {
+interface HttpRequest<T = unknown> {
   method: 'POST' | 'GET' | 'PUT' | 'DELETE';
   url: string;
-  headers?: Record<string, string>;  
-  body?: any;
+  headers?: Record<string, string>;
+  body?: T;
 }
 
-const ApiRequest = async ({ method, url, body, headers }: HttpRequest) => {
-
+const ApiRequest = async <T = unknown>({ method, url, body, headers }: HttpRequest<T>) => {
   const response = await fetch(url, {
     method,
     headers: {
       'Content-Type': 'application/json',
-      ...headers,  
+      ...headers,
     },
     body: body ? JSON.stringify(body) : undefined,
   });

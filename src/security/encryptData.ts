@@ -3,7 +3,7 @@ import CryptoJS from 'crypto-js';
 const secretKey = 'eclpseCE46D985F2DB819C6AC3DC5B73CAFFE8109DB1FF392C90295EE9976C9B48DACF';
 
 // Función para cifrar los datos
-export const encryptData = (data: any) => {
+export const encryptData = (data: object | string | number | boolean) => {
   return CryptoJS.AES.encrypt(JSON.stringify(data), secretKey).toString();
 };
 

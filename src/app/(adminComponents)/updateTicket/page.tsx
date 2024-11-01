@@ -63,7 +63,7 @@ const UpdateTicket: React.FC = () => {
 
 
 
-    const handleInputChange = (name: keyof FormData, value: any) => {
+    const handleInputChange = (name: keyof FormData, value: string | DateObject[] | { value: number, string: string }[]) => {
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,

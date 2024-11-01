@@ -68,7 +68,7 @@ const Login: React.FC = () => {
         }
 
       } catch (error) {
-        // console.log(error)
+        console.log(error)
       }
 
     }
@@ -108,7 +108,7 @@ const Login: React.FC = () => {
             ErrorMessage('Error al autenticar con Google');
           }
         } catch (error) {
-          // console.error('Error en la petición:', error);
+          console.error('Error en la petición:', error);
         }
       };
 

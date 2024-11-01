@@ -49,7 +49,7 @@ const AddTicket: React.FC = () => {
     });
 
     // Manejador para actualizar los valores del formulario
-    const handleInputChange = (name: keyof FormData, value: any) => {
+    const handleInputChange = (name: keyof FormData, value: string | DateObject[] | { value: number, string: string }[]) => {
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
@@ -106,7 +106,7 @@ const AddTicket: React.FC = () => {
                 }
 
             } catch (error) {
-                // console.log(error)
+                console.log(error)
             }
 
         }

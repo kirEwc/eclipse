@@ -32,7 +32,7 @@ const AdminPanel: React.FC = () => {
 
   return (
     <div className='bg-[url("/images/fondo/2.webp")] bg-cover bg-center bg-no-repeat min-h-screen '>
-      <header className="relative flex items-center justify-between bg-transparent h-16 px-2">
+      <header className="relative flex items-center justify-between bg-transparent h-16 px-4">
         {/* Imagen y texto Eclipse al inicio */}
         <div className="flex items-center flex-none hover:cursor-pointer"
           onClick={() => router.push('/')}
@@ -47,14 +47,14 @@ const AdminPanel: React.FC = () => {
           <p className="hidden lg:block text-white text-3xl font-bold ml-2">Eclipse</p>
         </div>
 
-        <div className="ml-3 md:ml-4 lg:ml-12" >
+        <div className=" sm:ml-2 md:ml-6 lg:ml-12" >
           <h1 className="text-white text-4xl font-bold">Panel <span className="hidden sm:inline-block">de Control</span></h1>
         </div>
 
 
-        <div className="flex items-center space-x-1 md:space-x-4">
+        <div className="flex items-center space-x-1 md:space-x-4 mr-4 sm:mr-0 ">
           <button
-            className="flex items-center space-x-2 w-10 lg:w-28 h-10 rounded-lg bg-gradient-to-tr from-blue-300 via-slate-300 to-purple-300 justify-center"
+            className="flex items-center w-10 lg:w-28 h-10 rounded-lg bg-gradient-to-tr from-blue-300 via-slate-300 to-purple-300 justify-center"
             onClick={handleClick}
           >
             <MaterialSymbolsLightAddNotes />
@@ -62,7 +62,7 @@ const AdminPanel: React.FC = () => {
           </button>
 
           <button
-            className="flex items-center space-x-2 w-10 lg:w-28 h-10 rounded-lg bg-gradient-to-tr from-blue-300 via-slate-300 to-purple-300 justify-center"
+            className="flex items-center w-10 lg:w-28 h-10 rounded-lg bg-gradient-to-tr from-blue-300 via-slate-300 to-purple-300 justify-center"
             onClick={() => onOpen()}
           >
             <MdiEditBox />

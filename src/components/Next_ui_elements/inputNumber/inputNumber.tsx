@@ -15,21 +15,20 @@ const InputNumber: React.FC<NumberInputProps> = ({
 }) => {
   
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    // Permitir solo números, Backspace, Delete, Tab, y las teclas de flecha
     const validKeys = [
       'Backspace',
       'Delete',
       'Tab',
       'ArrowLeft',
       'ArrowRight',
-      'Enter',  // Puedes permitir Enter si quieres
+      'Enter',
     ];
     
     if (
       !validKeys.includes(e.key) && 
-      (e.key < '0' || e.key > '9') // Solo permitir números
+      (e.key < '0' || e.key > '9')
     ) {
-      e.preventDefault(); // Evitar que se ingrese el carácter no válido
+      e.preventDefault();
     }
   };
 
@@ -37,10 +36,10 @@ const InputNumber: React.FC<NumberInputProps> = ({
     <Input      
       name={name}          
       onChange={onChange}  
-      onKeyDown={handleKeyDown} // Añadir el manejador de evento
+      onKeyDown={handleKeyDown} 
       placeholder=" X   X   X   X   X" 
       labelPlacement="outside"     
-      type="text" 
+      type="tel" // Cambia el tipo a "tel" para teclado numérico en móviles
       startContent={icon} 
       className={`max-w-xs`} 
       {...props}

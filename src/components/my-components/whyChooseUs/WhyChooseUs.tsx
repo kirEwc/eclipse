@@ -6,7 +6,7 @@ const WhyChooseUs = () => {
     <div className="flex flex-col items-center mt-4">
       
       <div className="flex flex-col items-center mb-8 animate__animated animate__bounce w-3/4 lg:w-2/3 ">
-        <h3 className="text-3xl lg:text-4xl font-bold">¿Por que somos <span className="text-blue-500">tu mejor elección?</span></h3>
+        <h3 className="text-3xl lg:text-4xl font-bold">¿Por qué somos <span className="text-blue-500">tu mejor elección?</span></h3>
         <p className="text-xl">¡Descubre el universo de posibilidades con Eclipse!</p>
       </div>
 
@@ -18,7 +18,7 @@ const WhyChooseUs = () => {
       <div className="flex items-start mb-4 w-full animate__animated animate__lightSpeedInLeft">
           <div >
             <h5 className="font-bold">Experiencia y profesionalismo: </h5>
-            <p className="text-sm">Nuestro equipo experto en viajes ofrece las mejores rutas y tarifas personalizadas para ti.</p>
+            <p className="text-sm">Nuestro equipo experto en viajes ofrece las mejores rutas y tarifas personalizadas para tí.</p>
           </div>
           <div className="flex items-center bg-blue-500 rounded-full p-3 hover:animate-rotate-y">
             <FluentHatGraduationSparkle16Filled className="text-4xl" />
@@ -71,7 +71,7 @@ const WhyChooseUs = () => {
           </div>
           <div >
             <h5 className="font-bold">Transacciones seguras: </h5>
-            <p className="text-sm">Garantizamos transacciones seguras con tecnología avanzada y métodos de pago confiables, protegiendo siempre tu información personal.</p>
+            <p className="text-sm">Garantizamos transacciones seguras con tecnología avanzada y métodos de pago confiables, protegiendo siempre tú información personal.</p>
           </div>
 
         </div>

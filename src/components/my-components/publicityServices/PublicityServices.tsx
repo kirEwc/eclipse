@@ -30,13 +30,13 @@ const PublicityServices = () => {
     onClick={handleClick}
   />
   <ServiceCard
-    title="Tu tranquilidad es lo primero:"
+    title="Calidad y Servicio Garantizados:"
     description="Más de X clientes satisfechos avalan nuestra calidad y servicio."
     imageUrl="/images/imagen-icons/3.svg"
     onClick={handleClick}
   />
   <ServiceCard
-    title="Tu tranquilidad es lo primero:"
+    title="Tú tranquilidad es lo primero:"
     description="Viaja con la certeza de que estamos siempre a tu lado."
     imageUrl="/images/imagen-icons/1.svg"
     onClick={handleClick}

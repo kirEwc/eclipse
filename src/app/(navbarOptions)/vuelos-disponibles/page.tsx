@@ -2,13 +2,14 @@ import React from 'react';
 import { Ticket2 } from '@/components/my-components/ticket/Ticket';
 import TicketsDate from '@/data/productCard';
 
+// Actualizamos TicketType para que coincida con la estructura de TicketsDate
 interface TicketType {
   id: string;
   aeroline: string;
   from: string;
   to: string;
-  date: string;
-  price: [string, { value: number; string: string }]; // El tipo de price
+  date: string[]; // Cambiado a string[]
+  price: { value: number; string: string }[]; // Cambiado a un array de objetos
 }
 
 const VuelosDisponibles: React.FC = () => {
@@ -28,8 +29,8 @@ const VuelosDisponibles: React.FC = () => {
               aeroline={ticket.aeroline}
               from={ticket.from}
               to={ticket.to}
-              date={ticket.date}
-              price={ticket.price}
+              date={ticket.date} // Pasamos el array como está
+              price={ticket.price} // Pasamos el array de precios
             />
           </div>
         ))}

@@ -1,7 +1,7 @@
 import { Ticket2 } from '@/components/my-components/ticket/Ticket';
 import TicketsDate from '@/data/productCard';
 
-interface TicketType = {
+interface TicketType {
   id: string;
   aeroline: string;
   from: string;

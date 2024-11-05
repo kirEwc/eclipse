@@ -1,5 +1,6 @@
 import React from "react";
-import type { SVGProps } from "react";
+import { WarningIcon } from "@/icons/Icons";
+
 
 type Requirement = {
   country: string;
@@ -7,76 +8,6 @@ type Requirement = {
   backgroundImage: string; // Personalización del fondo de la tarjeta
 };
 
-export function WarningIcon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
-      viewBox="0 0 32 32"
-      {...props}
-    >
-      <g fill="none">
-        <g filter="url(#f2444id0)">
-          <path
-            fill="url(#f2444id2)"
-            d="m14.442 6.497l-12.66 21.93c-.51.89.13 2.01 1.16 2.01h25.32c1.03 0 1.67-1.11 1.16-2.01l-12.66-21.93c-.52-.89-1.8-.89-2.32 0"
-          ></path>
-        </g>
-        <g fill="#4a4351" filter="url(#f2444id1)">
-          <path d="M14.202 22.135a1.4 1.4 0 1 0 2.8-.01v-9.16c0-.77-.62-1.4-1.4-1.4c-.77 0-1.4.62-1.4 1.4zm2.8 3.98a1.4 1.4 0 1 1-2.8 0a1.4 1.4 0 0 1 2.8 0"></path>
-        </g>
-        <defs>
-          <filter
-            id="f2444id0"
-            width={29.048}
-            height={25.008}
-            x={1.153}
-            y={5.429}
-            colorInterpolationFilters="sRGB"
-            filterUnits="userSpaceOnUse"
-          >
-            <feFlood floodOpacity={0} result="BackgroundImageFix"></feFlood>
-            <feBlend
-              in="SourceGraphic"
-              in2="BackgroundImageFix"
-              result="shape"
-            ></feBlend>
-            <feColorMatrix
-              in="SourceAlpha"
-              result="hardAlpha"
-              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-            ></feColorMatrix>
-            <feOffset dx={-0.45}></feOffset>
-            <feGaussianBlur stdDeviation={0.3}></feGaussianBlur>
-            <feComposite
-              in2="hardAlpha"
-              k2={-1}
-              k3={1}
-              operator="arithmetic"
-            ></feComposite>
-            <feColorMatrix values="0 0 0 0 1 0 0 0 0.996078 0 0 0 0 0.458824 0 0 0 1 0"></feColorMatrix>
-            <feBlend
-              in2="shape"
-              result="effect1_innerShadow_18590_533"
-            ></feBlend>
-          </filter>
-          <linearGradient
-            id="f2444id2"
-            x1={15.602}
-            x2={15.602}
-            y1={5.829}
-            y2={30.437}
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#ffd758"></stop>
-            <stop offset={1} stopColor="#ffa956"></stop>
-          </linearGradient>
-        </defs>
-      </g>
-    </svg>
-  );
-}
 
 const requirementsList: Requirement[] = [
   {

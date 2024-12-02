@@ -28,7 +28,7 @@ export const DropNLogin = () => {
           <DropdownItem key="login" textValue="Iniciar Seccion" className="h-14 gap-2">
           <Link href='/login' className="flex justify-around">
               <button className="w-full h-full flex items-start">
-              Inicia Seccion                
+              Inicia Sección                
             </button>
             <SolarLoginBroken className="w-6 h-6"/>
           </Link>

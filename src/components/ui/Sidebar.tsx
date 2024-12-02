@@ -1,38 +1,35 @@
-import { Bars3Icon, XMarkIcon } from "@/icons/Icons";
+import { Bars3Icon, HugeiconsComment01, IcTwotoneAirplaneTicket, Requirements, XMarkIcon } from "@/icons/Icons";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
 interface NavItem {
   name: string;
   href: string;
+  Icon: React.ComponentType<{ className: string }>; // Añade el tipo para el ícono
 }
 
 const navigation: NavItem[] = [
-  { name: "Vuelos Disponibles", href: "/vuelos-disponibles" },
-  { name: "Requisitos", href: "/requisitos" },
-  { name: "Comentarios", href: "/comentarios" },
+  { name: "Vuelos Disponibles", href: "/vuelos-disponibles", Icon: IcTwotoneAirplaneTicket },
+  { name: "Requisitos", href: "/requisitos", Icon: Requirements },
+  { name: "Comentarios", href: "/comentarios", Icon: HugeiconsComment01 },
 ];
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Función para cerrar el sidebar al hacer scroll
     const handleScroll = () => {
       if (isOpen) {
         setIsOpen(false);
       }
     };
-    // Agregar el event listener de scroll
     window.addEventListener("scroll", handleScroll);
 
-    // Limpiar el event listener al desmontar el componente
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [isOpen]);
 
-  // Función para cerrar el sidebar al hacer clic en un link
   const handleLinkClick = () => {
     setIsOpen(false);
   };
@@ -66,8 +63,9 @@ export default function Sidebar() {
                 key={item.name}
                 href={item.href}
                 className="group flex items-center px-2 py-2 text-base text-black font-medium rounded-md"
-                onClick={handleLinkClick} // Cierra el sidebar al hacer clic
+                onClick={handleLinkClick}
               >
+                <item.Icon className="mr-8 w-5 h-5  text-gray-600" /> {/* Icono delante del texto */}
                 {item.name}
               </Link>
             ))}

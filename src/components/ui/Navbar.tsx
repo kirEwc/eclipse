@@ -57,7 +57,7 @@ import { HugeiconsComment01, IcTwotoneAirplaneTicket, Requirements } from "@/ico
 
       {/* contenido 2 */}
       <NavbarContent className="hidden md:flex gap-4" justify="center">
-        <NavbarItem className="text-gray-600  hover:text-cyan-500 dark:text-gray-200  transition duration-300">
+        <NavbarItem  className="text-gray-600  hover:text-cyan-500 dark:text-gray-200  transition duration-300">
           <Link color="foreground" href="/vuelos-disponibles" className="flex flex-row items-center gap-1">
             <IcTwotoneAirplaneTicket className="w-5 h-5" />
             Vuelos Disponibles

@@ -28,17 +28,19 @@ const ConfirmPassword = () => {
       const messageError = String(firstError.message);
       ErrorMessage(messageError);
     } else {
+      const email = localStorage.getItem('email');
       try {
         const response = await ApiRequest({
-          method: 'POST',
-          url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
+          method: 'PATCH',
+          url: 'https://1935-195-181-163-29.ngrok-free.app/api/User/ChangePassword',
           body: {           
             password: password,
+            email: email,            
           },
         });
 
         if (response.status === 200) {
-          router.push('/Login');
+          router.push('/login');
         } else {
           ErrorMessage('Error al registrarce');
         }

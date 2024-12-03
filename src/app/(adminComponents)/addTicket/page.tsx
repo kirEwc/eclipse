@@ -17,39 +17,28 @@ import ApiRequest from "@/services/ApiRequest";
 import { ModalAddPrice } from "@/components/Next_ui_elements/Modal/ModalAddPrice";
 import CustomSelectAirline from "@/components/my-components/selectAirline/CustomSelectAirline";
 import ErrorMessage from "../../../messages/ErrorMessage";
-
-interface FormData {
-    selectedAirline: string;
-    origin: string;
-    destination: string;
-    selectedDates: DateObject[]// O cualquier tipo que uses para las fechas
-    price: { value: number, string: string }[];
-}
-
-interface Price {
-    value: number;
-    string: string;
-}
+import { InterfacePrice } from "@/interface/InterfacePrice";
+import { InterfaceTicket } from "@/interface/InterfaceTicket";
 
 
 
 const AddTicket: React.FC = () => {
     const router = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [addPrice, setaddPrice] = useState<Price[]>([]);
+    const [addPrice, setaddPrice] = useState<InterfacePrice[]>([]);
 
 
 
-    const [formData, setFormData] = useState<FormData>({
+    const [formData, setFormData] = useState<InterfaceTicket>({
         selectedAirline: '',
         origin: '',
         destination: '',
         selectedDates: [],
-        price: [],
+        prices: [],
     });
 
     // Manejador para actualizar los valores del formulario
-    const handleInputChange = (name: keyof FormData, value: string | DateObject[] | { value: number, string: string }[]) => {
+    const handleInputChange = (name: keyof InterfaceTicket, value: string | DateObject[] | { value: number, currency: string }[]) => {
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
@@ -68,11 +57,10 @@ const AddTicket: React.FC = () => {
             origin: origin,
             destination: destination,
             selectedDates: dates,
-            price: addPrice,
+            prices: addPrice,
         };
 
-        console.log(dataToValidate);
-
+     
         const validatedFields = validationAddTicket.safeParse(dataToValidate);
 
 
@@ -88,12 +76,13 @@ const AddTicket: React.FC = () => {
             try {
                 const response = await ApiRequest({
                     method: 'POST',
-                    url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
+                    url: 'https://1935-195-181-163-29.ngrok-free.app/api/Tickets/CreateTicket',
                     body: {
                         nameAirline: selectedAirline,
                         origin: origin,
                         destination: destination,
                         selectedDates: dates,
+                        prices: addPrice
                     },
                 });
 

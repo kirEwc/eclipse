@@ -37,15 +37,16 @@ const Register: React.FC = () => {
       try {
         const response = await ApiRequest({
           method: 'POST',
-          url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
+          url: 'https://1935-195-181-163-29.ngrok-free.app/api/User/CrearUsuario',
           body: {
             email: email,
             password: password,
+            token: null,
           },
         });
 
         if (response.status === 200) {
-          router.push('/Login');
+          router.push('/');
         } else {
           ErrorMessage('Error al registrarce');
         }

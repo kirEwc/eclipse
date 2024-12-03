@@ -1,17 +1,68 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Textarea, } from "@nextui-org/react";
 import { BiSendDashFill, BiSendPlusFill } from "@/icons/Icons";
+import ApiRequest from "@/services/ApiRequest";
+import CorrectMessage from "@/messages/CorrectMessage";
+import ErrorMessage from "@/messages/ErrorMessage";
 
 
 interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
+    
 }
 
 const ModalBaner: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+    const getBaner = async () => {
+        try {
+            const response = await ApiRequest({
+                method: 'GET',
+                url: 'https://1935-195-181-163-29.ngrok-free.app/api/Navbar/GetNavbar',
+            });
+            console.log(response);
+
+            if (response?.status === 200) {     
+                console.log(response);
+                CorrectMessage('Baner obtenido correctamente');
+                
+            } else {
+                ErrorMessage('Error al obtener el baner');
+            }
+        } catch (error) {
+            console.error('Error fetching baner:', error);
+        }
+    };
+
+
+    if (isOpen == true) {      
+            getBaner();       
+    }
+   
+
 
     const [newComment, setNewComment] = useState("");
 
+    const handleClick = async () => {
+        try {
+            const response= await ApiRequest({
+                method: 'POST',
+                url: 'https://1935-195-181-163-29.ngrok-free.app/api/Navbar/ChangeNavbar',
+                body: {
+                  navar:newComment
+                },
+            });
+            console.log(response);
+
+            if (response?.status === 200) {
+                CorrectMessage('Texto editado correctamente');
+                onClose();
+            } else {
+               ErrorMessage('Error al editar el texto');
+            }
+        } catch (error) {
+            
+        }
+    };
 
 
     return (
@@ -39,7 +90,7 @@ const ModalBaner: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                                 </Button>
                                 <Button
                                     color="primary"
-                                    onPress={onClose}                                   
+                                    onClick={handleClick}                                                                 
                                 >
                                     Enviar
                                     <BiSendPlusFill className="w-5 h-5 ml-1" />

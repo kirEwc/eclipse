@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn,useSession } from "next-auth/react";
+import { getSession, signIn,useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 
@@ -47,18 +47,20 @@ const Login: React.FC = () => {
       try {
         const response = await ApiRequest({
           method: 'POST',
-          url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
+          url: 'https://1c3e-195-181-163-8.ngrok-free.app/api/User/login',
           body: {
             email: email,
             password: password,
           },
         });
+     
+
         const data = await response.json();    
         
-
+        console.log(data);
         if (response?.status === 200) {
           const token = data.token;  
-          const role = data.role;  
+          const role = data.userRol;  
           
           login({ email,role});
           await setAuthCookie(token, role);
@@ -68,23 +70,52 @@ const Login: React.FC = () => {
         }
 
       } catch (error) {
+        console.log('no se ajecuta correctamente ')
         console.log(error)
       }
 
-    }
-    
-    const token = 'gwygr92r5723gr9h42dfby2evfb2iu'
-    const role ='admin'
-    login({ email,role}); 
-    await setAuthCookie(token, role);
-    router.push('/');
+    }    
+
   }
 
 
+  const handleGoogleSignIn = async () => {
+    try {
+      // Iniciar sesión con Google y obtener la respuesta
+      const response = await signIn("google", { redirect: false });
+  
+      if (response?.ok) {
+        // Obtener la sesión después de iniciar sesión
+        const session = await getSession();
+        
+        // Obtener el email y el token de la sesión
+        const email = session?.user?.email;
+        const token = session?.accessToken; // Este es el token de Google
+  
+        console.log("Email:", email);
+        console.log("Token:", token);
+  
+        // Enviar el email y el token al backend
+        const backendResponse = await ApiRequest({
+          method: 'POST',
+          url: 'https://1935-195-181-163-29.ngrok-free.app/api/User/CrearUsuario',
+          body: {
+            email: email,
+            token: token,  // Aquí se incluye el token en el cuerpo de la solicitud
+          },
+        });
+  
+        // Procesar la respuesta del backend
+        console.log(backendResponse);
+      }
+    } catch (error) {
+      console.log("Error during Google sign-in:", error);
+    }
+  };
 
 
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (status === 'authenticated' && !hasAuthenticated.current) {
       console.log('Usuario autenticado, ejecutando useEffect');
       hasAuthenticated.current = true;
@@ -115,7 +146,7 @@ const Login: React.FC = () => {
       authenticateUser();
     }
   }, [status, session, router]);
-
+ */
 
   return (
     <div className="h-screen w-screen bg-[url('/images/fondo/1.webp')] bg-cover bg-center bg-no-repeat">
@@ -150,11 +181,10 @@ const Login: React.FC = () => {
 
               <div className="mt-3 w-2/3">
                 <ButtonNext
+                  type="button"
                   icon={<Google className="h-6 w-6" />}
                   text="Iniciar con Google"
-                  onClick={() => signIn("google")}
-
-
+                  onClick={() => handleGoogleSignIn()}
                 >
                 </ButtonNext>
               </div>

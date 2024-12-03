@@ -33,13 +33,18 @@ const RecoveryPassword = () => {
       try {
         const response = await ApiRequest({
           method: 'POST',
-          url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
+          url: 'https://1935-195-181-163-29.ngrok-free.app/api/User/ChangePassword',
           body: {
             email: email,            
           },
         });
 
         if (response?.status === 200) {
+          if (typeof email === 'string') {
+            localStorage.setItem('email', email);
+          } else {
+            console.error('El valor del email no es una cadena de texto.');
+          }
           router.push('/verifyCode');
         } else {
           ErrorMessage('Credenciales incorrectas');

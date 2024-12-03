@@ -1,5 +1,5 @@
 interface HttpRequest<T = unknown> {
-  method: 'POST' | 'GET' | 'PUT' | 'DELETE';
+  method: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE';
   url: string;
   headers?: Record<string, string>;
   body?: T;

@@ -18,7 +18,7 @@ const VerifyCode = () => {
     event.preventDefault(); 
      const formData = new FormData(event.currentTarget);
     const { code } = Object.fromEntries(formData);
-    console.log(code);
+   
     const validatedFields = validationVerifyCode.safeParse({
       code: code,
     })
@@ -28,19 +28,18 @@ const VerifyCode = () => {
       const messageError = String(firstError.message);
       ErrorMessage(messageError);
     } else {
+     
       try {
         const response = await ApiRequest({
-          method: 'POST',
-          url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
-          body: {
-            code: code,
-          },
+          method: 'GET',
+          url: 'https://1935-195-181-163-29.ngrok-free.app/api/User/ConfirmChangeToken/'+code,
         });
 
-        if (response.status === 200) {
-          router.push('/Login');
+
+        if (response.status === 200) {        
+          router.push('/confirmPassword');
         } else {
-          ErrorMessage('Error al registrarce');
+          ErrorMessage('Código incorrecto');
         }
 
       } catch (error) {

@@ -5,16 +5,55 @@ import InputText from "@/components/Next_ui_elements/inputText/InputText";
 import ModalBaner from "@/components/Next_ui_elements/Modal/ModalBaner";
 import TicketsDate from "@/data/productCard";
 import { Fa6SolidMagnifyingGlass, MaterialSymbolsLightAddNotes, MdiEditBox } from "@/icons/Icons";
+import ApiRequest from "@/services/ApiRequest";
 import { useDisclosure } from "@nextui-org/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const AdminPanel: React.FC = () => {
+
+  const getTickets = async () => {
+    try {
+      const response = await ApiRequest({
+        method: 'GET',
+        url: 'https://1c3e-195-181-163-8.ngrok-free.app/api/Tickets/GetTicket',
+      });
+  
+      // Verifica el Content-Type para asegurarte de que es JSON
+      const contentType = response.headers.get('Content-Type');
+      console.log('Content-Type:', contentType);
+  
+      if (response.ok && contentType?.includes('application/json')) {
+        // Procesa la respuesta JSON
+        const data = await response.json();
+        const tickets = data.ticketModels; // Obtiene el array anidado
+        console.log('Tickets obtenidos:', tickets);
+      } else {
+        const text = await response.text();
+        console.error('La respuesta no es JSON válida. Contenido recibido:', text);
+      }
+    } catch (error) {
+      console.error('Error al realizar la solicitud:', error);
+    }
+  };
+  
+  
+
+  useEffect(() => {   
+  
+    // Llama a la función asíncrona
+    getTickets();
+  }, []);
+  
+  
+  
+
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+
+
 
   const handleClick = () => {
     router.push("/addTicket");
@@ -68,9 +107,9 @@ const AdminPanel: React.FC = () => {
             <MdiEditBox />
             <span className="hidden lg:block font-bold">Editar</span>
           </button>
-          <ModalBaner isOpen={isOpen} onClose={onClose} />
+          <ModalBaner isOpen={isOpen} onClose={onClose}  />
 
-        
+
         </div>
       </header>
 
@@ -102,5 +141,7 @@ const AdminPanel: React.FC = () => {
     </div>
   );
 };
+
+
 
 export default AdminPanel;

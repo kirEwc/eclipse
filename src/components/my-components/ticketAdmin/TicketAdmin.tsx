@@ -14,30 +14,22 @@ import { useRouter } from "next/navigation";
 import { Efectivo, MLC, Real, Zelle } from "@/icons/monedaicons";
 import { ticketStore } from "@/stores/ticketStore.store";
 import ModalConfirm from "@/components/Next_ui_elements/Modal/ModalConfirm";
-
-
-
-interface FlightData {
-    id: string;
-    aeroline: string;
-    from: string;
-    to: string;
-    date: string[];
-    price: { value: number, string: string }[];
-}
+import { InterfaceFlightData } from "@/interface/InterfaceFlightData";
 
 
 
 
 
-export const TicketAdmin: React.FC<FlightData> = ({
+
+
+export const TicketAdmin: React.FC<InterfaceFlightData> = ({
     id,
     aeroline = "No Disponible",
     from = "No Disponible",
     to = "No Disponible",
     date = ["No Disponible"],
     price = [{ value: 1, string: "No Disponible" }],
-}: FlightData) => {
+}: InterfaceFlightData) => {
     const router = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const setFlightData = ticketStore((state) => state.setTicketData);
@@ -63,7 +55,7 @@ export const TicketAdmin: React.FC<FlightData> = ({
     ];
 
 
-    const handleUpdate = async (ticket: FlightData) => {
+    const handleUpdate = async (ticket: InterfaceFlightData) => {
         setFlightData(ticket);
         router.push(`/updateTicket`);
     };

@@ -71,7 +71,7 @@ const LoginDrop = () => {
           {/* seccion del panel de control */}
 
             {user && user.role === "admin" ? (
-              <DropdownItem key="Admin" textValue="Panel de control">
+              <DropdownItem textValue="Panel de control">
               <Link href="/adminPanel" className="flex justify-around">
               <button className="w-full flex justify-between">
               Panel de Control
@@ -80,7 +80,11 @@ const LoginDrop = () => {
               </Link>
               </DropdownItem>
               ) : (
-                <DropdownItem className="w-0 h-0 -mb-3"></DropdownItem>
+                    <DropdownItem
+                      className="w-0 h-0 -mb-3"
+                      textValue="Panel de Control vacio"
+                    >
+                    </DropdownItem>
                 )}
 
           <DropdownItem key="logout" textValue="Cerrar Seccion" color="danger">

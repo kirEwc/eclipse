@@ -3,26 +3,27 @@ import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/react";
 import ButtonNext from "../button/ButtonNext";
 import { Efectivo, MLC, Real, Zelle } from "@/icons/monedaicons";
 import { useState } from "react";
-import InputNumber from "../inputNumber/inputNumber";
+import InputNumber from "../inputNumber/InputNumber";
+import { InterfacePrice } from "@/interface/InterfacePrice";
 
-interface Price {
-  value: number;
-  string: string;
-}
+
+
+
+
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  setaddPrice: React.Dispatch<React.SetStateAction<Price[]>>;
-  addPrice?: Price[];
+  setaddPrice: React.Dispatch<React.SetStateAction<InterfacePrice[]>>;
+  addPrice?: InterfacePrice[];
 }
 
 export const ModalAddPrice: React.FC<ModalProps> = ({ isOpen, onClose, setaddPrice, addPrice }) => {
   const [prices, setPrices] = useState({
-    USD: String(addPrice?.find(price => price.string === 'USD')?.value || ''),
-    Zelle: String(addPrice?.find(price => price.string === 'Zelle')?.value || ''),
-    MLC: String(addPrice?.find(price => price.string === 'MLC')?.value || ''),
-    Real: String(addPrice?.find(price => price.string === 'R$')?.value || ''),
+    USD: String(addPrice?.find(price => price.currency === 'USD')?.value || ''),
+    Zelle: String(addPrice?.find(price => price.currency === 'Zelle')?.value || ''),
+    MLC: String(addPrice?.find(price => price.currency === 'MLC')?.value || ''),
+    Real: String(addPrice?.find(price => price.currency === 'R$')?.value || ''),
   });
 
   const handleInputChange = (name: keyof typeof prices, value: string) => {
@@ -39,19 +40,19 @@ export const ModalAddPrice: React.FC<ModalProps> = ({ isOpen, onClose, setaddPri
     setaddPrice([
       {
         value: Number(prices.USD),  // Convertir a número
-        string: 'USD',
+        currency: 'USD',
       },
       {
         value: Number(prices.Zelle),
-        string: 'Zelle',
+        currency: 'Zelle',
       },
       {
         value: Number(prices.MLC),
-        string: 'MLC',
+        currency: 'MLC',
       },
       {
         value: Number(prices.Real),
-        string: 'R$',
+        currency: 'R$',
       },
     ]);
 

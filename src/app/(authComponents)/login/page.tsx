@@ -51,12 +51,10 @@ const Login: React.FC = () => {
             password: password,
           },
         });
-     
-
-        const data = await response.json();    
+                     
         
-        console.log(data);
         if (response?.status === 200) {
+          const data = await response.json();   
           const token = data.token;  
           const role = data.userRol;  
           

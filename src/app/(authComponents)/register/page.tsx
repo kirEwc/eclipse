@@ -37,7 +37,7 @@ const Register: React.FC = () => {
       try {
         const response = await ApiRequest({
           method: 'POST',
-          url: 'https://1935-195-181-163-29.ngrok-free.app/api/User/CrearUsuario',
+          url: 'http://localhost:5164/api/User/CrearUsuario',
           body: {
             email: email,
             password: password,
@@ -46,9 +46,9 @@ const Register: React.FC = () => {
         });
 
         if (response.status === 200) {
-          router.push('/');
+          router.push('/login');
         } else {
-          ErrorMessage('Error al registrarce');
+          ErrorMessage('Error al registrarse');
         }
 
       } catch (error) {

@@ -1,10 +1,10 @@
 interface InterfaceComentary {
     idComentary: number;
-    // user: { name: string, avatar: string };
+    image: string 
     email: string;
     stars: number;
     comentarytext: string;
-    // date: string;
+    date: string;
 }
 
 export default InterfaceComentary;

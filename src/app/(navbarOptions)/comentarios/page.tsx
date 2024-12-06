@@ -24,12 +24,9 @@ const Comentarios = () => {
 
       if (response.ok) {
         
-        const data = await response.json();
-        console.log(response)
-        setComentary(data);
-        // setAverageRating(data.totalComentary)
-
-        console.log(data);
+        const data = await response.json();        
+        setComentary(data.comentaryBack);
+        setAverageRating(data.totalComentary);     
        
       } else {       
         console.error('Error a obtener los boletos');
@@ -115,19 +112,20 @@ const Comentarios = () => {
             <Card key={comentary.idComentary} className={`mb-4 ${comentary.idComentary === 1 ? 'mt-4' : ''}`}>
               <CardBody>
                 <div className="flex items-center mb-2">
-                  {/* <Avatar
-                    src={comentary.user.avatar}
+                   <Avatar
+                    src={comentary.image}
                     size="sm"
                     className="mr-2"
-                  /> */}
+                    alt="avatar"
+                  /> 
                   <span className="font-semibold">{comentary.email}</span>
                   <StarComponent Nstar={comentary.stars} />
                 </div>
                 <p>{comentary.comentarytext}</p>
               </CardBody>
-              {/* <CardFooter>
+               <CardFooter>
                 <small className="text-gray-500">{comentary.date}</small>
-              </CardFooter> */}
+              </CardFooter> 
             </Card>
           ))}
         </div>

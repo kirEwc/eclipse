@@ -2,39 +2,54 @@
 import StarComponent from "@/components/my-components/Star/StarComponent";
 import ModalCustom from "@/components/Next_ui_elements/Modal/ModalComentarios";
 import { ProiconsNoteAdd, Star } from "@/icons/Icons";
+import InterfaceComentary from "@/interface/InterfaceComentary";
+import ApiRequest from "@/services/ApiRequest";
 import { Avatar, Button, Card, CardBody, CardFooter, Progress, useDisclosure } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Comentarios = () => {
   const [averageRating, setAverageRating] = useState(4.2);
-  console.log(setAverageRating);
+  const [comentary, setComentary] = useState<InterfaceComentary[]>([]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const reviews = [
-    {
-      id: "1",
-      user: { name: "Alice", avatar: "/images/fondo/1.webp" },
-      rating: 5,
-      comment: "Excellent product, very satisfied with the purchase.",
-      date: "2024-06-01",
-    },
-    {
-      id: "2",
-      user: { name: "Bob", avatar: "/images/fondo/1.webp" },
-      rating: 4,
-      comment: "Good product, but shipping took longer than expected.",
-      date: "2024-05-28",
-    },
-    {
-      id: "3",
-      user: { name: "Charlie", avatar: "/images/fondo/1.webp" },
-      rating: 5,
-      comment: "Incredible quality, I definitely recommend it.",
-      date: "2024-05-25",
-    },
-    
-  ];
+
+  const getComentary = async () => {
+    try {
+      const response = await ApiRequest({
+        method: 'GET',
+        url: 'http://localhost:5164/api/Commentary/GetComentary',
+      });
+  
+
+      if (response.ok) {
+        
+        const data = await response.json();
+        console.log(response)
+        setComentary(data);
+        // setAverageRating(data.totalComentary)
+
+        console.log(data);
+       
+      } else {       
+        console.error('Error a obtener los boletos');
+      }
+    } catch (error) {
+      console.error('Error al realizar la solicitud:', error);
+    }
+  };
+  
+  
+
+  useEffect(() => {   
+  
+    // Llama a la función asíncrona
+    getComentary();
+  }, []);
+  
+  
+
+  
 
   return (
     <div className="bg-[url('/images/fondo/comentarios.webp')] bg-cover bg-center bg-no-repeat">
@@ -43,7 +58,7 @@ const Comentarios = () => {
       </h2>
       <div className="flex flex-col md:flex-row justify-between items-center mx-4 md:mx-20 lg:mx-36">
         {/* Componente de rating general */}
-        <div className="flex flex-col md:flex-row items-center mb-6">
+         <div className="flex flex-col md:flex-row items-center mb-6">
           <div className="text-4xl font-bold mr-4">
             {averageRating.toFixed(1)}
           </div>
@@ -68,7 +83,7 @@ const Comentarios = () => {
               color="warning"
             />
           </div>
-        </div>
+        </div> 
 
         <div className="flex items-center mb-6">
           <Button
@@ -82,7 +97,10 @@ const Comentarios = () => {
             />
             Agregar Comentario
           </Button>
-          <ModalCustom isOpen={isOpen} onClose={onClose} />
+          <ModalCustom 
+              isOpen={isOpen} 
+              onClose={onClose} 
+          />
         </div>
       </div>
 
@@ -93,23 +111,23 @@ const Comentarios = () => {
       >
         {/* Caja de comentarios */}
         <div className="flex flex-col w-full md:w-2/3">
-          {reviews.map((review, index) => (
-            <Card key={review.id} className={`mb-4 ${index === 0 ? 'mt-4' : ''}`}>
+          {comentary?.map((comentary) => (
+            <Card key={comentary.idComentary} className={`mb-4 ${comentary.idComentary === 1 ? 'mt-4' : ''}`}>
               <CardBody>
                 <div className="flex items-center mb-2">
-                  <Avatar
-                    src={review.user.avatar}
+                  {/* <Avatar
+                    src={comentary.user.avatar}
                     size="sm"
                     className="mr-2"
-                  />
-                  <span className="font-semibold">{review.user.name}</span>
-                  <StarComponent Nstar={review.rating} />
+                  /> */}
+                  <span className="font-semibold">{comentary.email}</span>
+                  <StarComponent Nstar={comentary.stars} />
                 </div>
-                <p>{review.comment}</p>
+                <p>{comentary.comentarytext}</p>
               </CardBody>
-              <CardFooter>
-                <small className="text-gray-500">{review.date}</small>
-              </CardFooter>
+              {/* <CardFooter>
+                <small className="text-gray-500">{comentary.date}</small>
+              </CardFooter> */}
             </Card>
           ))}
         </div>

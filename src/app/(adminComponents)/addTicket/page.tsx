@@ -57,9 +57,10 @@ const AddTicket: React.FC = () => {
             origin: origin,
             destination: destination,
             selectedDates: dates,
-            prices: addPrice,
+            price: addPrice,
         };
 
+      
      
         const validatedFields = validationAddTicket.safeParse(dataToValidate);
 
@@ -72,11 +73,11 @@ const AddTicket: React.FC = () => {
                 ErrorMessage(message); // Muestra el mensaje de error
             }
         } if (validatedFields.success) {
-
+                
             try {
                 const response = await ApiRequest({
                     method: 'POST',
-                    url: 'https://1935-195-181-163-29.ngrok-free.app/api/Tickets/CreateTicket',
+                    url: 'http://localhost:5164/api/Tickets/CreateTicket',
                     body: {
                         nameAirline: selectedAirline,
                         origin: origin,

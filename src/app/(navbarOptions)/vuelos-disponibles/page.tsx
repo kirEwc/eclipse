@@ -1,20 +1,49 @@
-import React from 'react';
-import { Ticket2 } from '@/components/my-components/ticket/Ticket';
-import TicketsDate from '@/data/productCard';
+"use client";
 
-// Actualizamos TicketType para que coincida con la estructura de TicketsDate
-interface TicketType {
-  id: string;
-  aeroline: string;
-  from: string;
-  to: string;
-  date: string[]; // Cambiado a string[]
-  price: { value: number; string: string }[]; // Cambiado a un array de objetos
-}
+import React, { useEffect, useState } from 'react';
+import { Ticket2 } from '@/components/my-components/ticket/Ticket';
+import { InterfaceFlightData } from '@/interface/InterfaceFlightData';
+import ApiRequest from '@/services/ApiRequest';
+
 
 const VuelosDisponibles: React.FC = () => {
+  const [tickets, setTickets] = useState<InterfaceFlightData[]>([]);
+
+
+  const getTickets = async () => {
+    try {
+      const response = await ApiRequest({
+        method: 'GET',
+        url: 'http://localhost:5164/api/Tickets/GetTicket',
+      });
+  
+
+      if (response.ok) {        
+        const data = await response.json();
+        setTickets(data.ticketModels );
+        
+       
+      } else {       
+        console.error('Error a obtener los boletos');
+      }
+    } catch (error) {
+      console.error('Error al realizar la solicitud:', error);
+    }
+  };
+  
+  
+
+  useEffect(() => {   
+  
+    // Llama a la función asíncrona
+    getTickets();
+  }, []);
+
+
+
+  
   return (
-    <div className='bg-[url("/images/fondo/1.webp")] bg-cover bg-center bg-no-repeat'>
+    <div className='bg-[url("/images/fondo/1.webp")] bg-cover bg-center bg-no-repeat h-screen'>
       <h1 className='text-3xl font-bold text-center bg-transparent mb-8 pt-6'>
         <span className='bg-gradient-to-t from-gray-100 via-slate-300 to-cyan-200 bg-clip-text text-transparent'>
           Vuelos Disponibles
@@ -22,7 +51,7 @@ const VuelosDisponibles: React.FC = () => {
       </h1>
 
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-md md:max-w-lg lg:max-w-6xl mx-auto'>
-        {TicketsDate.map((ticket: TicketType) => (
+        {tickets.map((ticket: InterfaceFlightData) => (
           <div key={ticket.id} className="rounded-lg p-6 h-full flex justify-center">
             <Ticket2 
               id={ticket.id}

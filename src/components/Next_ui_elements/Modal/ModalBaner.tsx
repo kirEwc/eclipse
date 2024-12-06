@@ -4,27 +4,31 @@ import { BiSendDashFill, BiSendPlusFill } from "@/icons/Icons";
 import ApiRequest from "@/services/ApiRequest";
 import CorrectMessage from "@/messages/CorrectMessage";
 import ErrorMessage from "@/messages/ErrorMessage";
+import { InterfaceBaner } from "@/interface/InterfaceBaner";
 
 
 interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
-    
+
 }
 
 const ModalBaner: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+    const [dataBaner, setDataBaner] = useState<InterfaceBaner | undefined>(undefined);
+
+
+
     const getBaner = async () => {
         try {
             const response = await ApiRequest({
                 method: 'GET',
-                url: 'https://1935-195-181-163-29.ngrok-free.app/api/Navbar/GetNavbar',
+                url: 'http://localhost:5164/api/Navbar/GetNavbar',
             });
-            console.log(response);
 
-            if (response?.status === 200) {     
-                console.log(response);
-                CorrectMessage('Baner obtenido correctamente');
-                
+
+            if (response?.status === 200) {
+                const data = await response.json();               
+                setDataBaner(data);            
             } else {
                 ErrorMessage('Error al obtener el baner');
             }
@@ -33,34 +37,41 @@ const ModalBaner: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         }
     };
 
+    useEffect(() => {
+        // Llama a la función asíncrona
+        getBaner();
+    }, []);
 
-    if (isOpen == true) {      
-            getBaner();       
-    }
-   
 
 
-    const [newComment, setNewComment] = useState("");
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setDataBaner(prevData => ({
+            ...prevData,   // Asegúrate de mantener el estado previo
+            text: e.target.value, // Actualiza solo el campo "text"
+        }));
+    };
 
-    const handleClick = async () => {
+
+    const handleClick = async () => {        
         try {
-            const response= await ApiRequest({
-                method: 'POST',
-                url: 'https://1935-195-181-163-29.ngrok-free.app/api/Navbar/ChangeNavbar',
+            const response = await ApiRequest({
+                method: 'PATCH',
+                url: 'http://localhost:5164/api/Navbar/ChangeNavbar',
                 body: {
-                  navar:newComment
+                    text: dataBaner?.text,
+                    idNavbar: 1
                 },
             });
-            console.log(response);
 
-            if (response?.status === 200) {
+            if (response?.status === 200) {               
+                
                 CorrectMessage('Texto editado correctamente');
                 onClose();
             } else {
-               ErrorMessage('Error al editar el texto');
+                ErrorMessage('Error al editar el texto');
             }
         } catch (error) {
-            
+
         }
     };
 
@@ -74,23 +85,24 @@ const ModalBaner: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                             <ModalHeader className="flex flex-col gap-1">Editar Baner:</ModalHeader>
                             <ModalBody>
                                 <Textarea
-                                    value={newComment}
-                                    onChange={(e) => setNewComment(e.target.value)}
+                                    value={dataBaner?.text}
+                                    onChange={handleChange}
                                     className="mb-4"
                                 />
+
                             </ModalBody>
                             <ModalFooter className="flex justify-between w-full">
                                 <Button
                                     color="danger"
                                     variant="solid"
-                                    onPress={onClose}                                   
+                                    onPress={onClose}
                                 >
                                     Cancelar
                                     <BiSendDashFill className="w-5 h-5 ml-1" />
                                 </Button>
                                 <Button
                                     color="primary"
-                                    onClick={handleClick}                                                                 
+                                    onClick={handleClick}
                                 >
                                     Enviar
                                     <BiSendPlusFill className="w-5 h-5 ml-1" />

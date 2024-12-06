@@ -7,7 +7,7 @@ interface TicketData {
   from: string;
   to: string;
   date: string[]; // Múltiples fechas
-  price: { value: number; string: string }[]; // Lista de precios con valor y moneda
+  price: { value: number; currency: string }[]; // Lista de precios con valor y moneda
 }
 
 interface FlightStore {

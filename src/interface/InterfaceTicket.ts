@@ -1,7 +1,6 @@
 import { DateObject } from "react-multi-date-picker";
 
-export interface InterfaceTicket {
-    
+export interface InterfaceTicket {    
     selectedAirline: string;
     origin: string;
     destination: string;

@@ -19,18 +19,11 @@ import { ModalAddPrice } from "@/components/Next_ui_elements/Modal/ModalAddPrice
 import { ticketStore } from "@/stores/ticketStore.store";
 import CustomSelectAirline from "@/components/my-components/selectAirline/CustomSelectAirline";
 import ErrorMessage from "../../../messages/ErrorMessage";
+import { InterfaceFormDataTicket } from "@/interface/InterfaceFormDataTicket";
 
 
 
 
-interface FormData {
-    id: string;
-    selectedAirline: string;
-    origin: string;
-    destination: string;
-    selectedDates: DateObject[]; // O cualquier tipo que uses para las fechas
-    price: { value: number, string: string }[];
-}
 
 
 const UpdateTicket: React.FC = () => {
@@ -50,12 +43,12 @@ const UpdateTicket: React.FC = () => {
 
 
 
-    const [formData, setFormData] = useState<FormData>({
+    const [formData, setFormData] = useState<InterfaceFormDataTicket>({
         id: id,
-        selectedAirline: selectedAirlineLabel || '',
-        origin: from,
-        destination: to,
-        selectedDates: date.map((d) => new DateObject(d)), // Asegúrate de que DateObject acepte un string o ajusta según sea necesario
+        aeroline: selectedAirlineLabel || '',
+        from: from,
+        to: to,
+        date: date.map((d) => new DateObject(d)), // Asegúrate de que DateObject acepte un string o ajusta según sea necesario
         price: price,
     });
 
@@ -63,7 +56,7 @@ const UpdateTicket: React.FC = () => {
 
 
 
-    const handleInputChange = (name: keyof FormData, value: string | DateObject[] | { value: number, string: string }[]) => {
+    const handleInputChange = (name: keyof InterfaceFormDataTicket, value: string | DateObject[] | { value: number, string: string }[]) => {
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
@@ -71,16 +64,16 @@ const UpdateTicket: React.FC = () => {
     };
 
     const handleSubmit = async () => {
-        const { selectedAirline, origin, destination, selectedDates } = formData;
+        const { aeroline, from, to, date, price } = formData;
 
-        const dates = selectedDates.map(date => date.format("DD/MM/YYYY"));
+        const dates = date.map(date => date.format("DD/MM/YYYY"));
 
 
         const dataToValidate = {
-            nameAirline: selectedAirline,
-            origin: origin,
-            destination: destination,
-            selectedDates: dates,
+            nameAirline: aeroline,
+            origin: from,
+            destination: to,
+            selectedDates: dates,        
             price: addPrice,
         };
 
@@ -97,22 +90,29 @@ const UpdateTicket: React.FC = () => {
         }
 
         if (validatedFields.success) {
+            console.log(dataToValidate);
             try {
                 const response = await ApiRequest({
-                    method: 'POST',
-                    url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
+                    method: 'PATCH',
+                    url: 'http://localhost:5164/api/Tickets/ChangeTicket',
                     body: {
-                        nameAirline: selectedAirline,
-                        origin: origin,
-                        destination: destination,
-                        selectedDates: dates,
+                        id: id,
+                        aeroline: aeroline,
+                        from: from,
+                        to: to,
+                        date: dates,
+                        price: addPrice,
                     },
                 });
 
                 if (response?.status === 200) {
-                    CorrectMessage('Boleto agregado correctamente');
+                    CorrectMessage('Boleto actualizado con exito');
+                    setTimeout(() => {
+                       router.push('/adminPanel');
+                    }, 3000); 
+              
                 } else {
-                    ErrorMessage('Error al agregar el boleto');
+                    ErrorMessage('Error al actualizar  el boleto');
                 }
 
             } catch (error) {
@@ -140,8 +140,8 @@ const UpdateTicket: React.FC = () => {
 
                                 <CustomSelectAirline
                                     airlines={dataNameAirline}
-                                    selectedLabel={formData.selectedAirline}
-                                    onSelect={(airline) => handleInputChange('selectedAirline', airline.label)}
+                                    selectedLabel={formData.aeroline}
+                                    onSelect={(airline) => handleInputChange('aeroline', airline.label)}
                                 />
 
 
@@ -156,21 +156,21 @@ const UpdateTicket: React.FC = () => {
                             <div className="flex justify-between space-x-2">
                                 <div className="w-48">
                                     <InputText
-                                        name="origin"
+                                        name="from"
                                         placeholder="Origen"
                                         icon={<Origin />}
-                                        value={formData.origin} // Asegúrate de que el valor se refleje
-                                        onChange={(e) => handleInputChange('origin', e.target.value)}
+                                        value={formData.from} // Asegúrate de que el valor se refleje
+                                        onChange={(e) => handleInputChange('from', e.target.value)}
                                     />
                                 </div>
 
                                 <div className="w-48">
                                     <InputText
-                                        name="destination"
+                                        name="to"
                                         placeholder="Destino"
                                         icon={<Destination />}
-                                        value={formData.destination} // Asegúrate de que el valor se refleje
-                                        onChange={(e) => handleInputChange('destination', e.target.value)}
+                                        value={formData.to} // Asegúrate de que el valor se refleje
+                                        onChange={(e) => handleInputChange('to', e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -180,8 +180,8 @@ const UpdateTicket: React.FC = () => {
                             <div className="flex justify-between space-x-2">
                                 <div className="w-48">
                                     <Calendar
-                                        selectedDates={formData.selectedDates}
-                                        onChange={(dates) => handleInputChange('selectedDates', dates)}
+                                        selectedDates={formData.date}
+                                        onChange={(dates) => handleInputChange('date', dates)}
                                         placeholder="Fecha(s)"
                                     />
                                 </div>

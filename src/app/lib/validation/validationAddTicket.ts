@@ -14,7 +14,7 @@ export const validationAddTicket = z.object({
     selectedDates: z.array(z.unknown()).nonempty({
         message: "Seleccione al menos una fecha", // Asegúrate de que el arreglo no esté vacío
     }),
-    prices: z.array(  z.object({
+    price: z.array(  z.object({
         value: z.number().min(1, {
           message: "Debe llenar todos los campos de precio"
         })

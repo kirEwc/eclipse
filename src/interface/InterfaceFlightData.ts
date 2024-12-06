@@ -5,5 +5,5 @@ export interface InterfaceFlightData {
     from: string;
     to: string;
     date: string[];
-    price: { value: number, string: string }[];
+    price: { value: number, currency: string }[];
 }

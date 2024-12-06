@@ -7,25 +7,18 @@ import Image from "next/image";
 import Link from "next/link";
 import FechasDrop from "../../Next_ui_elements/Dropdwon/FechasDrop";
 import { useState } from "react";
+import { InterfaceFlightData } from "@/interface/InterfaceFlightData";
 
 
 
-interface FlightData {
-  id: string;
-  aeroline: string;
-  from: string;
-  to: string;
-  date: string[];
-  price: { value: number,string: string }[];
-}
 
-export  const Ticket2: React.FC<FlightData> = ({
+export  const Ticket2: React.FC<InterfaceFlightData> = ({
   aeroline = "No Disponible",
   from = "No Disponible",
   to = "No Disponible",
   date = ["No Disponible"],
-  price = [{ value: 1, string: "No Disponible" }],
-}: FlightData)=> {
+  price = [{ value: 1, currency: "No Disponible" }],
+}: InterfaceFlightData)=> {
 
   // await new Promise ((resolve) => setTimeout(resolve, 3000));
 

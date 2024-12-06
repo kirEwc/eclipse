@@ -28,7 +28,7 @@ export const TicketAdmin: React.FC<InterfaceFlightData> = ({
     from = "No Disponible",
     to = "No Disponible",
     date = ["No Disponible"],
-    price = [{ value: 1, string: "No Disponible" }],
+    price = [{ value: 1, currency: "No Disponible" }],
 }: InterfaceFlightData) => {
     const router = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,16 +40,15 @@ export const TicketAdmin: React.FC<InterfaceFlightData> = ({
     const items = [
         {
             key: "Update",
-            label: "Modificar",
+            label: "Modificar",           
             startContent: <Update />,
             onClick: () => handleUpdate(ticket)
         },
         {
             key: "delete",
-            label: "Eliminar",
+            label: "Eliminar",          
             startContent: <Delete className="text-danger" />,
-            isDanger: true, // Esta propiedad es la que activará el color peligroso
-            // onClick: () => handleDelete(id)
+            isDanger: true,           
             onClick: () => onOpen()
         },
     ];
@@ -65,16 +64,17 @@ export const TicketAdmin: React.FC<InterfaceFlightData> = ({
     const handleDelete = async (ticketId: string) => {
         try {
             const response = await ApiRequest({
-                method: 'POST',
-                url: 'https://fbbe-195-181-163-8.ngrok-free.app/api/User/login',
-                body: {
-                    id: ticketId,
-                },
+                method: 'DELETE',
+                url: 'http://localhost:5164/api/Tickets/DeleteTicket/'+ticketId,
             });
 
 
             if (response?.status === 200) {
                 CorrectMessage('Boleto eliminado');
+                setTimeout(() => {
+                    location.reload();
+                }, 3000); 
+                
             } else {
                 ErrorMessage('Error al eliminar el boleto');
             }
@@ -170,7 +170,7 @@ export const TicketAdmin: React.FC<InterfaceFlightData> = ({
                             >
                                 {/* Mapear el array dateItem para generar las opciones del Dropdown */}
                                 {date.map((date) => (
-                                    <DropdownItem key={date} className="flex items-center justify-between w-full" value={date}>
+                                    <DropdownItem textValue="item" key={date} className="flex items-center justify-between w-full" value={date}>
                                         <div className="flex items-center space-x-2">
                                             {<Calendar />}
                                             <span>{date}</span>
@@ -203,10 +203,10 @@ export const TicketAdmin: React.FC<InterfaceFlightData> = ({
                                     disallowEmptySelection
                                     selectionMode="single"
                                 >
-                                    {price.map(({ value, string }) => (
-                                        <DropdownItem key={string} textValue="item" value={string}> {/* Usa el string como key y value */}
-                                            {priceIcons[string as PriceIconKey]} {/* Muestra el ícono basado en el string */}
-                                            {string} - {value}  {/* Muestra el valor en palabras y el precio */}
+                                    {price.map(({ value, currency }) => (
+                                        <DropdownItem key={currency} textValue="item" value={currency}> {/* Usa el string como key y value */}
+                                            {priceIcons[currency as PriceIconKey]} {/* Muestra el ícono basado en el string */}
+                                            {currency} - {value}  {/* Muestra el valor en palabras y el precio */}
                                         </DropdownItem>
                                     ))}
                                 </DropdownMenu>

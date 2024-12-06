@@ -3,8 +3,8 @@
 import { TicketAdmin } from "@/components/my-components/ticketAdmin/TicketAdmin";
 import InputText from "@/components/Next_ui_elements/inputText/InputText";
 import ModalBaner from "@/components/Next_ui_elements/Modal/ModalBaner";
-import TicketsDate from "@/data/productCard";
 import { Fa6SolidMagnifyingGlass, MaterialSymbolsLightAddNotes, MdiEditBox } from "@/icons/Icons";
+import { InterfaceFlightData } from "@/interface/InterfaceFlightData";
 import ApiRequest from "@/services/ApiRequest";
 import { useDisclosure } from "@nextui-org/react";
 import Image from "next/image";
@@ -12,26 +12,28 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const AdminPanel: React.FC = () => {
+  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [tickets, setTickets] = useState<InterfaceFlightData[]>([]);
+
 
   const getTickets = async () => {
     try {
       const response = await ApiRequest({
         method: 'GET',
-        url: 'https://1c3e-195-181-163-8.ngrok-free.app/api/Tickets/GetTicket',
+        url: 'http://localhost:5164/api/Tickets/GetTicket',
       });
   
-      // Verifica el Content-Type para asegurarte de que es JSON
-      const contentType = response.headers.get('Content-Type');
-      console.log('Content-Type:', contentType);
-  
-      if (response.ok && contentType?.includes('application/json')) {
-        // Procesa la respuesta JSON
+
+      if (response.ok) {
+        
         const data = await response.json();
-        const tickets = data.ticketModels; // Obtiene el array anidado
-        console.log('Tickets obtenidos:', tickets);
-      } else {
-        const text = await response.text();
-        console.error('La respuesta no es JSON válida. Contenido recibido:', text);
+        setTickets(data.ticketModels );
+        
+       
+      } else {       
+        console.error('Error a obtener los boletos');
       }
     } catch (error) {
       console.error('Error al realizar la solicitud:', error);
@@ -49,9 +51,7 @@ const AdminPanel: React.FC = () => {
   
   
 
-  const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState("");
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
 
 
 
@@ -64,10 +64,12 @@ const AdminPanel: React.FC = () => {
   };
 
   // Filtrar los boletos en base al searchTerm
-  const filteredTickets = TicketsDate.filter((ticket) =>
+  const filteredTickets = tickets.filter((ticket) =>    
     ticket.from.toLowerCase().includes(searchTerm.toLowerCase()) ||
     ticket.to.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+ 
 
   return (
     <div className='bg-[url("/images/fondo/2.webp")] bg-cover bg-center bg-no-repeat min-h-screen '>
@@ -82,6 +84,7 @@ const AdminPanel: React.FC = () => {
             width={80}
             height={80}
             className="rounded-full w-20 h-20"
+            priority
           />
           <p className="hidden lg:block text-white text-3xl font-bold ml-2">Eclipse</p>
         </div>
@@ -125,8 +128,8 @@ const AdminPanel: React.FC = () => {
       </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-md md:max-w-lg lg:max-w-6xl mx-auto'>
-        {filteredTickets.map((ticket) => (
-          <div key={ticket.id} className="rounded-lg p-6 h-full flex justify-center">
+        {filteredTickets.map((ticket) => (          
+          <div  key={ticket.id}  className="rounded-lg p-6 h-full flex justify-center">
             <TicketAdmin
               id={ticket.id}
               aeroline={ticket.aeroline}

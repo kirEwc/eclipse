@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 import type { Selection } from "@nextui-org/react";
 import { Calendar } from "lucide-react";
@@ -16,7 +16,12 @@ export default function FechasDrop({ dateItem,setFechaValue }: DropdownCustomPro
     () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
     [selectedKeys]
   );
-  setFechaValue(selectedValue);
+
+  useEffect(() => {
+    setFechaValue(selectedValue);
+  }, []);
+
+  // setFechaValue(selectedValue);
 
   return (
     <Dropdown className="w-full sm:w-auto">
@@ -38,7 +43,7 @@ export default function FechasDrop({ dateItem,setFechaValue }: DropdownCustomPro
       >
         {/* Mapear el array dateItem para generar las opciones del Dropdown */}
         {dateItem.map((date) => (
-          <DropdownItem key={date} className="flex items-center justify-between w-full" value={date}>
+          <DropdownItem key={date} className="flex items-center justify-between w-full" value={date} textValue="item">
           <div className="flex items-center space-x-2">
             {<Calendar />}
             <span>{date}</span>
